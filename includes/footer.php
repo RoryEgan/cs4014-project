@@ -15,4 +15,9 @@
       </div>
     </div>
   </div>
+  <div class="hidden-sm-down">
+    <a href="#" id="go-top" title="Back to top of this page">
+      <i class="fa fa-chevron-up"></i><br><span class="go-top-text">Top</span>
+    </a>
+  </div>
 </footer>

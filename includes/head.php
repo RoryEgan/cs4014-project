@@ -5,5 +5,6 @@
   <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet">
   <link href="assets/sass/style.scss" rel="stylesheet">
+  <link href="assets/sass/header.scss" rel="stylesheet">
   <title>CS 4014 Project</title>
 </head>

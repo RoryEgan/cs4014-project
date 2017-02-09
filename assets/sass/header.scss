@@ -1,0 +1,50 @@
+.navbar {
+
+  width: 100%;
+  text-transform: uppercase;
+  font-size: 1.3125rem;
+  padding: 0;
+
+}
+
+.navbar-nav {
+  flex-direction: column;
+}
+
+.navbar-inverse .navbar-nav > .active > a,
+.navbar-inverse .navbar-nav > .active > a:hover,
+.navbar-inverse .navbar-nav > .active > a:focus {
+
+  color: #fff;
+  padding-right: 0.85rem;
+
+}
+
+header.banner {
+  padding: 1.25rem 0 1.25rem 0;
+  width: 100%;
+  text-align: center;
+  background-color: #000;
+}
+
+.header-heading {
+  color: #fff;
+}
+
+.navbar-static-top {
+  background-color: grey;
+  transition: all .7s;
+}
+
+// Styles added when the navbar contracts
+
+.nav-justified > li {
+
+  float: none;
+
+}
+
+.fixed-top {
+  background-color: #000;
+  transition: all .7s;
+}

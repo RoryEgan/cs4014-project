@@ -6,3 +6,23 @@
   border-color: #000;
 
 }
+
+#go-top {
+
+  background-color: rgba(000, 000, 000, 0.58);
+  color: #fff;
+  text-align: center;
+  border: 0.1rem solid #000;
+  position: fixed;
+  bottom: 3.75rem;
+  right: 1.25rem;
+  padding: 0.625rem;
+  display: none;
+
+  .go-top-text {
+
+    font-size: 1.125rem;
+
+  }
+
+}

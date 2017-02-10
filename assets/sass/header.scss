@@ -17,7 +17,6 @@
 
   color: #fff;
   padding-right: 0.85rem;
-
 }
 
 header.banner {
@@ -33,7 +32,7 @@ header.banner {
 
 .navbar-static-top {
   background-color: grey;
-  transition: all .7s;
+  transition: .7s;
 }
 
 // Styles added when the navbar contracts
@@ -46,5 +45,5 @@ header.banner {
 
 .fixed-top {
   background-color: #000;
-  transition: all .7s;
+  transition: .7s;
 }

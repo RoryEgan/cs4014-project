@@ -25,7 +25,7 @@ $(document).ready(function() {
 		// executes when complete page is fully loaded, including all frames, objects and images
 
 		// Sticky Nav
-		// ----------------------------------------------------------------------------
+		// -------------------------------------------------------------------------
 		var $sticky_navigation = $('#sticky-nav-wrap');
 
 		if( $sticky_navigation.length ) {

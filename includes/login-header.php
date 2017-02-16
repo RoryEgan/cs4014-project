@@ -10,9 +10,9 @@
         <form class="form-inline" action="" method="">
           <div class="form-group">
             <label class="mr-2" for="email">Email: </label>
-            <input id="email" class="form-control" type="email" placeholder="email"/>
+            <input id="signInEmail" class="form-control" type="email" placeholder="email" onblur="validateEmail()"/>
             <label class="mx-2" for="password">Password: </label>
-            <input id="password" type="password" class="form-control" placeholder="password"/>
+            <input id="signInPassword" type="password" class="form-control" placeholder="password" onblur="validatePassword(this.value)"/>
             <input type="submit" class="btn btn-default" value="login">
           </div>
         </form>

@@ -22,4 +22,5 @@
   </div>
   <script src="bower_components/jquery/jquery.min.js"></script>
   <script src="assets/js/custom-jquery.js"></script>
+  <script src="assets/js/login-validation.js"></script>
 </footer>

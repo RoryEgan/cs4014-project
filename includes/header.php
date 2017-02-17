@@ -45,7 +45,7 @@
           </button>
           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
             <a class="dropdown-item" href="#">You are logged in as: (user)</a>
-            <a class="dropdown-item" href="#">Logout</a>
+            <a class="dropdown-item" href="login.php">Logout</a>
             <a class="dropdown-item" href="#">View Profile</a>
           </div>
         </div>

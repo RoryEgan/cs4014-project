@@ -63,6 +63,13 @@ header.banner {
   transition: .7s;
 }
 
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  left: inherit;
+}
+
 footer {
   background-color: #000;
   color: #fff;

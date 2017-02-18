@@ -20,7 +20,9 @@ function validatePassword() {
 
 }
 
+
 function validateFirstName(){
+
   var firstname = document.getElementById('signUpFirstName');
   var nameSection = document.getElementById('fNameDiv');
 
@@ -35,6 +37,7 @@ function validateFirstName(){
 }
 
 function validateLastName(){
+
   var lastname = document.getElementById('signUpLastName');
   var nameSection = document.getElementById('lNameDiv');
 
@@ -46,8 +49,4 @@ function validateLastName(){
     nameSection.className = "form-inline has-danger";
     lastname.className = "form-control my-2 form-control-danger";
   }
-}
-
-function validateEmail(){
-  
 }

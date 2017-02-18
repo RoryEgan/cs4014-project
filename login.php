@@ -1,5 +1,41 @@
 <?php include('includes/head.php');?>
 <?php include('includes/login-header.php');?>
+<?php
+  $host = "localhost";
+  $username = ""; //enter phpmyadmin name here.
+  $password = ""; //enter phpmyadmin password here.
+  $db = "CS4014_project_database";
+
+
+  if(isset($_POST['loginSubmitButton'])){
+    $email = $_POST['signInEmail'];
+    $userPassword = $_POST['signInPassword'];
+
+
+    $connection = mysql_connect($host, $username, $password);
+    if($connection){
+      mysql_select_db($db);
+
+      $sql = "SELECT *
+              FROM User
+              where EmailAddress='".$email."' AND Password='".$userPassword."';";
+
+
+
+      $res = mysql_query($sql);
+
+      if(mysql_num_rows($res) >= 1){
+        header("Location: index.php");
+        exit();
+      }
+      else{
+        echo "<script>alert('invalid login');</script>";
+      }
+
+      mysql_close($connection);
+    }
+  }
+?>
 
 <body>
   <div class="container">
@@ -7,10 +43,11 @@
       <div class="col-md-6 offset-md-6">
         <div class="login-boundry my-5">
           <h2 class="my-3">Sign up!</h2>
-          <form class="form" action="" method="">
+          <form class="form" action="login.php" method="post">
             <div class="form-group">
               <div id="fNameDiv" class="form-inline">
-                <input id="signUpFirstName" class="form-control my-2" type="text" name="" value="" placeholder="First Name" onblur="validateFirstName()"/>
+                <input id="signUpFirstName" class="form-control my-2"
+                type="text" name="" value="" placeholder="First Name" onblur="validateFirstName()"/>
               </div>
               <div id="lNameDiv" class="form-inline">
                 <input id="signUpLastName" class="form-control my-2" type="text" name="" value="" placeholder="Last Name" onblur="validateLastName()"/>

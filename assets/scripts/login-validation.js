@@ -26,7 +26,7 @@ function validateFirstName(){
   var firstname = document.getElementById('signUpFirstName');
   var nameSection = document.getElementById('fNameDiv');
 
-  if(firstname.value.length >= 1 ){
+  if(firstname.value.length >= 1 && firstname.value.length <= 35){
     nameSection.className = "form-inline has-success";
     firstname.className = "form-control my-2 form-control-success";
   }
@@ -40,7 +40,7 @@ function validateLastName(){
   var lastname = document.getElementById('signUpLastName');
   var nameSection = document.getElementById('lNameDiv');
 
-  if(lastname.value.length >= 1 ){
+  if(lastname.value.length >= 1 && lastname.value.length <= 35){
     nameSection.className = "form-inline has-success";
     lastname.className = "form-control my-2 form-control-success";
   }
@@ -51,6 +51,7 @@ function validateLastName(){
 }
 
 function validateEmail(){
+
   var emailGroup = document.getElementById('emilSignUpGroup');
   var email = document.getElementById('signUpEmail');
 

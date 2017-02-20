@@ -1,38 +1,45 @@
 <?php include('includes/head.php');?>
 <?php include('includes/login-header.php');?>
 <?php
-include('Database.php');
+include('utils/Database.class.php');
+include('utils/Validator.class.php');
 $db = new Database();
 
 
 // Submission check?
-if(! isset($_POST['signUpButton'])) return;
+//if(! isset($_POST['signUpButton'])) return;
 // Honeypot
-if( ! $_POST['contact'] == '') return;
+//if( ! $_POST['contact'] == '') return;
 
 // Logic here!
 
-header('Location: thank-you.php');
-exit();
+//header('Location: thank-you.php');
+//exit();
 
 
-if(isset($_POST['loginSubmitButton'])){
+
+if (isset($_POST['loginSubmitButton'])) {
+  $val = new Validator();
   $inputEmail = $db->quote($_POST['signInEmail']);
   $inputPassword = $db->quote($_POST['signInPassword']);
   $connection = $db->connect();
-  if ($connection) {
-    $sql = "SELECT *
-    FROM User
-    WHERE EmailAddress = '$inputEmail' AND Password = '$inputPassword';";
-    $res = $db -> select($sql);
-    if (count($res) >= 1) {
-      header("Location: index.php");
-      exit();
+  if($val -> isValidEmail($inputEmail) && $val -> isValidPassword($inputPassword)) {
+    echo "passed validation";
+    if ($connection) {
+      $sql = "SELECT *
+      FROM User
+      WHERE EmailAddress = '$inputEmail' AND Password = '$inputPassword';";
+      $res = $db -> select($sql);
+      if (count($res) >= 1) {
+        echo "should be going to index page";
+        header("Location: index.php");
+        exit();
+      }
+      else {
+        echo "<script>alert('Email or password incorrect');</script>";
+      }
+      mysqli_close($connection);
     }
-    else {
-      echo "<script>alert('Email or password incorrect');</script>";
-    }
-    mysqli_close($connection);
   }
 }
 ?>

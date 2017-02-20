@@ -1,38 +1,34 @@
 <?php include('includes/head.php');?>
 <?php include('includes/login-header.php');?>
 <?php
-  $host = "localhost";
-  $username = ""; //enter phpmyadmin name here.
-  $password = ""; //enter phpmyadmin password here.
-  $db = "CS4014_project_database";
 
+  include('Database.php');
+
+  $db = new Database();
 
   if(isset($_POST['loginSubmitButton'])){
-    $email = $_POST['signInEmail'];
-    $userPassword = $_POST['signInPassword'];
+    $inputEmail = $db -> quote($_POST['signInEmail']);
+    $inputPassword = $db -> quote($_POST['signInPassword']);
 
+    $connection = $db -> connect();
 
-    $connection = mysql_connect($host, $username, $password);
-    if($connection){
-      mysql_select_db($db);
+    if ($connection) {
 
       $sql = "SELECT *
               FROM User
-              where EmailAddress='".$email."' AND Password='".$userPassword."';";
+              WHERE EmailAddress = '$inputEmail' AND Password = '$inputPassword';";
 
+      $res = $db -> select($sql);
 
-
-      $res = mysql_query($sql);
-
-      if(mysql_num_rows($res) >= 1){
+      if (count($res) >= 1) {
         header("Location: index.php");
         exit();
       }
-      else{
-        echo "<script>alert('invalid login');</script>";
+      else {
+        echo "<script>alert('Email or password incorrect');</script>";
       }
 
-      mysql_close($connection);
+      mysqli_close($connection);
     }
   }
 ?>
@@ -52,8 +48,8 @@
               <div id="lNameDiv" class="form-inline">
                 <input id="signUpLastName" class="form-control my-2" type="text" name="" value="" placeholder="Last Name" onblur="validateLastName()"/>
               </div>
-              <div class="">
-                <input id="signUpEmail" class="form-control my-2" type="email" placeholder="Email"/>
+              <div id="emailSignUpGroup">
+                <input id="signUpEmail" class="form-control my-2" type="email" onblur="validateEmail()" placeholder="Email"/>
               </div>
               <input id="signUpID" type="text" class="form-control my-2" placeholder="Student ID"/>
               <select class="form-control my-2">

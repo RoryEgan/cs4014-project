@@ -37,7 +37,6 @@ function validateFirstName(){
 }
 
 function validateLastName(){
-
   var lastname = document.getElementById('signUpLastName');
   var nameSection = document.getElementById('lNameDiv');
 
@@ -48,5 +47,19 @@ function validateLastName(){
   else{
     nameSection.className = "form-inline has-danger";
     lastname.className = "form-control my-2 form-control-danger";
+  }
+}
+
+function validateEmail(){
+  var emailGroup = document.getElementById('emilSignUpGroup');
+  var email = document.getElementById('signUpEmail');
+
+  if(email.match(/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/) ){
+    emailGroup.className = "has-success";
+    email.className = "form-control my-2 form-control-success";
+  }
+  else{
+    emailGroup.className = "has-danger";
+    email.className = "form-control my-2 form-control-danger";
   }
 }

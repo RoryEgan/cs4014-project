@@ -76,5 +76,9 @@ footer {
 }
 
 .login-form {
-  color: #fff;
+  color: #000;
+}
+
+.input-field input {
+  display: none;
 }

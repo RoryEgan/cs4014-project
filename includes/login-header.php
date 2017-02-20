@@ -16,7 +16,7 @@
             <div id="passwordSignInGroup" class="form-group">
               <label class="mx-2" for="password">Password: </label>
               <input id="signInPassword" name="signInPassword" type="password" class="form-control" placeholder="password"/>
-              <input type="submit" class="btn btn-default" value="login" name="loginSubmitButton"/>
+              <input type="submit" class="btn btn-default" value="login" name="loginSubmitButton" role="button"/>
             </div>
           </div>
         </form>

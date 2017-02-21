@@ -3,12 +3,26 @@
 
 class Validator{
 
+  function isValidSignUp($firstName, $lastName, $signUpEmail, $StudentID, $subject, $signUpPassword, $passwordConfirm){
+    return ($this -> isValidName($firstName) && $this -> isValidName($lastName) && $this -> isValidEmail($signUpEmail) && $this -> isValidStudentID($StudentID)
+          && $this -> isValidSubject($subject) && $this -> isValidPassword($signUpPassword) && ($signUpPassword == $passwordConfirm));
+  }
+
 
   function isValidEmail($email){
     if (filter_var($email, FILTER_VALIDATE_EMAIL) !== false){
       return true;
     }
     else {
+      return false;
+    }
+  }
+
+  function isValidName($name){
+    if (strlen($name) <= 35 && strlen($name) >= 1){
+      return true;
+    }
+    else{
       return false;
     }
   }
@@ -47,8 +61,10 @@ class Validator{
     return false;
   }
 
-
-
+  //functionality to be added
+  function isValidSubject($subject){
+    return true;
+  }
 
 }
 

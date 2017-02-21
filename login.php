@@ -93,8 +93,7 @@ if(isset($_POST['signUpButton'])) {
           <form class="form" action="login.php" method="post">
             <div class="form-group">
               <div id="fNameDiv" class="form-inline">
-                <input id="signUpFirstName" class="form-control my-2"
-                type="text" name="signUpFirstName" value="" placeholder="First Name" onblur="validateFirstName()" required/>
+                <input id="signUpFirstName" class="form-control my-2" type="text" name="signUpFirstName" value="" placeholder="First Name" onblur="validateFirstName()" required/>
               </div>
               <div id="lNameDiv" class="form-inline">
                 <input id="signUpLastName" name="signUpLastName" class="form-control my-2" type="text" value="" placeholder="Last Name" onblur="validateLastName()" required/>
@@ -111,8 +110,12 @@ if(isset($_POST['signUpButton'])) {
                 <option value="Engineering">Engineering</option>
                 <option value="Chemistry">Chemistry</option>
               </select>
-              <input id="signUpPassword" name="signUpPassword" type="password" class="form-control my-2" placeholder="Password"/>
-              <input id="signUpPasswordConfirm" name="signUpPasswordConfirm" type="password" class="form-control my-2" placeholder="Confirm Password"/>
+              <div id="passwordGroup">
+                <input id="signUpPassword" name="signUpPassword" type="password" class="form-control my-2" placeholder="Password" onblur="validatePassword()"/>
+              </div>
+              <div id="passwordConfirmGroup">
+                <input id="signUpPasswordConfirm" name="signUpPasswordConfirm" type="password" class="form-control my-2" placeholder="Confirm Password" onblur="confirmPassword()"/>
+              </div>
               <input type="submit" class="btn btn-default" value="Sign Up" name="signUpButton" role="button"/>
               <div class="input-field">
                 <input type="text" name="contact" value="" />

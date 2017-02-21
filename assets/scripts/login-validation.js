@@ -1,26 +1,3 @@
-function validateLogin() {
-  var emailRegex = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-  var email = document.getElementById('signInEmail');
-  var password = document.getElementById('signInPassword');
-  var emailSignInGroup = document.getElementById('emailSignInGroup');
-  var passwordSignInGroup = document.getElementById('passwordSignInGroup');
-
-  if (!email.value.match(emailRegex)) {
-    emailSignInGroup.className += " has-danger";
-  //  email.className += " form-control-danger";
-  }
-
-  if(password.value.length < 6){
-  //  password.className += " form-control-danger";
-    passwordSignInGroup.className += " has-danger";
-  }
-}
-
-function validatePassword() {
-
-}
-
-
 function validateFirstName(){
 
   var firstname = document.getElementById('signUpFirstName');
@@ -50,12 +27,18 @@ function validateLastName(){
   }
 }
 
+
 function validateEmail(){
 
-  var emailGroup = document.getElementById('emilSignUpGroup');
+  var emailGroup = document.getElementById('emailSignUpGroup');
+  console.log(emailGroup);
   var email = document.getElementById('signUpEmail');
+  console.log(email);
+  var emailText = email.value;
+  console.log(emailText);
 
-  if(email.match(/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/) ){
+  if(emailText.match(/^[\w\-\.\+]+\@[a-zA-Z0-9\.\-]+\.[a-zA-z0-9]{2,4}$/) ){
+
     emailGroup.className = "has-success";
     email.className = "form-control my-2 form-control-success";
   }

@@ -38,12 +38,12 @@ class Database{
     return $rows;
   }
 
-  //This function removes dangerous characters from user input.
+  //This function removes dangerous characters from user input. protects against sql injection
   function quote($value){
     //ensure we are connected to database by calling this class's function connect().
     $connection = $this -> connect();
 
-    //escape characters problematic characters passed and return result.
+    // problematic characters passed and return result.
     return mysqli_real_escape_string($connection,$value);
   }
 

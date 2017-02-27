@@ -1,3 +1,18 @@
+function checkHoneypot() {
+
+  console.log("REEEEEEEEEEEEEEEEEEEEE");
+
+  if(!document.getElementById("gotcha").value) {
+    console.log("ok");
+    return true;
+  }
+
+  else {
+    return false;
+    console.log("its a bot REEEEEEEEEEEEEEEE");
+  }
+}
+
 function validateFirstName() {
 
   var firstname = document.getElementById('signUpFirstName');

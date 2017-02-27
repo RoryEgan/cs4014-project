@@ -11,6 +11,7 @@ USE `CS4014_project_database` ;
 CREATE TABLE IF NOT EXISTS `CS4014_project_database`.`Subject` (
   `SubjectID` INT NOT NULL AUTO_INCREMENT,
   `SubjectName` VARCHAR(45) NOT NULL,
+  UNIQUE INDEX `SubjectName_UNIQUE` (`SubjectName` ASC),
   PRIMARY KEY (`SubjectID`))
 ENGINE = InnoDB;
 
@@ -58,7 +59,8 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `CS4014_project_database`.`TaskType` (
   `TaskTypeID` INT NOT NULL AUTO_INCREMENT,
   `TaskTypeVal` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`TaskTypeID`))
+  PRIMARY KEY (`TaskTypeID`)
+  UNIQUE INDEX `TaskTypeVal_UNIQUE` (`TaskTypeVal` ASC))
 ENGINE = InnoDB;
 
 

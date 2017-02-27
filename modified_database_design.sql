@@ -53,11 +53,22 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
+-- Table `CS4014_project_database`.`TaskType`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `CS4014_project_database`.`TaskType` (
+  `TaskTypeID` INT NOT NULL AUTO_INCREMENT,
+  `TaskTypeVal` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`TaskTypeID`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
 -- Table `CS4014_project_database`.`Task`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `CS4014_project_database`.`Task` (
   `TaskID` INT NOT NULL AUTO_INCREMENT,
   `User_UserID` INT NOT NULL,
+  `TaskType_TaskTypeID` INT NOT NULL,
   `Subject_SubjectID` INT NOT NULL,
   `Status_StatusID` INT NOT NULL,
   `Title` VARCHAR(75) NOT NULL,
@@ -69,6 +80,7 @@ CREATE TABLE IF NOT EXISTS `CS4014_project_database`.`Task` (
   INDEX `fk_Tasks_Subjects1_idx` (`Subject_SubjectID` ASC),
   INDEX `fk_Tasks_Users1_idx` (`User_UserID` ASC),
   INDEX `fk_Task_Status1_idx` (`Status_StatusID` ASC),
+  INDEX `fk_Task_TaskType1_idx` (`TaskType_TaskTypeID` ASC),
   CONSTRAINT `fk_Tasks_Subjects1`
     FOREIGN KEY (`Subject_SubjectID`)
     REFERENCES `CS4014_project_database`.`Subject` (`SubjectID`)
@@ -82,6 +94,11 @@ CREATE TABLE IF NOT EXISTS `CS4014_project_database`.`Task` (
   CONSTRAINT `fk_Task_Status1`
     FOREIGN KEY (`Status_StatusID`)
     REFERENCES `CS4014_project_database`.`Status` (`StatusID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Task_TaskType1`
+    FOREIGN KEY (`TaskType_TaskTypeID`)
+    REFERENCES `CS4014_project_database`.`TaskType` (`TaskTypeID`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;

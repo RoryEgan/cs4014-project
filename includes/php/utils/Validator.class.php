@@ -37,7 +37,7 @@ class Validator{
     }
   }
 
-  //passwords can be between 6 nd 20 characters long and must have:
+  //passwords can be between 6 and 20 characters long and must have:
   //  -atleast one letter
   //  -atleast one number
   function isValidPassword($password){

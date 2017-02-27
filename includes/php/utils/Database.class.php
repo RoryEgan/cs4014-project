@@ -33,6 +33,8 @@ class Database{
     //iterate through select query results and create corresponding array.
     while ($row = $result -> fetch_assoc()) {
         $rows[] = $row;
+        $res = $row['SubjectID'] . $row['SubjectName'];
+        echo "$res";
     }
 
     return $rows;

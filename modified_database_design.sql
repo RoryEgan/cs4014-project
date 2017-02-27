@@ -19,7 +19,7 @@ ENGINE = InnoDB;
 -- Table `CS4014_project_database`.`User`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `CS4014_project_database`.`User` (
-  `StudentID` INT NOT NULL,
+  `StudentID` INT NOT NULL AUTO_INCREMENT,
   `Subjects_SubjectID` INT NOT NULL,
   `ForeName` VARCHAR(35) NOT NULL,
   `Lastname` VARCHAR(35) NOT NULL,

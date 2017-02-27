@@ -9,13 +9,13 @@
       <div class="card my-2">
         <div class="card-header" role="tab" id="heading1">
           <h5 class="mb-0">
-            <a data-toggle="collapse" data-parent="#accordion" href="#collapse1" aria-expanded="true" aria-controls="collapse">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapse1" aria-expanded="true" aria-controls="collapse1">
               Question 1
               <i class="togglestate fa fa-chevron-down"></i>
             </a>
           </h5>
         </div>
-        <div id="collapse1" class="collapse" role="tabpanel" aria-labelledby="heading">
+        <div id="collapse1" class="collapse" role="tabpanel" aria-labelledby="heading1">
           <div class="card-block">
             Answer 1
           </div>
@@ -25,13 +25,13 @@
       <div class="card my-2">
         <div class="card-header" role="tab" id="heading2">
           <h5 class="mb-0">
-            <a data-toggle="collapse" data-parent="#accordion" href="#collapse2" aria-expanded="true" aria-controls="collapse">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapse2" aria-expanded="true" aria-controls="collapse2">
               Question 2
               <i class="togglestate fa fa-chevron-down"></i>
             </a>
           </h5>
         </div>
-        <div id="collapse2" class="collapse" role="tabpanel" aria-labelledby="heading">
+        <div id="collapse2" class="collapse" role="tabpanel" aria-labelledby="heading2">
           <div class="card-block">
             Answer 2
           </div>
@@ -41,13 +41,13 @@
       <div class="card my-2">
         <div class="card-header" role="tab" id="heading3">
           <h5 class="mb-0">
-            <a data-toggle="collapse" data-parent="#accordion" href="#collapse3" aria-expanded="true" aria-controls="collapse">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapse3" aria-expanded="true" aria-controls="collapse3">
               Question 3
               <i class="togglestate fa fa-chevron-down"></i>
             </a>
           </h5>
         </div>
-        <div id="collapse3" class="collapse" role="tabpanel" aria-labelledby="heading">
+        <div id="collapse3" class="collapse" role="tabpanel" aria-labelledby="heading3">
           <div class="card-block">
             Answer 3
           </div>
@@ -57,13 +57,13 @@
       <div class="card my-2">
         <div class="card-header" role="tab" id="heading4">
           <h5 class="mb-0">
-            <a data-toggle="collapse" data-parent="#accordion" href="#collapse4" aria-expanded="true" aria-controls="collapse">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapse4" aria-expanded="true" aria-controls="collapse4">
               Question 4
               <i class="togglestate fa fa-chevron-down"></i>
             </a>
           </h5>
         </div>
-        <div id="collapse4" class="collapse" role="tabpanel" aria-labelledby="heading">
+        <div id="collapse4" class="collapse" role="tabpanel" aria-labelledby="heading4">
           <div class="card-block">
             Answer 4
           </div>
@@ -73,13 +73,13 @@
       <div class="card my-2">
         <div class="card-header" role="tab" id="heading5">
           <h5 class="mb-0">
-            <a data-toggle="collapse" data-parent="#accordion" href="#collapse5" aria-expanded="true" aria-controls="collapse">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapse5" aria-expanded="true" aria-controls="collapse5">
               Question 5
               <i class="togglestate fa fa-chevron-down"></i>
             </a>
           </h5>
         </div>
-        <div id="collapse5" class="collapse" role="tabpanel" aria-labelledby="heading">
+        <div id="collapse5" class="collapse" role="tabpanel" aria-labelledby="heading5">
           <div class="card-block">
             Answer 5
           </div>
@@ -89,13 +89,13 @@
       <div class="card my-2">
         <div class="card-header" role="tab" id="heading6">
           <h5 class="mb-0">
-            <a data-toggle="collapse" data-parent="#accordion" href="#collapse6" aria-expanded="true" aria-controls="collapse">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapse6" aria-expanded="true" aria-controls="collapse6">
               Question 6
               <i class="togglestate fa fa-chevron-down"></i>
             </a>
           </h5>
         </div>
-        <div id="collapse6" class="collapse" role="tabpanel" aria-labelledby="heading">
+        <div id="collapse6" class="collapse" role="tabpanel" aria-labelledby="heading6">
           <div class="card-block">
             Answer 6
           </div>

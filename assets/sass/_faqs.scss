@@ -7,6 +7,10 @@
 .accordion {
   a {
     color: inherit;
+
+    :hover {
+      text-decoration: none;
+    }
   }
 }
 
@@ -19,7 +23,7 @@
       -moz-transform: rotate(-90deg);
       -ms-transform: rotate(-90deg);
       -o-transform: rotate(-90deg);
-      transform: rotate(0deg);
+      transform: rotate(-90deg);
 
     }
   }
@@ -31,11 +35,11 @@
 
         display: inline-block;
 
-        -webkit-transform: rotate(-90deg);
-        -moz-transform: rotate(-90deg);
-        -ms-transform: rotate(-90deg);
-        -o-transform: rotate(-90deg);
-        transform: rotate(-90deg);
+        -webkit-transform: rotate(0deg);
+        -moz-transform: rotate(0deg);
+        -ms-transform: rotate(0deg);
+        -o-transform: rotate(0deg);
+        transform: rotate(0deg);
 
       }
     }

@@ -2,7 +2,7 @@
   <div class="container">
     <div class="row">
       <div class="col-md-6 text-left">
-        <a href="/cs4014">
+        <a href="/CS4014_project/login.php">
           <h1 class="header-heading">Our Website</h1>
         </a>
       </div>

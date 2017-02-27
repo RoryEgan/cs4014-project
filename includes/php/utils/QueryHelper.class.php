@@ -16,17 +16,18 @@ class QueryHepler{
   function insertUser($StudentID, $subjectID, $firstName, $lastName, $signUpEmail, $signUpPassword){
     $database = new Database();
     $insertSql = "INSERT INTO   `CS4014_project_database`.`User` (
-                          `StudentID` ,
+                          `UserID` ,
                           `Subject_SubjectID` ,
                           `ForeName` ,
                           `LastName` ,
                           `EmailAddress` ,
+                          `StudentID`,
                           `Password` ,
                           `Reputation` ,
                           `IsMod`
                           )
                           VALUES (
-                          '$StudentID',  '$subjectID',  '$firstName',  '$lastName',  '$signUpEmail',  '$signUpPassword',  '0',  '0'
+                          '',  '$subjectID',  '$firstName',  '$lastName',  '$signUpEmail', '$StudentID', '$signUpPassword',  '0',  '0'
                         );";
 
     $result = $database -> query($insertSql);

@@ -75,16 +75,12 @@ footer {
   color: #fff;
 }
 
-.login-form {
-  color: #fff;
-}
-
-.input-field input {
-  display: none;
-}
-
 .panel-heading i {
   float: right;
+}
+
+.accordion a {
+  color: inherit;
 }
 
 .accordion .card-header i.togglestate {
@@ -103,4 +99,12 @@ footer {
   -ms-transform: rotate(-90deg);
   -o-transform: rotate(-90deg);
   transform: rotate(-90deg);
+}
+
+.login-form {
+  color: #fff;
+}
+
+.input-field input {
+  display: none;
 }

@@ -21,7 +21,7 @@
             <ul class="navbar-nav mr-auto mt-2 mt-md-0">
               <li class="active nav-item"><a href="#">Page 1</a></li>
               <li class="active nav-item"><a href="#">Page 2</a></li>
-              <li class="active nav-item"><a href="#">Page 3</a></li>
+              <li class="active nav-item"><a href="faq.php">FAQS</a></li>
               <li class="active nav-item"><a href="#">Page 4</a></li>
               <li class="active nav-item"><a href="#">Page 5</a></li>
             </ul>

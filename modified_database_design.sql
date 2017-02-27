@@ -20,7 +20,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `CS4014_project_database`.`User` (
   `StudentID` INT NOT NULL AUTO_INCREMENT,
-  `Subjects_SubjectID` INT NOT NULL,
+  `Subject_SubjectID` INT NOT NULL,
   `ForeName` VARCHAR(35) NOT NULL,
   `Lastname` VARCHAR(35) NOT NULL,
   `EmailAddress` VARCHAR(255) NOT NULL,
@@ -29,10 +29,10 @@ CREATE TABLE IF NOT EXISTS `CS4014_project_database`.`User` (
   `IsMod` TINYINT(1) NOT NULL,
   PRIMARY KEY (`StudentID`),
   UNIQUE INDEX `EmailAddress_UNIQUE` (`EmailAddress` ASC),
-  INDEX `fk_Users_Subjects_idx` (`Subjects_SubjectID` ASC),
+  INDEX `fk_Users_Subjects_idx` (`Subject_SubjectID` ASC),
   UNIQUE INDEX `StudentID_UNIQUE` (`StudentID` ASC),
   CONSTRAINT `fk_Users_Subjects`
-    FOREIGN KEY (`Subjects_SubjectID`)
+    FOREIGN KEY (`Subject_SubjectID`)
     REFERENCES `CS4014_project_database`.`Subject` (`SubjectID`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
@@ -45,23 +45,23 @@ DEFAULT CHARACTER SET = utf8;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `CS4014_project_database`.`Task` (
   `TaskID` INT NOT NULL AUTO_INCREMENT,
-  `Users_StudentID` INT NOT NULL,
-  `Subjects_SubjectID` INT NOT NULL,
+  `User_StudentID` INT NOT NULL,
+  `Subject_SubjectID` INT NOT NULL,
   `Title` VARCHAR(75) NOT NULL,
   `Description` VARCHAR(300) NOT NULL,
   `NumPages` INT NOT NULL,
   `NumWords` INT NOT NULL,
   `ClaimantID` VARCHAR(45) NULL,
   PRIMARY KEY (`TaskID`),
-  INDEX `fk_Tasks_Subjects1_idx` (`Subjects_SubjectID` ASC),
-  INDEX `fk_Tasks_Users1_idx` (`Users_StudentID` ASC),
+  INDEX `fk_Tasks_Subjects1_idx` (`Subject_SubjectID` ASC),
+  INDEX `fk_Tasks_Users1_idx` (`User_StudentID` ASC),
   CONSTRAINT `fk_Tasks_Subjects1`
-    FOREIGN KEY (`Subjects_SubjectID`)
+    FOREIGN KEY (`Subject_SubjectID`)
     REFERENCES `CS4014_project_database`.`Subject` (`SubjectID`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_Tasks_Users1`
-    FOREIGN KEY (`Users_StudentID`)
+    FOREIGN KEY (`User_StudentID`)
     REFERENCES `CS4014_project_database`.`User` (`StudentID`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
@@ -69,15 +69,23 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
+-- Table `CS4014_project_database`.`table3`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `CS4014_project_database`.`table3` (
+)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
 -- Table `CS4014_project_database`.`Deadline`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `CS4014_project_database`.`Deadline` (
-  `Tasks_TaskID` INT NOT NULL,
+  `Task_TaskID` INT NOT NULL,
   `Claim` DATE NOT NULL,
   `Completion` DATE NOT NULL,
-  INDEX `fk_Deadlines_Tasks1_idx` (`Tasks_TaskID` ASC),
+  INDEX `fk_Deadlines_Tasks1_idx` (`Task_TaskID` ASC),
   CONSTRAINT `fk_Deadlines_Tasks1`
-    FOREIGN KEY (`Tasks_TaskID`)
+    FOREIGN KEY (`Task_TaskID`)
     REFERENCES `CS4014_project_database`.`Task` (`TaskID`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
@@ -102,14 +110,14 @@ CREATE TABLE IF NOT EXISTS `CS4014_project_database`.`Document` (
   `DocumentID` INT NOT NULL AUTO_INCREMENT,
   `DocumentURL` VARCHAR(255) NOT NULL,
   `Type` VARCHAR(45) NOT NULL,
-  `Tasks_TaskID` INT NOT NULL,
+  `Task_TaskID` INT NOT NULL,
   `Format_FormatID` INT NOT NULL,
   UNIQUE INDEX `DocumentURL_UNIQUE` (`DocumentURL` ASC),
-  INDEX `fk_Documents_Tasks1_idx` (`Tasks_TaskID` ASC),
+  INDEX `fk_Documents_Tasks1_idx` (`Task_TaskID` ASC),
   PRIMARY KEY (`DocumentID`),
   INDEX `fk_Document_Format1_idx` (`Format_FormatID` ASC),
   CONSTRAINT `fk_Documents_Tasks1`
-    FOREIGN KEY (`Tasks_TaskID`)
+    FOREIGN KEY (`Task_TaskID`)
     REFERENCES `CS4014_project_database`.`Task` (`TaskID`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
@@ -125,11 +133,11 @@ ENGINE = InnoDB;
 -- Table `CS4014_project_database`.`Flag`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `CS4014_project_database`.`Flag` (
-  `Tasks_TaskID` INT NOT NULL,
+  `Task_TaskID` INT NOT NULL,
   `Complaint` VARCHAR(200) NOT NULL,
-  INDEX `fk_Flags_Tasks1_idx` (`Tasks_TaskID` ASC),
+  INDEX `fk_Flags_Tasks1_idx` (`Task_TaskID` ASC),
   CONSTRAINT `fk_Flags_Tasks1`
-    FOREIGN KEY (`Tasks_TaskID`)
+    FOREIGN KEY (`Task_TaskID`)
     REFERENCES `CS4014_project_database`.`Task` (`TaskID`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
@@ -153,18 +161,18 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `CS4014_project_database`.`Clicks` (
   `clickID` INT NOT NULL AUTO_INCREMENT,
-  `Tasks_TaskID` INT NOT NULL,
-  `Users_StudentID` INT NOT NULL,
-  INDEX `fk_Clicks_Tasks1_idx` (`Tasks_TaskID` ASC),
+  `Task_TaskID` INT NOT NULL,
+  `User_StudentID` INT NOT NULL,
+  INDEX `fk_Clicks_Tasks1_idx` (`Task_TaskID` ASC),
   PRIMARY KEY (`clickID`),
-  INDEX `fk_Clicks_Users1_idx` (`Users_StudentID` ASC),
+  INDEX `fk_Clicks_Users1_idx` (`User_StudentID` ASC),
   CONSTRAINT `fk_Clicks_Tasks1`
-    FOREIGN KEY (`Tasks_TaskID`)
+    FOREIGN KEY (`Task_TaskID`)
     REFERENCES `CS4014_project_database`.`Task` (`TaskID`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_Clicks_Users1`
-    FOREIGN KEY (`Users_StudentID`)
+    FOREIGN KEY (`User_StudentID`)
     REFERENCES `CS4014_project_database`.`User` (`StudentID`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
@@ -187,18 +195,18 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `CS4014_project_database`.`TaskTag` (
   `TaskTagID` INT NOT NULL AUTO_INCREMENT,
-  `Tags_TagID` INT NOT NULL,
-  `Tasks_TaskID` INT NOT NULL,
-  INDEX `fk_TaskTags_Tags1_idx` (`Tags_TagID` ASC),
+  `Tag_TagID` INT NOT NULL,
+  `Task_TaskID` INT NOT NULL,
+  INDEX `fk_TaskTags_Tags1_idx` (`Tag_TagID` ASC),
   PRIMARY KEY (`TaskTagID`),
-  INDEX `fk_TaskTags_Tasks1_idx` (`Tasks_TaskID` ASC),
+  INDEX `fk_TaskTags_Tasks1_idx` (`Task_TaskID` ASC),
   CONSTRAINT `fk_TaskTags_Tags1`
-    FOREIGN KEY (`Tags_TagID`)
+    FOREIGN KEY (`Tag_TagID`)
     REFERENCES `CS4014_project_database`.`Tag` (`TagID`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_TaskTags_Tasks1`
-    FOREIGN KEY (`Tasks_TaskID`)
+    FOREIGN KEY (`Task_TaskID`)
     REFERENCES `CS4014_project_database`.`Task` (`TaskID`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
@@ -211,12 +219,12 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `CS4014_project_database`.`Status` (
   `StatusID` INT NOT NULL AUTO_INCREMENT,
   `StatusVal` VARCHAR(45) NOT NULL,
-  `Tasks_TaskID` INT NOT NULL,
+  `Task_TaskID` INT NOT NULL,
   PRIMARY KEY (`StatusID`),
   UNIQUE INDEX `StatusVal_UNIQUE` (`StatusVal` ASC),
-  INDEX `fk_Status_Tasks1_idx` (`Tasks_TaskID` ASC),
+  INDEX `fk_Status_Tasks1_idx` (`Task_TaskID` ASC),
   CONSTRAINT `fk_Status_Tasks1`
-    FOREIGN KEY (`Tasks_TaskID`)
+    FOREIGN KEY (`Task_TaskID`)
     REFERENCES `CS4014_project_database`.`Task` (`TaskID`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)

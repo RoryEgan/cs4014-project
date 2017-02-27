@@ -17,7 +17,7 @@ class QueryHepler{
     $database = new Database();
     $insertSql = "INSERT INTO   `CS4014_project_database`.`User` (
                           `StudentID` ,
-                          `Subjects_SubjectID` ,
+                          `Subject_SubjectID` ,
                           `ForeName` ,
                           `LastName` ,
                           `EmailAddress` ,

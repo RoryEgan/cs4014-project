@@ -1,11 +1,16 @@
 <?php
 
+$database = new Database();
+
 class QueryHepler{
+
   function getSubjectIdFromSubjectName($subject){
-    $database = new Database();
+    global $database;
+
     $selectSubjectIdQuery = "SELECT *
                              FROM Subject
                              WHERE SubjectName = '$subject';";
+
 
     $subjectIdResult = $database -> select($selectSubjectIdQuery);
     $subjectID = $subjectIdResult[0]['SubjectID'];
@@ -14,7 +19,7 @@ class QueryHepler{
   }
 
   function insertUser($StudentID, $subjectID, $firstName, $lastName, $signUpEmail, $signUpPassword, $passwordSalt){
-    $database = new Database();
+    global $database;
     $insertSql = "INSERT INTO   `CS4014_project_database`.`User` (
                           `UserID` ,
                           `Subject_SubjectID` ,
@@ -37,6 +42,7 @@ class QueryHepler{
   }
 
   function getPasswordSalt($email){
+    global $database;
     $query = "SELECT *
               FROM User
               WHERE EmailAddress = '$email';";
@@ -49,10 +55,13 @@ class QueryHepler{
 
 
   function getUser($email, $hashedPassword){
+    global $database;
+
     $sql = "SELECT *
     FROM User
     WHERE EmailAddress = '$email' AND Password = '$hashedPassword';";
-    $res = $db -> select($sql);
+    
+    $res = $database -> select($sql);
 
     return $res;
   }

@@ -27,7 +27,7 @@ if(isset($_POST['signUpButton'])) {
 
       $mysalt = openssl_random_pseudo_bytes(64, $strong);
       $saltyPassword = $signUpPassword . $mysalt;
-      $hashedPassword = password_hash($saltyPassword, PASSWORD_BCRYPT);
+      $hashedPassword = password_verify($saltyPassword, PASSWORD_BCRYPT);
 
       $subjectID = $qh->getSubjectIdFromSubjectName($subject);
       $result = $qh -> insertUser($StudentID, $subjectID, $firstName, $lastName, $signUpEmail, $hashedPassword, $mysalt);

@@ -16,20 +16,21 @@ if (isset($_POST['loginSubmitButton'])) {
 
       $retrievedSalt = $qh -> getPasswordSalt($signInEmail);
 
-      $saltyPassword = $signUpPassword . $retrievedSalt;
-      $hashedPassword = password_hash($saltyPassword, PASSWORD_BCRYPT);
+      $saltyPassword = $signInPassword . $retrievedSalt;
+      $hashedPassword = password_verify($saltyPassword, PASSWORD_BCRYPT);
 
       $res = $qh -> getUser($signInEmail, $hashedPassword);
 
-      
+
       if (count($res) >= 1) {
         header("Location: index.php");
+        mysqli_close($connection);
+        unset($connection);
         exit();
       }
       else {
         echo "<script>alert('Email or password incorrect');</script>";
       }
-      mysqli_close($connection);
     }
   }
 }

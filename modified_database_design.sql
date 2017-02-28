@@ -26,9 +26,10 @@ CREATE TABLE IF NOT EXISTS `CS4014_project_database`.`User` (
   `Lastname` VARCHAR(35) NOT NULL,
   `EmailAddress` VARCHAR(255) NOT NULL,
   `StudentID` INT NOT NULL,
-  `Password` VARCHAR(45) NOT NULL,
+  `Password` VARCHAR(255) NOT NULL,
   `Reputation` INT NOT NULL,
   `IsMod` TINYINT(1) NOT NULL,
+  `PasswordSalt` VARCHAR(64) NOT NULL,
   PRIMARY KEY (`UserID`),
   UNIQUE INDEX `EmailAddress_UNIQUE` (`EmailAddress` ASC),
   INDEX `fk_Users_Subjects_idx` (`Subject_SubjectID` ASC),
@@ -59,7 +60,7 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `CS4014_project_database`.`TaskType` (
   `TaskTypeID` INT NOT NULL AUTO_INCREMENT,
   `TaskTypeVal` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`TaskTypeID`)
+  PRIMARY KEY (`TaskTypeID`),
   UNIQUE INDEX `TaskTypeVal_UNIQUE` (`TaskTypeVal` ASC))
 ENGINE = InnoDB;
 

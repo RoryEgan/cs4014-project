@@ -24,11 +24,13 @@ if(isset($_POST['signUpButton'])) {
   //          -connection through SSL for login/ sign up
   if($val->isValidSignUp($firstName, $lastName, $signUpEmail, $StudentID, $subject, $signUpPassword, $passwordConfirm)){
     if($connection){
-      include('includes/php/utils/QueryHelper.class.php');
-      $qh = new QueryHepler();
+
+      $mysalt = openssl_random_pseudo_bytes(64, $strong);
+      $saltyPassword = $signUpPassword . $mysalt;
+      $hashedPassword = password_hash($saltyPassword, PASSWORD_BCRYPT);
 
       $subjectID = $qh->getSubjectIdFromSubjectName($subject);
-      $result = $qh -> insertUser($StudentID, $subjectID, $firstName, $lastName, $signUpEmail, $signUpPassword);
+      $result = $qh -> insertUser($StudentID, $subjectID, $firstName, $lastName, $signUpEmail, $hashedPassword, $mysalt);
 
       if($result){
         header('Location: thank-you.php');

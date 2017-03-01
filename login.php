@@ -9,7 +9,7 @@
       <div class="col-md-6 offset-md-6">
         <div class="login-boundry my-5">
           <h2 class="my-3">Sign up!</h2>
-          <form class="form" onsubmit="checkHoneypot()" action="login.php" method="post">
+          <form class="form" onsubmit="return checkHoneypot()" action="login.php" method="post">
             <div class="form-group">
               <div id="fNameDiv" class="form-inline">
                 <input id="signUpFirstName" class="form-control my-2" type="text" name="signUpFirstName" value="" placeholder="First Name" onblur="validateFirstName()" required/>

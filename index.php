@@ -5,11 +5,11 @@
 
     <section>
       <button type="button" class="btn btn-outline-primary">
-        <a href="#" data-toggle="modal" data-target="#contact-modal-2" class="modal-trigger">
+        <a href="#" data-toggle="modal" data-target="#task-modal" class="modal-trigger">
           New Task
         </a>
       </button>
-      <div class="modal" id="contact-modal-2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal" id="task-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">

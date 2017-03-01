@@ -1,8 +1,10 @@
 <?php
 include('includes/php/utils/Database.class.php');
 include('includes/php/utils/Validator.class.php');
+include('includes/php/utils/QueryHelper.class.php');
 $db = new Database();
 $val = new Validator();
+$qh = new QueryHepler();
 
 
 if (isset($_POST['loginSubmitButton'])) {
@@ -11,18 +13,24 @@ if (isset($_POST['loginSubmitButton'])) {
   $connection = $db->connect();
   if($val -> isValidEmail($signInEmail) && $val -> isValidPassword($signInPassword)) {
     if ($connection) {
-      $sql = "SELECT *
-      FROM User
-      WHERE EmailAddress = '$signInEmail' AND Password = '$signInPassword';";
-      $res = $db -> select($sql);
+
+      $retrievedSalt = $qh -> getPasswordSalt($signInEmail);
+
+      $saltyPassword = $signInPassword . $retrievedSalt;
+      $hashedPassword = password_verify($saltyPassword, PASSWORD_BCRYPT);
+
+      $res = $qh -> getUser($signInEmail, $hashedPassword);
+
+
       if (count($res) >= 1) {
         header("Location: index.php");
+        mysqli_close($connection);
+        unset($connection);
         exit();
       }
       else {
         echo "<script>alert('Email or password incorrect');</script>";
       }
-      mysqli_close($connection);
     }
   }
 }

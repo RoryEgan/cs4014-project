@@ -1,11 +1,16 @@
 <?php
 
+$database = new Database();
+
 class QueryHepler{
+
   function getSubjectIdFromSubjectName($subject){
-    $database = new Database();
+    global $database;
+
     $selectSubjectIdQuery = "SELECT *
                              FROM Subject
                              WHERE SubjectName = '$subject';";
+
 
     $subjectIdResult = $database -> select($selectSubjectIdQuery);
     $subjectID = $subjectIdResult[0]['SubjectID'];
@@ -13,8 +18,8 @@ class QueryHepler{
     return $subjectID;
   }
 
-  function insertUser($StudentID, $subjectID, $firstName, $lastName, $signUpEmail, $signUpPassword){
-    $database = new Database();
+  function insertUser($StudentID, $subjectID, $firstName, $lastName, $signUpEmail, $signUpPassword, $passwordSalt){
+    global $database;
     $insertSql = "INSERT INTO   `CS4014_project_database`.`User` (
                           `UserID` ,
                           `Subject_SubjectID` ,
@@ -24,15 +29,41 @@ class QueryHepler{
                           `StudentID`,
                           `Password` ,
                           `Reputation` ,
-                          `IsMod`
+                          `IsMod`,
+                          `PasswordSalt`
                           )
                           VALUES (
-                          '',  '$subjectID',  '$firstName',  '$lastName',  '$signUpEmail', '$StudentID', '$signUpPassword',  '0',  '0'
+                          '',  '$subjectID',  '$firstName',  '$lastName',  '$signUpEmail', '$StudentID', '$signUpPassword',  '0',  '0', '$passwordSalt'
                         );";
 
     $result = $database -> query($insertSql);
 
     return $result;
+  }
+
+  function getPasswordSalt($email){
+    global $database;
+    $query = "SELECT *
+              FROM User
+              WHERE EmailAddress = '$email';";
+
+    $result = $database -> select($query);
+    $salt = $result[0]['PasswordSalt'];
+
+    return $salt;
+  }
+
+
+  function getUser($email, $hashedPassword){
+    global $database;
+
+    $sql = "SELECT *
+    FROM User
+    WHERE EmailAddress = '$email' AND Password = '$hashedPassword';";
+    
+    $res = $database -> select($sql);
+
+    return $res;
   }
 }
 

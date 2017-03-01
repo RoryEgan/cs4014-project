@@ -1,5 +1,5 @@
 <?php include('includes/php/utils/Database.class.php'); ?>
-<form class="form" onsubmit="checkHoneypot()" action="login.php" method="post">
+<form class="form" onsubmit="return checkHoneypot()" action="login.php" method="post">
   <div class="form-group">
     <div>
       <input  class="form-control my-2" type="text" name="signUpFirstName" value="" placeholder="Task Title" required/>

@@ -65,9 +65,7 @@ function validatePassword() {
   var password = document.getElementById('signUpPassword');
   var passwordText = password.value;
 
-
-/*passwordText.match(/[a-zA-Z]/.test(passwordText) && /[0-9]/.test(passwordText)) && passwordText.length >= 8 && passwordText.length <= 20*/
-  if(10 >= 5) {
+  if(passwordText.match(/^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])([a-zA-Z0-9]{8,})$/)) {
 
     passwordGroup.className = "has-success";
     password.className = "form-control my-2 form-control-success";
@@ -75,6 +73,7 @@ function validatePassword() {
   else {
     passwordGroup.className = "has-danger";
     password.className = "form-control my-2 form-control-danger";
+    console.log("REEEEEEEEEEEEEEEEEEEEEEEEEEEEEee");
   }
 }
 

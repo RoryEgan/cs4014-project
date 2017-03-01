@@ -43,7 +43,7 @@ class Validator{
   function isValidPassword($password){
     $hasAlpha = false;
     $hasDigit = false;
-    if(strlen($password) >= 6 && strlen($password) <= 20){
+    if(strlen($password) >= 8 && strlen($password) <= 20){
       $splitStringArray = str_split($password);
 
       for($i = 0; $i < count($splitStringArray); $i++){

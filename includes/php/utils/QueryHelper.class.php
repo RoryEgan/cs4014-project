@@ -41,6 +41,7 @@ class QueryHepler{
     return $result;
   }
 
+  //returns the password salt that belongs to a particular user.
   function getPasswordSalt($email){
     global $database;
     $query = "SELECT *
@@ -53,18 +54,67 @@ class QueryHepler{
     return $salt;
   }
 
-
+  //returns a user with the specified email and password or false if the user does not exist.
   function getUser($email, $hashedPassword){
     global $database;
 
     $sql = "SELECT *
     FROM User
     WHERE EmailAddress = '$email' AND Password = '$hashedPassword';";
-    
+
     $res = $database -> select($sql);
 
     return $res;
   }
+
+  //check if the email is already used or belongs to banned user.
+  function isUniqueEmail($inputEmail){
+    global $database;
+
+    $bannedUserQuery = "SELECT EmailAddress
+                        From BannedUser
+                        WHERE EmailAddress = '$inputEmail';";
+    $bannedUserResult = $database -> select($bannedUserQuery);
+
+    //if we get false back from our select query we proceed to check if this email is in the user table.
+    if(!$bannedUserResult){
+
+      $userQuery = "SELECT EmailAddress
+                          From User
+                          WHERE EmailAddress = '$inputEmail';";
+      $userResult = $database -> select($userQuery);
+
+      //if the email is not in the user table we return true.
+      if(!$userResult){
+        return true;
+      }
+      else{
+        return false;
+      }
+    }
+    else{
+      return false;
+    }
+  }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ?>

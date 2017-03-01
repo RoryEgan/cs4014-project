@@ -17,7 +17,7 @@ if (isset($_POST['loginSubmitButton'])) {
       $retrievedSalt = $qh -> getPasswordSalt($signInEmail);
 
       $saltyPassword = $signInPassword . $retrievedSalt;
-      $hashedPassword = password_verify($saltyPassword, PASSWORD_BCRYPT);
+      $hashedPassword = hash('sha256', $saltyPassword);
 
       $res = $qh -> getUser($signInEmail, $hashedPassword);
 

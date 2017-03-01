@@ -17,24 +17,32 @@ if(isset($_POST['signUpButton'])) {
   $connection = $db->connect();
 
   //REQUIRED:
-  //          -password encryption.
-  //          -ensure studentIDs entered are unique
-  //          -ensure emails are unique
-  //          -ensure banned users are not trying to sign up again (check email and studentID)
   //          -connection through SSL for login/ sign up
   if($val->isValidSignUp($firstName, $lastName, $signUpEmail, $StudentID, $subject, $signUpPassword, $passwordConfirm)){
     if($connection){
+      //check if the email is already used or belongs to banned user.
+      if($qh -> isUniqueEmail($signUpEmail)){
 
-      $mysalt = openssl_random_pseudo_bytes(64, $strong);
-      $saltyPassword = $signUpPassword . $mysalt;
-      $hashedPassword = password_verify($saltyPassword, PASSWORD_BCRYPT);
+        //Salted password hashing
+        $mysalt = openssl_random_pseudo_bytes(64, $strong);
+        $saltyPassword = $signUpPassword . $mysalt;
+        $hashedPassword = hash('sha256', $saltyPassword);
 
-      $subjectID = $qh->getSubjectIdFromSubjectName($subject);
-      $result = $qh -> insertUser($StudentID, $subjectID, $firstName, $lastName, $signUpEmail, $hashedPassword, $mysalt);
+        $subjectID = $qh->getSubjectIdFromSubjectName($subject);
+        $result = $qh -> insertUser($StudentID, $subjectID, $firstName, $lastName, $signUpEmail, $hashedPassword, $mysalt);
 
-      if($result){
-        header('Location: thank-you.php');
-        exit();
+
+
+        if($result){
+          header('Location: thank-you.php');
+          exit();
+        }
+        else{
+          echo "<script>alert('Failed to create account');</script>";
+        }
+      }
+      else{
+        echo "<script>alert('The email supplied is already used by another account');</script>";
       }
     }
   }

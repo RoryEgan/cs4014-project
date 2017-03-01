@@ -34,7 +34,8 @@ class QueryHepler{
                           `PasswordSalt`
                           )
                           VALUES (
-                          NULL,  '$subjectID',  '$firstName',  '$lastName',  '$signUpEmail', '$studentID', '$signUpPassword',  '0',  '0', '$passwordSalt'
+
+                         NULL,  '$subjectID',  '$firstName',  '$lastName',  '$signUpEmail', '$studentID', '$signUpPassword',  '0',  '0', '$passwordSalt'
                         );";
 
     $result = $database -> query($insertSql);

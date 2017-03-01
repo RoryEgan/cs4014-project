@@ -28,6 +28,7 @@ if(isset($_POST['signUpButton'])) {
         $saltyPassword = $signUpPassword . $mysalt;
         $hashedPassword = hash('sha256', $saltyPassword);
 
+
         $subjectID = $qh->getSubjectIdFromSubjectName($subject);
         $result = $qh -> insertUser($StudentID, $subjectID, $firstName, $lastName, $signUpEmail, $hashedPassword, $mysalt);
 

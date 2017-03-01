@@ -18,8 +18,9 @@ class QueryHepler{
     return $subjectID;
   }
 
-  function insertUser($StudentID, $subjectID, $firstName, $lastName, $signUpEmail, $signUpPassword, $passwordSalt){
+  function insertUser($studentID, $subjectID, $firstName, $lastName, $signUpEmail, $signUpPassword, $passwordSalt){
     global $database;
+
     $insertSql = "INSERT INTO   `CS4014_project_database`.`User` (
                           `UserID` ,
                           `Subject_SubjectID` ,
@@ -33,7 +34,7 @@ class QueryHepler{
                           `PasswordSalt`
                           )
                           VALUES (
-                          '',  '$subjectID',  '$firstName',  '$lastName',  '$signUpEmail', '$StudentID', '$signUpPassword',  '0',  '0', '$passwordSalt'
+                          NULL,  '$subjectID',  '$firstName',  '$lastName',  '$signUpEmail', '$studentID', '$signUpPassword',  '0',  '0', '$passwordSalt'
                         );";
 
     $result = $database -> query($insertSql);

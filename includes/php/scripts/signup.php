@@ -5,6 +5,8 @@
 if( ! $_POST['contact'] == '') return;
 
 
+$val -> isValidPassword('Password123');
+
 // Submission check
 if(isset($_POST['signUpButton'])) {
   $firstName = $db->quote(trim($_POST['signUpFirstName']));

@@ -41,19 +41,24 @@ class Validator{
   //  -atleast one letter
   //  -atleast one number
   function isValidPassword($password){
-    $hasAlpha = false;
+    $hasLower = false;
     $hasDigit = false;
+    $hasUpper = false;
+
     if(strlen($password) >= 8 && strlen($password) <= 20){
       $splitStringArray = str_split($password);
 
       for($i = 0; $i < count($splitStringArray); $i++){
-        if(ctype_alpha($splitStringArray[$i])){
-          $hasAlpha = true;
+        if(ctype_lower($splitStringArray[$i])){
+          $hasLower = true;
         }
         else if(ctype_digit($splitStringArray[$i])){
           $hasDigit = true;
         }
-        if($hasAlpha && $hasDigit){
+        else if(ctype_upper($splitStringArray[$i])){
+          $hasUpper = true;
+        }
+        if($hasLower && $hasDigit && $hasUpper){
           return true;
         }
       }

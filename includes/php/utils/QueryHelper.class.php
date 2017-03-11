@@ -2,7 +2,7 @@
 
 $database = new Database();
 
-class QueryHepler{
+class QueryHelper{
 
   function getSubjectIdFromSubjectName($subject){
     global $database;
@@ -35,7 +35,7 @@ class QueryHepler{
                           )
                           VALUES (
 
-                         '0',  '$subjectID',  '$firstName',  '$lastName',  '$signUpEmail', '$studentID', '$signUpPassword',  '0',  '0', '$passwordSalt'
+                         NULL,  '$subjectID',  '$firstName',  '$lastName',  '$signUpEmail', '$studentID', '$signUpPassword',  '0',  '0', '$passwordSalt'
                         );";
 
     $result = $database -> query($insertSql);
@@ -98,8 +98,142 @@ class QueryHepler{
       return false;
     }
   }
-}
 
+  function verifyDropDownInput($input, $selectQuery, $columnName){
+    global $database;
+
+    $result = $database -> select($selectQuery);
+
+    for($i = 0; $i < count($result); $i++){
+      if($input == $result[$i][$columnName]){
+        return true;
+      }
+    }
+    return false;
+  }
+
+  function insertTask($task){
+    global $database;
+
+    echo "Insert task executed";
+
+    //insert into the associated tables.
+    $this -> insertDeadlines($task);
+    $this -> insertDocument($task);
+    $this -> insertTaskTags($task);
+
+    //collect the data required to insert into task table.
+    $taskTypeID = $this -> getTaskTypeIDFromTaskType($task->getTaskType());
+    $subjectID = $this -> getSubjectIDFromSubjectName($task -> getSubject());
+    $title = $task -> getTaskTitle();
+    $description = $task -> getTaskDescription();
+    $numPages = $task -> getNumPages();
+    $numWords = $task -> getNumWords();
+
+    //sql statement
+    $taskInsert = "INSERT INTO 'CS4014_project_database'.`Task`(
+      `TaskID`,
+      `User_UserID`,
+      `TaskType_TaskTypeID`,
+      `Subject_SubjectID`,
+      `Status_StatusID`,
+      `Title`,
+      `Description`,
+      `NumPages`,
+      `NumWords`,
+      `ClaimantID`)
+    VALUES (NULL,1, $taskTypeID, $subjectID,'2','$title','$description',$numPages,$numWords,1);";
+
+    //execute query
+    $taskInsertSuccess = $database -> query($taskInsert);
+
+    if(!$taskInsertSuccess){
+      echo "Task insert failed";
+    }
+    else{
+      return true;
+    }
+  }
+
+
+  function insertDocument($task){
+
+  }
+
+  function insertDeadlines($task){
+    global $database;
+
+    $claimDeadline = $task -> getClaimDeadline();
+    $completeDeadline = $task -> getCompleteDeadline();
+
+    $sql = "INSERT INTO `CS4014_project_database`.`Deadline`('Task_TaskID', Claim, Completion)
+            VALUES('1', '$claimDeadline', '$completeDeadline');";
+
+    $deadlineInsert = $database -> query($sql);
+    if(!$deadlineInsert){
+      echo "Deadlines did not insert";
+    }
+    else{
+      echo "deadline inserted successfully";
+    }
+  }
+
+  function insertTaskTags($task){
+    global $database;
+
+    //get each tag for the task
+    $t1 = $task -> getTag1();
+    $t2 = $task -> getTag2();
+    $t3 = $task -> getTag3();
+    $t4 = $task -> getTag4();
+
+    //convert to array for convenience.
+    $tags = array($t1, $t2, $t3, $t4);
+
+    //for each tag check if it was given a value and if it was we insert into taskTag
+    for ($i=0; $i < sizeof($tags); $i++) {
+      $currentTag = $task -> getTag($i + 1);
+      if($currentTag != 'Tag'){
+        $tagID = $this -> getTagIDFromTagVal($currentTag);
+        $database -> query("INSERT INTO `CS4014_project_database`.`TaskTag`
+                            ('TaskTagID, 'Tag_TagID', 'Task_TaskID')
+                            VALUES(NULL, '$tagID', '1');");
+      }
+      else{
+        echo "<pre>\nThis tag was not selected\n</pre>";
+      }
+    }
+  }
+
+  function getTagIDFromTagVal($tagVal){
+    global $database;
+
+    $sql = "SELECT * FROM Tag WHERE Value = '$tagVal'";
+
+    $res = $database -> select($sql);
+
+    if(!$res){
+      return false;
+    }
+    else{
+      $tagID = $res[0]['TagID'];
+
+      return $tagID;
+    }
+  }
+
+  function getTaskTypeIDFromTaskType($taskType){
+    global $database;
+
+    $taskTypeIDArray = $database -> select("SELECT TaskTypeID FROM TaskType
+                                       WHERE TaskType = '$taskType';");
+    $taskTypeID = $taskTypeIDArray[0]['TaskTypeID'];
+
+    return $taskTypeID;
+  }
+
+
+}
 
 
 

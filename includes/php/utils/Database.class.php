@@ -26,7 +26,7 @@ class Database{
     $result = $this -> query($query);
 
     //check if query returns no result / false.
-    if($result === false) {
+    if($result == false) {
         return false;
     }
 
@@ -54,6 +54,7 @@ class Database{
 
     //call the query function on the connection object.
     $result  = $connection -> query($query);
+
 
     return $result;
   }

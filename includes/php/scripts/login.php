@@ -4,7 +4,7 @@ include('includes/php/utils/Validator.class.php');
 include('includes/php/utils/QueryHelper.class.php');
 $db = new Database();
 $val = new Validator();
-$qh = new QueryHepler();
+$qh = new QueryHelper();
 
 
 if (isset($_POST['loginSubmitButton'])) {
@@ -22,14 +22,14 @@ if (isset($_POST['loginSubmitButton'])) {
       $res = $qh -> getUser($signInEmail, $hashedPassword);
 
 
-      if (count($res) >= 1) {
-        header("Location: index.php");
-        mysqli_close($connection);
-        unset($connection);
-        exit();
+      if (!$res) {
+        echo "<script>alert('Email or password incorrect');</script>";
       }
       else {
-        echo "<script>alert('Email or password incorrect');</script>";
+          header("Location: index.php");
+          mysqli_close($connection);
+          unset($connection);
+          exit();
       }
     }
   }

@@ -5,8 +5,6 @@
 if( ! $_POST['contact'] == '') return;
 
 
-$val -> isValidPassword('Password123');
-
 // Submission check
 if(isset($_POST['signUpButton'])) {
   $firstName = $db->quote(trim($_POST['signUpFirstName']));
@@ -24,6 +22,8 @@ if(isset($_POST['signUpButton'])) {
     if($connection){
       //check if the email is already used or belongs to banned user.
       if($qh -> isUniqueEmail($signUpEmail)){
+
+
 
         //Salted password hashing
         $mysalt = openssl_random_pseudo_bytes(64, $strong);
@@ -48,6 +48,9 @@ if(isset($_POST['signUpButton'])) {
         echo "<script>alert('The email supplied is already used by another account');</script>";
       }
     }
+  }
+  else{
+    echo "<script>alert('One or more of your entries was invalid');</script>";
   }
 }
 

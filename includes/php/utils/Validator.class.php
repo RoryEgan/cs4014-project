@@ -8,6 +8,10 @@ class Validator{
           && $this -> isValidSubject($subject) && $this -> isValidPassword($signUpPassword) && ($signUpPassword == $passwordConfirm));
   }
 
+  function isValidTask($taskTitle, $taskDescription, $numPages, $numWords, $docFormat, $docType, $claimDeadline, $completeDeadline){
+    return true;
+  }
+
 
   function isValidEmail($email){
     if (filter_var($email, FILTER_VALIDATE_EMAIL) !== false){
@@ -68,9 +72,22 @@ class Validator{
 
   //functionality to be added
   function isValidSubject($subject){
-    return true;
+    $qh = new QueryHelper();
+
+    $columnName = "SubjectName";
+    $selectSubject = "SELECT * FROM Subject;";
+    if($qh -> verifryDropDownInput($subject, $selectSubject, $columnName)){
+      return true;
+    }
+    else{
+      return false;
+    }
   }
 
+  function isValidTaskTitle(){
+
+  }
 }
+
 
 ?>

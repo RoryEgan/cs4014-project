@@ -1,10 +1,11 @@
-<?php include('includes/php/utils/Database.class.php'); ?>
-<form class="form" onsubmit="return checkHoneypot()" action="login.php" method="post">
+<?php include('includes/php/utils/Database.class.php');
+?>
+<form class="form" onsubmit="return checkHoneypot()" action="index.php" method="post">
   <div class="form-group">
     <div>
-      <input  class="form-control my-2" type="text" name="signUpFirstName" value="" placeholder="Task Title" required/>
+      <input  class="form-control my-2" type="text" name="taskTitle" value="" placeholder="Task Title" required/>
     </div>
-    <select class="form-control my-2" name="signUpSubject">
+    <select class="form-control my-2" name="taskType">
       <option selected hidden>Task Type</option>
       <?php
       include('includes/php/utils/DropdownOptionGenerator.class.php');
@@ -14,33 +15,88 @@
       ?>
     </select>
     <div>
-      <textarea name="signUpLastName" class="form-control my-2 input-large" type="text" value="" placeholder="Description"  required></textarea>
+      <textarea name="taskDescription" class="form-control my-2 input-large" maxlength="200" type="text" value="" placeholder="Description"  required></textarea>
     </div>
     <div class="form-inline">
-      <input name="signUpEmail" class="form-control my-2" type="text" placeholder="Number of pages" required/>
+      <input name="numPages" class="form-control my-2" type="number" placeholder="Number of pages" required/>
     </div>
     <div class="form-inline">
-      <input name="signUpPassword" type="password" class="form-control my-2" placeholder="Number of words" />
+      <input name="numWords" type="number" class="form-control my-2" placeholder="Number of words" />
     </div>
-    <select class="form-control my-2" name="signUpSubject">
+    <select class="form-control my-2" name="documentFormat">
       <option selected hidden>File Format</option>
       <?php
       $query = "SELECT * FROM Format;";
       $gen -> generateOptions($query, 'FormatVal');
       ?>
     </select>
+    <select class="form-control my-2" name="documentType">
+      <option selected hidden>Document Type</option>
+      <?php
+      $query = "SELECT * FROM DocumentType;";
+      $gen -> generateOptions($query, 'DocumentTypeVal');
+      ?>
+    </select>
+
+    <select class="form-control my-2" name="taskSubject">
+      <option selected hidden>Subject / Discipline</option>
+      <?php
+      $query = "SELECT * FROM Subject;";
+      $gen -> generateOptions($query, 'SubjectName');
+      ?>
+    </select>
+
+    <div class="form-inline">
+      <select name="tag1" class="form-control my-2 form-inline">
+        <option selected hidden>Tag1</option>
+        <?php
+        $query = "SELECT * FROM Tag;";
+        $gen -> generateOptions($query, 'Value');
+        ?>
+      </select>
+
+      <select name="tag2" class="form-control my-2 form-inline">
+        <option selected hidden>Tag2</option>
+        <?php
+        $query = "SELECT * FROM Tag;";
+        $gen -> generateOptions($query, 'Value');
+        ?>
+      </select>
+
+      <select name="tag3" class="form-control my-2 form-inline">
+        <option selected hidden>Tag3</option>
+        <?php
+        $query = "SELECT * FROM Tag;";
+        $gen -> generateOptions($query, 'Value');
+        ?>
+      </select>
+
+      <select name="tag4" class="form-control my-2 form-inline">
+        <option selected hidden>Tag4</option>
+        <?php
+        $query = "SELECT * FROM Tag;";
+        $gen -> generateOptions($query, 'Value');
+        ?>
+      </select>
+    </div>
+
+
+
     <div class="my-2">
-      <input type="file" class="my-2 btn-default btn-file" required/>
+      <input name="taskDocument" type="file" class="my-2 btn-default btn-file" required/>
     </div>
-    <label for="claim-date">Claim deadline:</label>
     <div class=" my-2">
-      <input id="claim-date" type="date" />
+      <label for="claim-date">Claim deadline:</label>
+      <input name="claim-date" id="claim-date" type="date" />
     </div>
-    <label for="completion-date">Completion deadline:</label>
+
     <div class=" my-2">
-      <input id="completion-date" type="date" />
+      <label for="completion-date">Completion deadline:</label>
+      <input name="completion-date" id="completion-date" type="date" />
     </div>
-    <input type="submit" class="btn btn-default" value="Submit" name="signUpButton" role="button"/>
+    <div class="my-2 form-inline">
+      <input type="submit" class="btn btn-default" value="Submit" name="taskSubmitButton" role="button"/>
+    </div>
     <div class="input-field">
       <input id="gotcha" type="text" name="contact" value="" />
     </div>

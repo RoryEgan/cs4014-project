@@ -24,13 +24,15 @@ CREATE TABLE IF NOT EXISTS `CS4014_project_database`.`User` (
   `ForeName` VARCHAR(35) NOT NULL,
   `Lastname` VARCHAR(35) NOT NULL,
   `EmailAddress` VARCHAR(255) NOT NULL,
+  `StudentID` INT NOT NULL,
   `Password` VARCHAR(45) NOT NULL,
   `reputation` INT NOT NULL,
   `IsMod` TINYINT(1) NOT NULL,
+  `PasswordSalt` VARCHAR(64) NOT NULL,
   PRIMARY KEY (`UserID`),
   UNIQUE INDEX `EmailAddress_UNIQUE` (`EmailAddress` ASC),
   INDEX `fk_Users_Subjects_idx` (`Subject_SubjectID` ASC),
-  UNIQUE INDEX `StudentID_UNIQUE` (`UserID` ASC),
+  UNIQUE INDEX `UserID_UNIQUE` (`UserID` ASC),
   CONSTRAINT `fk_Users_Subjects`
     FOREIGN KEY (`Subject_SubjectID`)
     REFERENCES `CS4014_project_database`.`Subject` (`SubjectID`)
@@ -204,20 +206,20 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `CS4014_project_database`.`Clicks`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `CS4014_project_database`.`Clicks` (
+CREATE TABLE IF NOT EXISTS `CS4014_project_database`.`Click` (
   `clickID` INT NOT NULL AUTO_INCREMENT,
   `Task_TaskID` INT NOT NULL,
-  `User_StudentID` INT NOT NULL,
+  `User_UserID` INT NOT NULL,
   INDEX `fk_Clicks_Tasks1_idx` (`Task_TaskID` ASC),
   PRIMARY KEY (`clickID`),
-  INDEX `fk_Clicks_Users1_idx` (`User_StudentID` ASC),
+  INDEX `fk_Clicks_Users1_idx` (`User_UserID` ASC),
   CONSTRAINT `fk_Clicks_Tasks1`
     FOREIGN KEY (`Task_TaskID`)
     REFERENCES `CS4014_project_database`.`Task` (`TaskID`)
     ON DELETE CASCADE
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_Clicks_Users1`
-    FOREIGN KEY (`User_StudentID`)
+    FOREIGN KEY (`User_UserID`)
     REFERENCES `CS4014_project_database`.`User` (`UserID`)
     ON DELETE CASCADE
     ON UPDATE NO ACTION)

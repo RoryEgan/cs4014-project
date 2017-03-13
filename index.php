@@ -25,6 +25,13 @@
         </div>
       </div>
     </section>
+    <?php
+      include('includes/php/utils/TaskPrinter.class.php');
+      $taskPrinter = new TaskPrinter();
+      $task = new Task();
+      $taskPrinter -> printDefaultTask($task);
+    ?>
+
     <section>
       <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
         tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim

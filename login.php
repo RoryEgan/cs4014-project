@@ -1,7 +1,7 @@
 <?php include('includes/head.php');?>
 <?php include('includes/login-header.php');?>
 <?php include('includes/php/scripts/login.php');?>
-<?php include('includes/php/scripts/signup.php') ?>
+<?php include('includes/php/scripts/signup.php'); ?>
 
 <body>
   <div class="container">

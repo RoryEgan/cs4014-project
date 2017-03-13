@@ -19,8 +19,8 @@
         <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
           <div class="nav-menu">
             <ul class="navbar-nav mr-auto mt-2 mt-md-0">
-              <li class="active nav-item"><a href="#">Page 1</a></li>
-              <li class="active nav-item"><a href="#">Page 2</a></li>
+              <li class="active nav-item"><a href="index.php">Home</a></li>
+              <li class="active nav-item"><a href="profile.php">Profile</a></li>
               <li class="active nav-item"><a href="faq.php">FAQS</a></li>
               <li class="active nav-item"><a href="#">Page 4</a></li>
             </ul>

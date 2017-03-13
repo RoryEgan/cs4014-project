@@ -1,10 +1,9 @@
 <?php include('includes/php/utils/Database.class.php');
 ?>
-<!--
-<form class="form" onsubmit="return checkHoneypot()" action="index.php" method="post">
+<form class="form" enctype="multipart/form-data" onsubmit="return checkHoneypot()" action="test-new-task.php" method="post">
   <div class="form-group">
     <div>
-      <input  class="form-control my-2" type="text" name="taskTitle" value="" placeholder="Task Title" required/>
+      <input  class="form-control my-2" maxlength="74" type="text" name="taskTitle" value="" placeholder="Task Title" required/>
     </div>
     <select class="form-control my-2" name="taskType">
       <option selected hidden>Task Type</option>
@@ -49,7 +48,7 @@
 
     <div class="form-inline">
       <select name="tag1" class="form-control my-2 form-inline">
-        <option selected hidden>Tag1</option>
+        <option selected hidden>Tag</option>
         <?php
         $query = "SELECT * FROM Tag;";
         $gen -> generateOptions($query, 'Value');
@@ -57,7 +56,7 @@
       </select>
 
       <select name="tag2" class="form-control my-2 form-inline">
-        <option selected hidden>Tag2</option>
+        <option selected hidden>Tag</option>
         <?php
         $query = "SELECT * FROM Tag;";
         $gen -> generateOptions($query, 'Value');
@@ -65,7 +64,7 @@
       </select>
 
       <select name="tag3" class="form-control my-2 form-inline">
-        <option selected hidden>Tag3</option>
+        <option selected hidden>Tag</option>
         <?php
         $query = "SELECT * FROM Tag;";
         $gen -> generateOptions($query, 'Value');
@@ -73,7 +72,7 @@
       </select>
 
       <select name="tag4" class="form-control my-2 form-inline">
-        <option selected hidden>Tag4</option>
+        <option selected hidden>Tag</option>
         <?php
         $query = "SELECT * FROM Tag;";
         $gen -> generateOptions($query, 'Value');

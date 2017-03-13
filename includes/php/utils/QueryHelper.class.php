@@ -292,7 +292,10 @@ class QueryHelper{
     return $taskTypeID;
   }
 
+<<<<<<< HEAD
+=======
 
+>>>>>>> 0481fd85a6bf177c374b1e582c2d92476b7d04f9
   function getFormatIDFromFormat($format){
     global $database;
 
@@ -313,7 +316,10 @@ class QueryHelper{
     return $docTypeID;
   }
 
+<<<<<<< HEAD
+=======
 
+>>>>>>> 0481fd85a6bf177c374b1e582c2d92476b7d04f9
   public function getTasksCount($query) {
 
     global $database;
@@ -325,7 +331,10 @@ class QueryHelper{
 
     return $num;
   }
+<<<<<<< HEAD
+=======
 
+>>>>>>> 0481fd85a6bf177c374b1e582c2d92476b7d04f9
 
 }
 

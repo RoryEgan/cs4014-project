@@ -115,8 +115,6 @@ class QueryHelper{
   function insertTask($task){
     global $database;
 
-    echo "Insert task executed";
-
     //collect the data required to insert into task table.
     $taskTypeID = $this -> getTaskTypeIDFromTaskType($task->getTaskType());
     $subjectID = $this -> getSubjectIDFromSubjectName($task -> getSubject());
@@ -138,25 +136,81 @@ class QueryHelper{
       `NumWords`,
       `ClaimantID`)
     VALUES (NULL,1, $taskTypeID, $subjectID,2,'$title','$description',$numPages,$numWords,NULL);";
-
     //execute query
     $taskInsertSuccess = $database -> query($taskInsert);
 
+    $taskID = $database -> getLastInsertID();
+    $task -> setTaskID($taskID);
+
+
+
     if(!$taskInsertSuccess){
       echo "failed to insert task";
+      return false;
     }
     else{
       //insert into the associated tables.
-      $this -> insertDeadlines($task);
-      $this -> insertDocument($task);
-      $this -> insertTaskTags($task);
+      $deadlineInsert = $this -> insertDeadlines($task);
+      if(!$deadlineInsert){
+        echo "Failed to insert deadlines";
+        return false;
+      }
+      $docInsert = $this -> insertDocument($task);
+      if(!$docInsert){
+        echo "Failed to insert document";
+        return false;
+      }
+      $taskTagInsert = $this -> insertTaskTags($task);
+      if(!$taskTagInsert){
+        echo "Failed to insert tasktag";
+        return false;
+      }
       return true;
     }
   }
 
 
   function insertDocument($task){
+    global $database;
 
+    $document = $task -> getDocument();
+    $location = $document['tmp_name'];
+    $targetFile = basename($document['name']);
+    $ext = $task -> getDocFormat();
+
+    $fileNameNew = uniqid('', true) . $ext;
+
+    $fileDestination = 'files/documents/' . $fileNameNew;
+
+    echo "<pre>\noriginal location: $location\t new location: $fileDestination\n</pre>";
+
+    if(move_uploaded_file($location, $fileDestination)){
+      $taskID = $task -> getTaskID();
+      $format = $task -> getDocFormat();
+      $docType = $task -> getDocType();
+      $formatID = $this -> getFormatIDFromFormat($format);
+      $documentTypeID = $this -> getDocTypeIDFromDocType($docType);
+
+      echo "task id: $taskID formatID: $formatID docType: $documentTypeID fileDest: $fileDestination format: $format";
+
+
+      $insertSQL = "INSERT INTO `CS4014_project_database`.`Document`(
+        `DocumentID`,
+        `DocumentURL`,
+        `Task_TaskID`,
+        `Format_FormatID`,
+        `DocumentType_DocumentTypeID`)
+      VALUES (NULL,'$fileDestination',$taskID,$formatID,$documentTypeID);";
+
+      $docInsert = $database -> query($insertSQL);
+      if($docInsert){
+        return true;
+      }
+    }
+    else{
+      $error = $document['error'];
+      echo "File not uploaded: $error";
+    }
   }
 
   function insertDeadlines($task){
@@ -164,9 +218,11 @@ class QueryHelper{
 
     $claimDeadline = $task -> getClaimDeadline();
     $completeDeadline = $task -> getCompleteDeadline();
+    $taskID = $task -> getTaskID();
+    echo "task ID: $taskID";
 
-    $sql = "INSERT INTO `CS4014_project_database`.`Deadline`('Task_TaskID', Claim, Completion)
-            VALUES('1', '$claimDeadline', '$completeDeadline');";
+    $sql = "INSERT INTO `CS4014_project_database`.`Deadline`(`Task_TaskID`, `Claim`, `Completion`)
+            VALUES($taskID, '$claimDeadline', '$completeDeadline');";
 
     $deadlineInsert = $database -> query($sql);
     return $deadlineInsert;
@@ -174,6 +230,7 @@ class QueryHelper{
 
   function insertTaskTags($task){
     global $database;
+    $insertSuccess = true;
 
     //get each tag for the task
     $t1 = $task -> getTag1();
@@ -183,6 +240,7 @@ class QueryHelper{
 
     //convert to array for convenience.
     $tags = array($t1, $t2, $t3, $t4);
+    $taskID = $task -> getTaskID();
 
     //for each tag check if it was given a value and if it was we insert into taskTag
     for ($i=0; $i < sizeof($tags); $i++) {
@@ -191,12 +249,19 @@ class QueryHelper{
         $tagID = $this -> getTagIDFromTagVal($currentTag);
         $tagInsert = $database -> query("INSERT INTO `CS4014_project_database`.`TaskTag`
                             (`TaskTagID`, `Tag_TagID`, `Task_TaskID`)
-                            VALUES (1, $tagID, 1);");
+                            VALUES (NULL, $tagID, $taskID);");
 
         if(!$tagInsert){
           echo "Failed to insert tag: $currentTag";
+          $insertSuccess = false;
         }
       }
+    }
+    if($insertSuccess){
+      return true;
+    }
+    else{
+      return false;
     }
   }
 
@@ -225,6 +290,26 @@ class QueryHelper{
     $taskTypeID = $taskTypeIDArray[0]['TaskTypeID'];
 
     return $taskTypeID;
+  }
+
+  function getFormatIDFromFormat($format){
+    global $database;
+
+    $formatArray = $database -> select("SELECT * FROM Format
+                                       WHERE FormatVal = '$format';");
+    $formatID = $formatArray[0]['FormatID'];
+
+    return $formatID;
+  }
+
+  function getDocTypeIDFromDocType($docType){
+    global $database;
+
+    $docTypeArray = $database -> select("SELECT * FROM DocumentType
+                                       WHERE DocumentTypeVal = '$docType';");
+    $docTypeID = $docTypeArray[0]['DocumentTypeID'];
+
+    return $docTypeID;
   }
 
 

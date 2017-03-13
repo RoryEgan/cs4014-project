@@ -227,6 +227,17 @@ class QueryHelper{
     return $taskTypeID;
   }
 
+  public function getTasksCount($query) {
+
+    global $database;
+    echo "string";
+
+    $num = $database -> query($query);
+    echo "dfsgfs";
+    echo $num;
+
+    return $num;
+  }
 
 }
 

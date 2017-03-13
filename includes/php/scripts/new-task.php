@@ -39,7 +39,7 @@ if(isset($_POST['taskSubmitButton']) ){
 
 
       if($result){
-        //header("Location: index.php");
+        header("Location: index.php");
         echo "<script>alert('Task Created!');</script>";
       }
       else{

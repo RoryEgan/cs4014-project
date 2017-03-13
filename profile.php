@@ -1,5 +1,13 @@
 <?php include('includes/head.php');?>
 <?php include('includes/header.php');?>
+<?php
+include('includes/php/utils/Database.class.php');
+include('includes/php/utils/Validator.class.php');
+include('includes/php/utils/QueryHelper.class.php');
+$db = new Database();
+$val = new Validator();
+$qh = new QueryHelper();
+?>
 <div class="container">
   <div class="row my-5">
       <div class="col-md-3">
@@ -11,9 +19,14 @@
       </div>
       <div class="col-md-9">
         <?php
-          for ($i = 1; $i <= 10; $i++) {
+        $qh = new QueryHelper();
+        $query = "SELECT COUNT(TaskID) FROM Task;";
+        $num = $qh -> getTasksCount($query);
+        echo $num;
+          for ($i = 1; $i <= $num; $i++) {
             include('includes/partial/task.php');
-          }?>
+          }
+          ?>
       </div>
   </div>
 </div>

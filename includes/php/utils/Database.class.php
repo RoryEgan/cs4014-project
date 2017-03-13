@@ -38,6 +38,7 @@ class Database{
     return $rows;
   }
 
+
   //This function removes dangerous characters from user input. protects against sql injection
   function quote($value){
     //ensure we are connected to database by calling this class's function connect().

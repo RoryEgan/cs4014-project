@@ -312,6 +312,17 @@ class QueryHelper{
     return $docTypeID;
   }
 
+  public function getTasksCount($query) {
+
+    global $database;
+    echo "string";
+
+    $num = $database -> query($query);
+    echo "dfsgfs";
+    echo $num;
+
+    return $num;
+  }
 
 }
 

@@ -55,10 +55,16 @@ class Database{
 
     //call the query function on the connection object.
     $result  = $connection -> query($query);
-    if(!result){
+    if(!$result){
       printf("<pre>Errormessage: %s\n</pre>", $connection->error);
     }
 
     return $result;
+  }
+
+  function getLastInsertID(){
+    $connection = $this -> connect();
+
+    return $connection->insert_id;
   }
 }

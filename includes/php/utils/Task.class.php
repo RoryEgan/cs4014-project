@@ -1,6 +1,7 @@
 
 <?php
 class Task{
+  private $taskID;
   private $taskTitle;
   private $taskType;
   private $taskDescription;
@@ -19,6 +20,7 @@ class Task{
   function __construct($taskTitle, $taskType, $taskDescription, $numPages, $numWords, $docFormat, $docType, $subject, $document,
                               $tag1, $tag2, $tag3, $tag4, $claimDeadline, $completeDeadline){
 
+    $this->taskID = -1;                            
     $this->taskTitle = $taskTitle;
     $this->taskType = $taskType;
     $this->taskDescription = $taskDescription;
@@ -36,6 +38,8 @@ class Task{
     $this->completeDeadline = $completeDeadline;
   }
 
+  function setTaskID($taskID) { $this->taskID = $taskID; }
+  function getTaskID() { return $this->taskID; }
   function setTaskTitle($taskTitle) { $this->taskTitle = $taskTitle; }
   function getTaskTitle() { return $this->taskTitle; }
   function setTaskType($taskType) { $this->taskType = $taskType; }

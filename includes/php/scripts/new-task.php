@@ -31,7 +31,6 @@ if(isset($_POST['taskSubmitButton']) ){
 
   if($val->isValidTask($taskTitle, $taskDescription, $numPages, $numWords, $docFormat, $docType, $taskSubject, $tags,
                         $document, $claimDeadline, $completeDeadline)){
-    echo "overall task validation passed";
     if($connection){
       $currentTask = new Task($taskTitle, $taskType, $taskDescription, $numPages, $numWords, $docFormat, $docType, $taskSubject, $document,
                                   $tag1, $tag2, $tag3, $tag4, $claimDeadline, $completeDeadline);
@@ -40,12 +39,16 @@ if(isset($_POST['taskSubmitButton']) ){
 
 
       if($result){
+        //header("Location: index.php");
         echo "<script>alert('Task Created!');</script>";
       }
       else{
         echo "<script>alert('Failed to insert task');</script>";
       }
     }
+  }
+  else{
+    echo "<script>alert('Error: atleast one entry was invalid');</script>";
   }
 }
 

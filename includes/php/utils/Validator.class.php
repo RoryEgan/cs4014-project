@@ -184,6 +184,8 @@ class Validator{
   }
 
   //Checks if document matches the given docFormat and that the document has no errors
+  //we have already checked that the document format/extension is valid so we do not need
+  //to do that here. 
   function isValidDocument($docFormat, $document){
     $name = $document['name'];
     $ext = explode('.', $name);

@@ -1,5 +1,6 @@
 <?php include('includes/php/utils/Database.class.php');
 ?>
+<!--
 <form class="form" onsubmit="return checkHoneypot()" action="index.php" method="post">
   <div class="form-group">
     <div>

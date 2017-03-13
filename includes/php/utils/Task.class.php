@@ -70,13 +70,13 @@ class Task{
   function getTag($tagNum){
     switch ($tagNum) {
       case 1:
-        return $this -> $tag1;
+        return $this -> getTag1();
       case 2:
-        return $this -> $tag2;
+        return $this -> getTag2();
       case 3:
-        return $this -> $tag3;
+        return $this -> getTag3();
       case 4:
-        return $this -> $tag4;
+        return $this -> getTag4();
     }
   }
 }

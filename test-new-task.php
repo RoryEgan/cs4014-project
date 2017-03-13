@@ -10,10 +10,10 @@
       <div class="col-md-6 ">
         <div class="my-5">
           <h2 class="my-3">Add a Task!</h2>
-          <form class="form" onsubmit="return checkHoneypot()" action="test-new-task.php" method="post">
+          <form class="form" enctype="multipart/form-data" onsubmit="return checkHoneypot()" action="test-new-task.php" method="post">
             <div class="form-group">
               <div>
-                <input  class="form-control my-2" type="text" name="taskTitle" value="" placeholder="Task Title" required/>
+                <input  class="form-control my-2" maxlength="74" type="text" name="taskTitle" value="" placeholder="Task Title" required/>
               </div>
               <select class="form-control my-2" name="taskType">
                 <option selected hidden>Task Type</option>

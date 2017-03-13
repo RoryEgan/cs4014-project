@@ -292,6 +292,7 @@ class QueryHelper{
     return $taskTypeID;
   }
 
+
   function getFormatIDFromFormat($format){
     global $database;
 
@@ -310,6 +311,19 @@ class QueryHelper{
     $docTypeID = $docTypeArray[0]['DocumentTypeID'];
 
     return $docTypeID;
+  }
+
+
+  public function getTasksCount($query) {
+
+    global $database;
+    echo "string";
+
+    $num = $database -> query($query);
+    echo "dfsgfs";
+    echo $num;
+
+    return $num;
   }
 
 

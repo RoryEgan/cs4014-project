@@ -292,10 +292,7 @@ class QueryHelper{
     return $taskTypeID;
   }
 
-<<<<<<< HEAD
-=======
 
->>>>>>> 0481fd85a6bf177c374b1e582c2d92476b7d04f9
   function getFormatIDFromFormat($format){
     global $database;
 
@@ -316,25 +313,20 @@ class QueryHelper{
     return $docTypeID;
   }
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 0481fd85a6bf177c374b1e582c2d92476b7d04f9
-  public function getTasksCount($query) {
+  public function getTasksCount() {
 
     global $database;
     echo "string";
 
-    $num = $database -> query($query);
+    $query = "SELECT COUNT(*) FROM Task;";
+
+    $num = $database -> select($query);
     echo "dfsgfs";
-    echo $num;
+    echo $num[0]['COUNT(*)'];
 
-    return $num;
+    return $num[0]['COUNT(*)'];
   }
-<<<<<<< HEAD
-=======
 
->>>>>>> 0481fd85a6bf177c374b1e582c2d92476b7d04f9
 
 }
 

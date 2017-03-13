@@ -20,9 +20,7 @@ $qh = new QueryHelper();
       <div class="col-md-9">
         <?php
         $qh = new QueryHelper();
-        $query = "SELECT COUNT(TaskID) FROM Task;";
-        $num = $qh -> getTasksCount($query);
-        echo $num;
+        $num = $qh -> getTasksCount();
           for ($i = 1; $i <= $num; $i++) {
             include('includes/partial/task.php');
           }

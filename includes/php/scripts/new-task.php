@@ -9,7 +9,7 @@ $qh = new QueryHelper();
 $db = new Database();
 
 
-if(isset($_POST['taskSubmitButton'])){
+if(isset($_POST['taskSubmitButton']) ){
   $taskTitle = $db->quote(trim($_POST['taskTitle']));
   $taskType = $db->quote($_POST['taskType']);
   $taskDescription = $db->quote(trim($_POST['taskDescription']));
@@ -18,27 +18,25 @@ if(isset($_POST['taskSubmitButton'])){
   $docFormat = $db->quote($_POST['documentFormat']);
   $docType = $db->quote($_POST['documentType']);
   $taskSubject = $db->quote($_POST['taskSubject']);
-  $document = $db->quote(trim($_POST['taskDocument']));
+  $document = $_FILES['taskDocument'];
   $tag1 = $db->quote($_POST['tag1']);
   $tag2 = $db->quote($_POST['tag2']);
   $tag3 = $db->quote($_POST['tag3']);
   $tag4 = $db->quote($_POST['tag4']);
   $claimDeadline = $db->quote($_POST['claim-date']);
   $completeDeadline = $db->quote($_POST['completion-date']);
+  $tags = array($tag1, $tag2, $tag3, $tag4);
 
   $connection = $db->connect();
 
-
-  var_dump($claimDeadline);
-  var_dump($completeDeadline);
-
-  if($val->isValidTask($taskTitle, $taskDescription, $numPages, $numWords, $docFormat, $docType, $claimDeadline, $completeDeadline)){
+  if($val->isValidTask($taskTitle, $taskDescription, $numPages, $numWords, $docFormat, $docType, $taskSubject, $tags,
+                        $document, $claimDeadline, $completeDeadline)){
+    echo "overall task validation passed";
     if($connection){
       $currentTask = new Task($taskTitle, $taskType, $taskDescription, $numPages, $numWords, $docFormat, $docType, $taskSubject, $document,
                                   $tag1, $tag2, $tag3, $tag4, $claimDeadline, $completeDeadline);
 
       $result = $qh -> insertTask($currentTask);
-
 
 
       if($result){

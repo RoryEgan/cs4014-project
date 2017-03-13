@@ -4,20 +4,20 @@
 class Validator{
 
   function isValidSignUp($firstName, $lastName, $signUpEmail, $StudentID, $subject, $signUpPassword, $passwordConfirm){
-    return ($this -> isValidName($firstName) && $this -> isValidName($lastName) && $this -> isValidEmail($signUpEmail) && $this -> isValidStudentID($StudentID)
-          && $this -> isValidSubject($subject) && $this -> isValidPassword($signUpPassword) && ($signUpPassword == $passwordConfirm));
+    return ($this -> isValidName($firstName) && $this -> isValidName($lastName) && $this -> isValidEmail($signUpEmail) &&
+          $this -> isValidStudentID($StudentID) && $this -> isValidSubject($subject) && $this -> isValidPassword($signUpPassword)
+          && ($signUpPassword == $passwordConfirm));
   }
 
-  function isValidTask($taskTitle, $taskDescription, $numPages, $numWords, $docFormat, $docType, $claimDeadline, $completeDeadline){
-    return true;
-  }
+  function isValidTask($taskTitle, $taskDescription, $numPages, $numWords, $docFormat, $docType, $subject, $tags, $document,
+                       $claimDeadline, $completeDeadline){
 
-
-  function isValidEmail($email){
-    if (filter_var($email, FILTER_VALIDATE_EMAIL) !== false){
-      return true;
-    }
-    else {
+    if($this->isValidTaskTitle($taskTitle) && $this->isValidTaskDescription($taskDescription) && $this->isPosNum($numPages)
+    && $this->isPosNum($numWords) && $this->isValidFormat($docFormat) && $this -> isValidDocument($docFormat, $document) && $this->isValidDocType($docType) &&
+    $this->isValidSubject($subject) && $this->validTags($tags) && $this->validDeadlines($claimDeadline, $completeDeadline)){
+        return true;
+      }
+    else{
       return false;
     }
   }
@@ -41,9 +41,10 @@ class Validator{
     }
   }
 
-  //passwords can be between 6 and 20 characters long and must have:
+  //passwords can be between 8 and 20 characters long and must have:
   //  -atleast one letter
   //  -atleast one number
+  //  -atleast one uppercase letter
   function isValidPassword($password){
     $hasLower = false;
     $hasDigit = false;
@@ -76,7 +77,7 @@ class Validator{
 
     $columnName = "SubjectName";
     $selectSubject = "SELECT * FROM Subject;";
-    if($qh -> verifryDropDownInput($subject, $selectSubject, $columnName)){
+    if($qh -> verifyDropDownInput($subject, $selectSubject, $columnName)){
       return true;
     }
     else{
@@ -84,9 +85,141 @@ class Validator{
     }
   }
 
-  function isValidTaskTitle(){
-
+  //ensures length of task title is valid
+  function isValidTaskTitle($taskTitle){
+    if(strlen($taskTitle) <= 74){
+      return true;
+    }
+    else{
+      echo "invalid taskTitle";
+      return false;
+    }
   }
+
+  //checks if task description is no longer than 200 characters.
+  function isValidTaskDescription($taskDescription){
+    if (strlen($taskDescription) <= 200){
+      return true;
+    }
+    else{
+      echo "invalid taskDescription";
+      return false;
+    }
+  }
+
+  //Checks whether or not format is valid.
+  function isValidFormat($format){
+    $qh = new QueryHelper();
+
+    $columnName = "FormatVal";
+    $selectFormat = "SELECT * FROM Format;";
+    if($qh -> verifyDropDownInput($format, $selectFormat, $columnName)){
+      return true;
+    }
+    else{
+      echo "invalid format";
+      return false;
+    }
+  }
+
+  //makes sure user isn't entering negative num (or non number) for numPages/numWords.
+  function isPosNum($number){
+    if(((int)$number) >= 0){
+      return true;
+    }
+    else{
+      echo "invalid number of pages (or words)";
+      return false;
+    }
+  }
+
+  //Checks each tag is a valid entry in the database.
+  function validTags($tags){
+    $qh = new QueryHelper();
+
+    $columnName = "Value";
+    $selectTag = "SELECT * FROM Tag;";
+
+    for($i = 0; $i < sizeof($tags); $i++){
+      if(!$tags[$i] == 'Tag'){
+        if(!$qh -> verifyDropDownInput($tags[$i], $selectFormat, $columnName)){
+          echo "invalid tag: $i";
+          return false;
+        }
+      }
+    }
+    return true;
+  }
+
+  //checks if the selected DocumentType is a valid value existing in the database.
+  function isValidDocType($docType){
+    $qh = new QueryHelper();
+
+    $columnName = "DocumentTypeVal";
+    $selectDocumentType = "SELECT * FROM DocumentType;";
+    if($qh -> verifyDropDownInput($docType, $selectDocumentType, $columnName)){
+      return true;
+    }
+    else{
+      echo "invalid doc type";
+      return false;
+    }
+  }
+
+  //valid deadlines consist of:
+  // - valid dates in YYYY-MM-DD Format
+  // - the claim deadline being greater than the current Date
+  // - the completeDeadline being greater than the claimDeadline
+  function validDeadlines($claimDeadline, $completeDeadline){
+    if($this -> validateDate($claimDeadline) && $this -> validateDate($completeDeadline)){
+      $currentTime = date('Y-m-d');
+      if($this -> dateGreaterThan($claimDeadline, $currentTime)){
+        if($this -> dateGreaterThan($completeDeadline, $claimDeadline)){
+          return true;
+        }
+      }
+    }
+    echo "deadlines not valid";
+    return false;
+  }
+
+  //Checks if document matches the given docFormat and that the document has no errors
+  function isValidDocument($docFormat, $document){
+    $name = $document['name'];
+    $ext = explode('.', $name);
+    $ext = '.' . $ext[1];
+
+    if($ext == $docFormat){
+      if($document['error'] === 0){
+        return true;
+      }
+      else{
+        echo "error uploading document";
+        return false;
+      }
+    }
+    else{
+      echo "doc type does not match documents true extension";
+    }
+  }
+
+  function validateDate($date){
+    $d = DateTime::createFromFormat('Y-m-d', $date);
+    return $d && $d->format('Y-m-d') === $date;
+  }
+
+  function dateGreaterThan($d1, $d2){
+    $tsDate1 = strtotime($d1);
+    $tsDate2 = strtotime($d2);
+
+    if($tsDate1 > $tsDate2){
+      return true;
+    }
+    else{
+      return false;
+    }
+  }
+
 }
 
 

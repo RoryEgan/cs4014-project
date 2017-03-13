@@ -117,11 +117,6 @@ class QueryHelper{
 
     echo "Insert task executed";
 
-    //insert into the associated tables.
-    $this -> insertDeadlines($task);
-    $this -> insertDocument($task);
-    $this -> insertTaskTags($task);
-
     //collect the data required to insert into task table.
     $taskTypeID = $this -> getTaskTypeIDFromTaskType($task->getTaskType());
     $subjectID = $this -> getSubjectIDFromSubjectName($task -> getSubject());
@@ -131,7 +126,7 @@ class QueryHelper{
     $numWords = $task -> getNumWords();
 
     //sql statement
-    $taskInsert = "INSERT INTO 'CS4014_project_database'.`Task`(
+    $taskInsert = "INSERT INTO `CS4014_project_database`.`Task`(
       `TaskID`,
       `User_UserID`,
       `TaskType_TaskTypeID`,
@@ -142,15 +137,19 @@ class QueryHelper{
       `NumPages`,
       `NumWords`,
       `ClaimantID`)
-    VALUES (NULL,1, $taskTypeID, $subjectID,'2','$title','$description',$numPages,$numWords,1);";
+    VALUES (NULL,1, $taskTypeID, $subjectID,2,'$title','$description',$numPages,$numWords,NULL);";
 
     //execute query
     $taskInsertSuccess = $database -> query($taskInsert);
 
     if(!$taskInsertSuccess){
-      echo "Task insert failed";
+      echo "failed to insert task";
     }
     else{
+      //insert into the associated tables.
+      $this -> insertDeadlines($task);
+      $this -> insertDocument($task);
+      $this -> insertTaskTags($task);
       return true;
     }
   }
@@ -170,12 +169,7 @@ class QueryHelper{
             VALUES('1', '$claimDeadline', '$completeDeadline');";
 
     $deadlineInsert = $database -> query($sql);
-    if(!$deadlineInsert){
-      echo "Deadlines did not insert";
-    }
-    else{
-      echo "deadline inserted successfully";
-    }
+    return $deadlineInsert;
   }
 
   function insertTaskTags($task){
@@ -195,12 +189,13 @@ class QueryHelper{
       $currentTag = $task -> getTag($i + 1);
       if($currentTag != 'Tag'){
         $tagID = $this -> getTagIDFromTagVal($currentTag);
-        $database -> query("INSERT INTO `CS4014_project_database`.`TaskTag`
-                            ('TaskTagID, 'Tag_TagID', 'Task_TaskID')
-                            VALUES(NULL, '$tagID', '1');");
-      }
-      else{
-        echo "<pre>\nThis tag was not selected\n</pre>";
+        $tagInsert = $database -> query("INSERT INTO `CS4014_project_database`.`TaskTag`
+                            (`TaskTagID`, `Tag_TagID`, `Task_TaskID`)
+                            VALUES (1, $tagID, 1);");
+
+        if(!$tagInsert){
+          echo "Failed to insert tag: $currentTag";
+        }
       }
     }
   }
@@ -226,7 +221,7 @@ class QueryHelper{
     global $database;
 
     $taskTypeIDArray = $database -> select("SELECT TaskTypeID FROM TaskType
-                                       WHERE TaskType = '$taskType';");
+                                       WHERE TaskTypeVal = '$taskType';");
     $taskTypeID = $taskTypeIDArray[0]['TaskTypeID'];
 
     return $taskTypeID;

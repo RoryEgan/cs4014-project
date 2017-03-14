@@ -1,21 +1,25 @@
 <?php include('includes/head.php');?>
 <?php include('includes/header.php');?>
 <?php
-include('includes/php/utils/Database.class.php');
 include('includes/php/utils/Validator.class.php');
 include('includes/php/utils/QueryHelper.class.php');
+include('includes/php/utils/User.class.php');
 $db = new Database();
 $val = new Validator();
 $qh = new QueryHelper();
+$currentUser = User::getCurrentUser($_SESSION['email']);
+$subject = $currentUser -> getSubject();
+$email = $currentUser -> getEmailAddress();
+$reputation = $currentUser -> getReputation();
 ?>
 <div class="container">
   <div class="row my-5">
       <div class="col-md-3">
         <h2>My Profile</h2>
         <br>Bert
-        <br>Computer Science
-        <br>email
-        <br>Rating
+        <br>Field of expertise: <?php echo "$subject";?>
+        <br>Email Addrress: <?php echo "$email";?>
+        <br>Reputation: <?php echo "$reputation";?>
       </div>
       <div class="col-md-9">
         <button id="my-button" type="button" class="btn btn-outline-secondary mb-5" role="button">

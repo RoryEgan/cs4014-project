@@ -2,9 +2,9 @@
 
 class DropdownOptionGenerator{
     function generateOptions($query, $displayColumn){
-      $db = new Database();
+      $qh = new QueryHelper();
 
-      $queryResult = $db -> select($query);
+      $queryResult = $qh -> select($query);
 
       for ($i=0; $i < sizeof($queryResult); $i++) {
          ?><option><?php echo $queryResult[$i][$displayColumn]; ?>

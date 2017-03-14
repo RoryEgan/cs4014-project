@@ -1,6 +1,6 @@
 <?php include('includes/head.php');?>
 <?php include('includes/header.php');?>
-<?php include('includes/php/utils/Database.class.php'); ?>
+<?php include('includes/php/utils/QueryHelper.class.php'); ?>
 <?php include('includes/php/scripts/new-task.php');?>
 
 

@@ -1,5 +1,10 @@
 <?php include('includes/head.php');?>
 <?php include('includes/header.php');?>
+<?php include('includes/php/utils/User.class.php');?>
+<?php include('includes/php/utils/QueryHelper.class.php');
+      include('includes/php/utils/TaskRetriever.class.php');
+      include('includes/php/utils/TaskPrinter.class.php');
+      include('includes/php/utils/Task.class.php'); ?>
 <div class="page-content my-5">
   <div class="container">
 
@@ -26,10 +31,6 @@
       </div>
     </section>
     <?php
-      include('includes/php/utils/QueryHelper.class.php');
-      include('includes/php/utils/TaskRetriever.class.php');
-      include('includes/php/utils/TaskPrinter.class.php');
-      include('includes/php/utils/Task.class.php');
       $retriever = new TaskRetriever();
       $taskPrinter = new TaskPrinter();
       $allTasks = $retriever -> getAllTasks();

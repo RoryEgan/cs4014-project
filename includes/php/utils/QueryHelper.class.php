@@ -1,8 +1,19 @@
 <?php
 
+include('includes/php/utils/Database.class.php');
+
 $database = new Database();
 
 class QueryHelper{
+
+  //The database class is paired with this class exclusively (to simplify includes) thus we require this
+  //functionality at times.
+  function select($query){
+    global $database;
+
+    $res = $database -> select($query);
+    return $res;
+  }
 
   function getSubjectIdFromSubjectName($subject){
     global $database;
@@ -60,15 +71,12 @@ class QueryHelper{
   function getUser($email, $hashedPassword){
     global $database;
 
-    echo "$hashedPassword";
-
     $sql = "SELECT *
     FROM User
     WHERE EmailAddress = '$email' AND Password = '$hashedPassword';";
 
     $res = $database -> select($sql);
-    echo "In query helper: ";
-    print_r($res);
+
 
 
     return $res;
@@ -128,6 +136,11 @@ class QueryHelper{
     $numPages = $task -> getNumPages();
     $numWords = $task -> getNumWords();
 
+
+    $currentUser = User::getCurrentUser($_SESSION['email']);
+    $userID = $currentUser -> getUserID();
+    echo "user ID is: $userID";
+
     //sql statement
     $taskInsert = "INSERT INTO `CS4014_project_database`.`Task`(
       `TaskID`,
@@ -140,7 +153,7 @@ class QueryHelper{
       `NumPages`,
       `NumWords`,
       `ClaimantID`)
-    VALUES (NULL,1, $taskTypeID, $subjectID,2,'$title','$description',$numPages,$numWords,NULL);";
+    VALUES (NULL,$userID, $taskTypeID, $subjectID,2,'$title','$description',$numPages,$numWords,NULL);";
     //execute query
     $taskInsertSuccess = $database -> query($taskInsert);
 
@@ -353,10 +366,40 @@ class QueryHelper{
 
 
 
+ function getUserInfo($emailAddress){
+   global $database;
 
 
+   $userSQL = "SELECT * FROM User WHERE EmailAddress = '$emailAddress';";
+
+   $userResult = $database -> select($userSQL);
+
+   $subject = $this -> getSubjectNameFromSubjectId($userResult[0]['Subject_SubjectID']);
+   $isMod = false;
+
+   if($userResult[0]['IsMod'] != 0){
+     $isMod = true;
+   }
+
+   $userInfo = array($userResult[0]['UserID'], $subject, $userResult[0]['ForeName'], $userResult[0]['Lastname'],
+                      $userResult[0]['StudentID'], $userResult[0]['reputation'], $isMod);
+    return $userInfo;
+ }
 
 
+ function getSubjectNameFromSubjectId($subjectID){
+   global $database;
+
+   $selectSubjectNameQuery = "SELECT *
+                            FROM Subject
+                            WHERE SubjectID = '$subjectID';";
+
+
+   $subjectNameResult = $database -> select($selectSubjectNameQuery);
+   $subjectName = $subjectNameResult[0]['SubjectName'];
+
+   return $subjectName;
+ }
 
 
 

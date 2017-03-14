@@ -5,18 +5,18 @@ class Validator{
 
   function isValidSignUp($firstName, $lastName, $signUpEmail, $StudentID, $subject, $signUpPassword, $passwordConfirm){
     return ($this -> isValidName($firstName) && $this -> isValidName($lastName) && $this -> isValidEmail($signUpEmail) &&
-          $this -> isValidStudentID($StudentID) && $this -> isValidSubject($subject) && $this -> isValidPassword($signUpPassword)
-          && ($signUpPassword == $passwordConfirm));
+    $this -> isValidStudentID($StudentID) && $this -> isValidSubject($subject) && $this -> isValidPassword($signUpPassword)
+    && ($signUpPassword == $passwordConfirm));
   }
 
   function isValidTask($taskTitle, $taskDescription, $numPages, $numWords, $docFormat, $docType, $subject, $tags, $document,
-                       $claimDeadline, $completeDeadline){
+  $claimDeadline, $completeDeadline){
 
     if($this->isValidTaskTitle($taskTitle) && $this->isValidTaskDescription($taskDescription) && $this->isPosNum($numPages)
     && $this->isPosNum($numWords) && $this->isValidFormat($docFormat) && $this -> isValidDocument($docFormat, $document) && $this->isValidDocType($docType) &&
     $this->isValidSubject($subject) && $this->validTags($tags) && $this->validDeadlines($claimDeadline, $completeDeadline)){
-        return true;
-      }
+      return true;
+    }
     else{
       return false;
     }
@@ -27,6 +27,16 @@ class Validator{
       return true;
     }
     else{
+      return false;
+    }
+  }
+
+  function isValidEmail($signUpEmail) {
+
+    if (!filter_var($signUpEmail, FILTER_VALIDATE_EMAIL) === false) {
+      return true;
+    }
+    else {
       return false;
     }
   }
@@ -185,7 +195,7 @@ class Validator{
 
   //Checks if document matches the given docFormat and that the document has no errors
   //we have already checked that the document format/extension is valid so we do not need
-  //to do that here. 
+  //to do that here.
   function isValidDocument($docFormat, $document){
     $name = $document['name'];
     $ext = explode('.', $name);

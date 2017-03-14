@@ -22,7 +22,11 @@ $qh = new QueryHelper();
         $qh = new QueryHelper();
         $num = $qh -> getTasksCount();
           for ($i = 1; $i <= $num; $i++) {
-            include('includes/partial/task.php');
+            include('includes/php/utils/TaskPrinter.class.php');
+            $taskPrinter = new TaskPrinter();
+            include('includes/php/utils/Task.class.php');
+            $task = new Task();
+            $taskPrinter -> printDefaultTask($task);
           }
           ?>
       </div>

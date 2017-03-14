@@ -1,7 +1,7 @@
 <div class="card task-card mb-3">
   <div class="card-block">
     <h4 class="card-title">
-      Review Microbiology Phd paper
+      Title
     </h4>
     <div class="card-text">
       <div class="row">

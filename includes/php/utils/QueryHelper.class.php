@@ -316,13 +316,10 @@ class QueryHelper{
   public function getTasksCount() {
 
     global $database;
-    echo "string";
 
     $query = "SELECT COUNT(*) FROM Task;";
 
     $num = $database -> select($query);
-    echo "dfsgfs";
-    echo $num[0]['COUNT(*)'];
 
     return $num[0]['COUNT(*)'];
   }

@@ -60,11 +60,16 @@ class QueryHelper{
   function getUser($email, $hashedPassword){
     global $database;
 
+    echo "$hashedPassword";
+
     $sql = "SELECT *
     FROM User
     WHERE EmailAddress = '$email' AND Password = '$hashedPassword';";
 
     $res = $database -> select($sql);
+    echo "In query helper: ";
+    print_r($res);
+
 
     return $res;
   }

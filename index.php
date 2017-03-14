@@ -28,9 +28,9 @@
     <?php
       include('includes/php/utils/TaskPrinter.class.php');
       include('includes/php/utils/Task.class.php');
-      //$taskPrinter = new TaskPrinter();
-      //$task = new Task();
-      //$taskPrinter -> printDefaultTask($task);
+      $taskPrinter = new TaskPrinter();
+      $task = new Task();
+      $taskPrinter -> printDefaultTask($task);
     ?>
 
     <section>

@@ -1,13 +1,16 @@
-<div class="card task-card mb-3">
+<?php
+$id = "test";
+?>
+<div id=<?php echo $id; ?> class="card task-card mb-3">
   <div class="card-block">
     <h4 class="card-title">
-      Review Microbiology Phd paper
+      Title
     </h4>
     <div class="card-text">
       <div class="row">
         <div class="col-md-6">
           <ul>
-            <li>detail 1</li>
+            <li class="type">detail 1</li>
             <li>detail 2</li>
             <li>detail 3</li>
           </ul>

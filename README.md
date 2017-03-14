@@ -85,3 +85,14 @@ in the user being promoted to admin.
   -automatic tag completion
   -login security / email verification
   -recaptcha forms for spamming
+
+## Note on setting up permissions for file uploaded
+  There may be permission errors trying to uplioad files. To fix this I carried out these commands:
+
+  ```
+  chown -R user:www-data yourprojectfoldername
+
+  chmod 775 yourprojectfoldername
+  ```
+
+  On the files folder within in the project.

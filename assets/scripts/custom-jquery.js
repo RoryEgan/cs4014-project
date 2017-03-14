@@ -1,5 +1,12 @@
 $(document).ready(function() {
 
+	$( "#my-button" ).click(function() {
+		$('#test').fadeIn(300);
+	});
+
+	$( "#claimed-button" ).click(function() {
+		$('#test').fadeOut(300);
+	});
 	// Back to Top Navigation
 	// ---------------------------------------------------------------------------
 	$(window).scroll(function() {

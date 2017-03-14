@@ -28,7 +28,9 @@ if(isset($_POST['signUpButton'])) {
         //Salted password hashing
         $mysalt = openssl_random_pseudo_bytes(64, $strong);
         $saltyPassword = $signUpPassword . $mysalt;
-        $hashedPassword = password_hash($saltyPassword);
+
+
+        $hashedPassword = hash('sha256', $saltyPassword);
 
 
         $subjectID = $qh->getSubjectIdFromSubjectName($subject);
@@ -37,8 +39,10 @@ if(isset($_POST['signUpButton'])) {
 
 
         if($result){
+        /*  session_start();
+          $_SESSION['email'] = $signUpEmail;
           header('Location: thank-you.php');
-          exit();
+          exit();*/
         }
         else{
           echo "<script>alert('Failed to create account');</script>";

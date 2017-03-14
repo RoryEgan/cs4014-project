@@ -1,10 +1,12 @@
 <?php
-include('includes/php/utils/Database.class.php');
 include('includes/php/utils/Validator.class.php');
 include('includes/php/utils/QueryHelper.class.php');
 $db = new Database();
 $val = new Validator();
 $qh = new QueryHelper();
+
+session_start();
+session_destroy();
 
 
 if (isset($_POST['loginSubmitButton'])) {
@@ -17,21 +19,28 @@ if (isset($_POST['loginSubmitButton'])) {
       $retrievedSalt = $qh -> getPasswordSalt($signInEmail);
 
       $saltyPassword = $signInPassword . $retrievedSalt;
-      $hashedPassword = password_verify($saltyPassword);
+      $hashedPassword = hash('sha256', $saltyPassword);
 
       $res = $qh -> getUser($signInEmail, $hashedPassword);
+
+      print_r($res);
 
 
       if (!$res) {
         echo "<script>alert('Email or password incorrect');</script>";
       }
       else {
+          session_start();
+          $_SESSION['email'] = $signInEmail;
           header("Location: index.php");
           mysqli_close($connection);
           unset($connection);
           exit();
       }
     }
+  }
+  else{
+    echo "<script>alert('Email or password invalid');</script>";;
   }
 }
 

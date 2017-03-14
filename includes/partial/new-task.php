@@ -1,5 +1,4 @@
-<?php include('includes/php/utils/Database.class.php');
-?>
+
 <form class="form" enctype="multipart/form-data" onsubmit="return checkHoneypot()" action="test-new-task.php" method="post">
   <div class="form-group">
     <div>

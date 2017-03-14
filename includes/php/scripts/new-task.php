@@ -1,7 +1,7 @@
 
 <?php
 include('includes/php/utils/Validator.class.php');
-include('includes/php/utils/QueryHelper.class.php');
+include('includes/php/utils/User.class.php');
 include('includes/php/utils/Task.class.php');
 
 $val = new Validator();

@@ -1,3 +1,7 @@
+
+<?php
+      include('includes/php/scripts/check-session.php');
+      ?>
 <header class="banner hidden-sm-down">
   <div class="container">
     <div class="flex-row">
@@ -43,9 +47,9 @@
             <i class="fa fa-bars"></i>
           </button>
           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <a class="dropdown-item" href="#">You are logged in as: (user)</a>
+            <a class="dropdown-item" href="#">You are logged in with: <?php echo $_SESSION['email'];?>
+            <a class="dropdown-item" href="profile.php">View Profile</a>
             <a class="dropdown-item" href="login.php">Logout</a>
-            <a class="dropdown-item" href="#">View Profile</a>
           </div>
         </div>
       </div>

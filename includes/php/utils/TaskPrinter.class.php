@@ -17,6 +17,10 @@ class TaskPrinter{
         $myDateTime = DateTime::createFromFormat('Y-m-d', $completeDateOriginal);
         $completeDate = $myDateTime->format('d/m/Y');
       }
+      else{
+        $claimDate = " / / ";
+        $completeDate = " / / ";
+      }
 
 
       include('includes/partial/default-task.php');

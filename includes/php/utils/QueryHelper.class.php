@@ -325,17 +325,37 @@ class QueryHelper{
   }
 
 
+
+ function getJoinedTaskView(){
+   global $database;
+
+   $joinedTaskSQL =  "SELECT * FROM JoinedTask;";
+
+   $result = $database -> select($joinedTaskSQL);
+
+   return $result;
+ }
+
+ function getJoinedTagView(){
+   global $database;
+
+   $joinedTaskSQL =  "SELECT * FROM JoinedTag;";
+
+   $result = $database -> select($joinedTaskSQL);
+
+   return $result;
+ }
+
+
+
+
+
+
+
+
+
+
 }
-
-
-
-
-
-
-
-
-
-
 
 
 

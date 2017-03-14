@@ -2,6 +2,8 @@
 <?php
 class Task{
   private $taskID;
+  private $ownerID;
+  private $status;
   private $taskTitle;
   private $taskType;
   private $taskDescription;
@@ -20,7 +22,9 @@ class Task{
   function __construct($taskTitle, $taskType, $taskDescription, $numPages, $numWords, $docFormat, $docType, $subject, $document,
                               $tag1, $tag2, $tag3, $tag4, $claimDeadline, $completeDeadline){
 
-    $this->taskID = -1;                            
+    $this->taskID = -1;
+    $this->ownerID = -1;
+    $this->status = "Pending Claim";
     $this->taskTitle = $taskTitle;
     $this->taskType = $taskType;
     $this->taskDescription = $taskDescription;
@@ -40,6 +44,10 @@ class Task{
 
   function setTaskID($taskID) { $this->taskID = $taskID; }
   function getTaskID() { return $this->taskID; }
+  function setOwnerID($ownerID) { $this->ownerID = $ownerID; }
+  function getOwnerID() { return $this->ownerID; }
+  function setStatus($status) { $this->status = $status; }
+  function getStatus() { return $this->status; }
   function setTaskTitle($taskTitle) { $this->taskTitle = $taskTitle; }
   function getTaskTitle() { return $this->taskTitle; }
   function setTaskType($taskType) { $this->taskType = $taskType; }

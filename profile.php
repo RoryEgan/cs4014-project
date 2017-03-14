@@ -18,15 +18,21 @@ $qh = new QueryHelper();
         <br>Rating
       </div>
       <div class="col-md-9">
+        <button id="my-button" type="button" class="btn btn-outline-secondary mb-5" role="button">
+            My Tasks
+        </button>
+        <button id="claimed-button" type="button" class="btn btn-outline-secondary mb-5" role="button">
+            Claimed Tasks
+        </button>
         <?php
         $qh = new QueryHelper();
         $num = $qh -> getTasksCount();
           for ($i = 1; $i <= $num; $i++) {
-            include('includes/php/utils/TaskPrinter.class.php');
-            $taskPrinter = new TaskPrinter();
-            include('includes/php/utils/Task.class.php');
-            $task = new Task();
-            $taskPrinter -> printDefaultTask($task);
+            include('includes/partial/task.php');
+            // $taskPrinter = new TaskPrinter();
+            // include('includes/php/utils/Task.class.php');
+            // $task = new Task();
+            // $taskPrinter -> printDefaultTask($task);
           }
           ?>
       </div>

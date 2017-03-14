@@ -28,7 +28,7 @@ if(isset($_POST['signUpButton'])) {
         //Salted password hashing
         $mysalt = openssl_random_pseudo_bytes(64, $strong);
         $saltyPassword = $signUpPassword . $mysalt;
-        $hashedPassword = hash('sha256', $saltyPassword);
+        $hashedPassword = password_hash($saltyPassword);
 
 
         $subjectID = $qh->getSubjectIdFromSubjectName($subject);

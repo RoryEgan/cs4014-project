@@ -25,7 +25,7 @@ CREATE TABLE IF NOT EXISTS `CS4014_project_database`.`User` (
   `Lastname` VARCHAR(35) NOT NULL,
   `EmailAddress` VARCHAR(255) NOT NULL,
   `StudentID` INT NOT NULL,
-  `Password` VARCHAR(45) NOT NULL,
+  `Password` VARCHAR(64) NOT NULL,
   `reputation` INT NOT NULL,
   `IsMod` TINYINT(1) NOT NULL,
   `PasswordSalt` VARCHAR(64) NOT NULL,

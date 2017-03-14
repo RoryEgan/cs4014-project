@@ -7,17 +7,17 @@
       <div class="row">
         <div class="col-md-6">
           <ul>
-            <li><?php echo "$docType"; ?></li>
-            <li><?php echo "$numPages"; ?>/li>
-            <li><?php echo "$numWords"; ?></li>
+            <li>Paper Type: <?php echo "$docType"; ?></li>
+            <li>Number of Pages: <?php echo "$numPages"; ?></li>
+            <li>Number of words: <?php echo "$numWords"; ?></li>
           </ul>
         </div>
-        <div class="col-md-3 offset-md-3">
-          <?php echo "$claimDate"; ?>
-          <br><?php echo "$completeDate"; ?>
+        <div class="col-md-2.7 offset-md-3">
+          <?php echo "Claim Deadline: $claimDate"; ?>
+          <br><br><?php echo "Completion Deadline: $completeDate"; ?>
         </div>
       </div>
-      <p><?php echo "$description"; ?></p>
+      <p>Description: <?php echo "$description"; ?></p>
     </div>
   </div>
 </div>

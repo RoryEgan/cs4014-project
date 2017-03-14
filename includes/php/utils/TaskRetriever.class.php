@@ -1,9 +1,14 @@
 <?php
 
   class TaskRetriever{
-    function getAllTask(){
-      $AllTasksQuery = "";
+    function getAllTasks(){
+      $qh = new queryHelper();
+      $allTasks = $qh -> getJoinedTaskView();
+
+
     }
+
+
   }
 
  ?>

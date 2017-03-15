@@ -1,3 +1,4 @@
+<a href="task-details.php?taskID=<?php echo "$taskID"?>">
 <div class="card task-card mb-3">
   <div class="card-block">
     <h4 class="card-title">
@@ -21,3 +22,4 @@
     </div>
   </div>
 </div>
+</a>

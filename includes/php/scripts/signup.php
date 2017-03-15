@@ -39,10 +39,10 @@ if(isset($_POST['signUpButton'])) {
 
 
         if($result){
-        /*  session_start();
+          session_start();
           $_SESSION['email'] = $signUpEmail;
           header('Location: thank-you.php');
-          exit();*/
+          exit();
         }
         else{
           echo "<script>alert('Failed to create account');</script>";

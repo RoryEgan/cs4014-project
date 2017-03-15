@@ -4,6 +4,7 @@ class TaskPrinter{
 
 
     function printDefaultTask($task){
+      $taskID = $task -> getTaskID();
       $title = $task -> getTaskTitle();
       $docType = $task -> getDocType();
       $numPages = $task -> getNumPages();

@@ -23,8 +23,6 @@ if (isset($_POST['loginSubmitButton'])) {
 
       $res = $qh -> getUser($signInEmail, $hashedPassword);
 
-      print_r($res);
-
 
       if (!$res) {
         echo "<script>alert('Email or password incorrect');</script>";

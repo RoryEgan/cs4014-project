@@ -354,6 +354,16 @@ class QueryHelper{
    return $result;
  }
 
+ function getJoinedTask($taskID){
+   global $database;
+
+   $joinedTaskSQL =  "SELECT * FROM JoinedTask WHERE TaskID = '$taskID';";
+
+   $result = $database -> select($joinedTaskSQL);
+
+   return $result;
+ }
+
  function getJoinedTagView(){
    global $database;
 
@@ -368,7 +378,6 @@ class QueryHelper{
 
  function getUserInfo($emailAddress){
    global $database;
-
 
    $userSQL = "SELECT * FROM User WHERE EmailAddress = '$emailAddress';";
 

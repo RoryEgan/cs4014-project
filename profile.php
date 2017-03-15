@@ -17,9 +17,9 @@ $reputation = $currentUser -> getReputation();
       <div class="col-md-3">
         <h2>My Profile</h2>
         <br>Bert
-        <br>Field of expertise: <?php echo "$subject";?>
-        <br>Email Addrress: <?php echo "$email";?>
-        <br>Reputation: <?php echo "$reputation";?>
+        <br><br>Field of expertise:<br> <?php echo "$subject";?>
+        <br><br>Email Addrress: <?php echo "$email";?>
+        <br><br>Reputation: <?php echo "$reputation";?>
       </div>
       <div class="col-md-9">
         <button id="my-button" type="button" class="btn btn-outline-secondary mb-5" role="button">

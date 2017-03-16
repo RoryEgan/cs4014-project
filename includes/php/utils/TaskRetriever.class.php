@@ -88,7 +88,7 @@ $qh = new queryHelper();
           $ctr++;
         }
       }
-      for($i = sizeof($returnTags)-1; $i < 4; $i++){
+      for($i = sizeof($returnTags); $i < 4; $i++){
         $returnTags[$i] = 'Tag';
       }
       return $returnTags;

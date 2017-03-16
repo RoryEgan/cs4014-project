@@ -13,6 +13,8 @@
     <br><br><p><?php echo "<b>Claim Deadline:</b> $claimDate"; ?> </p>
     <br><br><p><?php echo "<b>Completion Deadline:</b> $completeDate"; ?></p>
     <br><br><p><b>Status:</b> <?php echo "$status"; ?></p>
+    <br><br><p><b>Tags:</b> <?php echo "$tag1 $tag2 $tag3 $tag4"; ?></p>
+    <br><br><p><b>Document:</b><a href=" <?php echo "$documentURL"; ?> " download>Get Document</a></p>
 
     <?php
       if($claimant == $userID){
@@ -27,7 +29,7 @@
          echo '<br><br><input type="button" class="btn btn-default" value="Remove Task" name="signUpButton" role="button"/>';
        } ?>
 
-    <?php if($status == "Pending Claim"){
+    <?php if($status == "Pending Claim" && $userID != $owner){
         echo '<br><br><input type="button" class="btn btn-default" value="Claim Task" name="signUpButton" role="button"/>';
     }?>
     <br><br><input type="button" class="btn btn-default" value="Flag Task" name="signUpButton" role="button"/><br><br>

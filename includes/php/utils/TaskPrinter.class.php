@@ -1,5 +1,7 @@
 <?php
 
+include('includes/php/utils/DateFormatConverter.class.php');
+
 class TaskPrinter{
 
 
@@ -9,20 +11,12 @@ class TaskPrinter{
       $docType = $task -> getDocType();
       $numPages = $task -> getNumPages();
       $numWords = $task -> getNumWords();
-      $claimDateOriginal = $task -> getClaimDeadline();
-      $completeDateOriginal = $task -> getCompleteDeadline();
+      $claimDate = $task -> getClaimDeadline();
+      $completeDate = $task -> getCompleteDeadline();
       $description = $task -> getTaskDescription();
-      if($claimDateOriginal != '' && $completeDateOriginal != ''){
-        $myDateTime = DateTime::createFromFormat('Y-m-d', $claimDateOriginal);
-        $claimDate = $myDateTime->format('d/m/Y');
-        $myDateTime = DateTime::createFromFormat('Y-m-d', $completeDateOriginal);
-        $completeDate = $myDateTime->format('d/m/Y');
-      }
-      else{
-        $claimDate = " / / ";
-        $completeDate = " / / ";
-      }
-
+      $converter = new DateFormatConverter();
+      $claimDate = $converter -> convert($claimDate);
+      $completeDate = $converter -> convert($completeDate);
 
       include('includes/partial/default-task.php');
     }

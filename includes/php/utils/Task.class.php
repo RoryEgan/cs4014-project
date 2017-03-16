@@ -95,4 +95,25 @@ class Task{
         return $this -> getTag4();
     }
   }
+
+  function getTags(){
+    $tags = array("", "", "", "");
+
+
+    if($this -> getTag1() != "Tag"){
+      $tags[0] = $this -> getTag1();
+    }
+    if($this -> getTag2() != "Tag"){
+      $tags[1] = $this -> getTag2();
+    }
+    if($this -> getTag3() != "Tag"){
+      $tags[2] = $this -> getTag3();
+    }
+    if($this -> getTag4() != "Tag"){
+      $tags[3] = $this -> getTag4();
+    }
+
+    return $tags;
+
+  }
 }

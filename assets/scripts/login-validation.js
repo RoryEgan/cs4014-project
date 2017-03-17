@@ -73,7 +73,6 @@ function validatePassword() {
   else {
     passwordGroup.className = "has-danger";
     password.className = "form-control my-2 form-control-danger";
-    console.log("REEEEEEEEEEEEEEEEEEEEEEEEEEEEEee");
   }
 }
 

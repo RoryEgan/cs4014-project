@@ -10,7 +10,7 @@ $id = "test";
       <div class="row">
         <div class="col-md-6">
           <ul>
-            <li class="type">detail 1</li>
+            <li>detail 1</li>
             <li>detail 2</li>
             <li>detail 3</li>
           </ul>

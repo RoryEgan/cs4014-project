@@ -7,7 +7,7 @@
         </a>
       </div>
       <div class="login-form col-md-6">
-        <form class="form-inline" action="login.php" novalidate="novalidate" method="post" onsubmit="validateLogin()">
+        <form class="form-inline" action="login.php" novalidate="novalidate" method="post" onsubmit="">
           <div class="form-group">
             <div id="emailSignInGroup" class="form-group">
               <label class="mr-2 login-form" for="email">Email: </label>

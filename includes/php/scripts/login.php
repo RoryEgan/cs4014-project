@@ -25,7 +25,10 @@ if (isset($_POST['loginSubmitButton'])) {
 
 
       if (!$res) {
-        echo "<script>alert('Email or password incorrect');</script>";
+        echo '<script type="text/javascript">',
+             'loginFailed();',
+             '</script>'
+             ;
       }
       else {
           session_start();
@@ -38,8 +41,22 @@ if (isset($_POST['loginSubmitButton'])) {
     }
   }
   else{
-    echo "<script>alert('Email or password invalid');</script>";;
+    echo '<script type="text/javascript">',
+         'loginFailed();',
+         '</script>'
+         ;
+         echo "string";
   }
 }
 
 ?>
+
+<script type="text/javascript">
+function loginFailed() {
+
+  var login = document.getElementById('signInEmail');
+
+  login.className = "form-control form-control-danger";
+
+}
+</script>

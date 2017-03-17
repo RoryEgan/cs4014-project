@@ -1,3 +1,26 @@
+<script type="text/javascript">
+function passwordFailed() {
+
+  var password = document.getElementById('signInPassword');
+  var passwordGroup = document.getElementById('passwordSignInGroup');
+
+  passwordGroup.className = "form-group has-danger";
+  password.className = "form-control form-control-danger";
+  console.log("Javascript password failed.");
+
+}
+function emailFailed() {
+
+  var email = document.getElementById('signInEmail');
+  var emailGroup = document.getElementById('passwordSignInGroup');
+
+  emailGroup.className = "from-group has-danger";
+  email.className = "form-control form-control-danger";
+  console.log("Javascript email failed.");
+
+}
+</script>
+
 <?php
 include('includes/php/utils/Validator.class.php');
 include('includes/php/utils/QueryHelper.class.php');
@@ -13,50 +36,41 @@ if (isset($_POST['loginSubmitButton'])) {
   $signInEmail = $db->quote(strtolower($_POST['signInEmail']));
   $signInPassword = $db->quote(trim($_POST['signInPassword']));
   $connection = $db->connect();
-  if($val -> isValidEmail($signInEmail) && $val -> isValidPassword($signInPassword)) {
-    if ($connection) {
+  if($val -> isValidEmail($signInEmail)) {
+    if($val -> isValidPassword($signInPassword)) {
+      if ($connection) {
 
-      $retrievedSalt = $qh -> getPasswordSalt($signInEmail);
+        $retrievedSalt = $qh -> getPasswordSalt($signInEmail);
 
-      $saltyPassword = $signInPassword . $retrievedSalt;
-      $hashedPassword = hash('sha256', $saltyPassword);
+        $saltyPassword = $signInPassword . $retrievedSalt;
+        $hashedPassword = hash('sha256', $saltyPassword);
 
-      $res = $qh -> getUser($signInEmail, $hashedPassword);
+        $res = $qh -> getUser($signInEmail, $hashedPassword);
 
+        session_start();
+        $_SESSION['email'] = $signInEmail;
+        header("Location: index.php");
+        mysqli_close($connection);
+        unset($connection);
+        exit();
 
-      if (!$res) {
-        echo '<script type="text/javascript">',
-             'loginFailed();',
-             '</script>'
-             ;
-      }
-      else {
-          session_start();
-          $_SESSION['email'] = $signInEmail;
-          header("Location: index.php");
-          mysqli_close($connection);
-          unset($connection);
-          exit();
       }
     }
+    else {
+      echo '<script type="text/javascript">',
+      'passwordFailed();',
+      '</script>'
+      ;
+      echo "password failed";
+    }
   }
-  else{
+  else {
     echo '<script type="text/javascript">',
-         'loginFailed();',
-         '</script>'
-         ;
-         echo "string";
+    'emailFailed();',
+    '</script>'
+    ;
+    echo "email failed";
   }
 }
 
 ?>
-
-<script type="text/javascript">
-function loginFailed() {
-
-  var login = document.getElementById('signInEmail');
-
-  login.className = "form-control form-control-danger";
-
-}
-</script>

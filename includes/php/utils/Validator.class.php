@@ -1,5 +1,6 @@
 <?php
 
+include_once('includes/php/utils/QueryHelper.class.php');
 
 class Validator{
 

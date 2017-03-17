@@ -1,12 +1,12 @@
 <?php
-include('includes/php/utils/QueryHelper.class.php');
-include('includes/php/utils/Task.class.php');
+include_once('includes/php/utils/QueryHelper.class.php');
+include_once('includes/php/utils/Task.class.php');
 
 $qh = new queryHelper();
 
   class TaskRetriever{
 
-    function getAllTasks(){
+    function getTasks(){
       global $qh;
       $allTasks = $qh -> getJoinedTaskView();
       $allTags = $qh -> getJoinedTagView();

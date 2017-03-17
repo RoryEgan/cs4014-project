@@ -1,5 +1,5 @@
-
-<form class="form" enctype="multipart/form-data" onsubmit="return checkHoneypot()" action="test-new-task.php" method="post">
+<?php include_once('includes/php/utils/DropdownOptionGenerator.class.php'); ?>
+<form class="form" enctype="multipart/form-data" onsubmit="return checkHoneypot()" action="index.php" method="post">
   <div class="form-group">
     <div>
       <input  class="form-control my-2" maxlength="74" type="text" name="taskTitle" value="" placeholder="Task Title" required/>
@@ -7,7 +7,6 @@
     <select class="form-control my-2" name="taskType">
       <option selected hidden>Task Type</option>
       <?php
-      include('includes/php/utils/DropdownOptionGenerator.class.php');
       $gen = new DropdownOptionGenerator();
       $query = "SELECT * FROM TaskType;";
       $gen -> generateOptions($query, 'TaskTypeVal');

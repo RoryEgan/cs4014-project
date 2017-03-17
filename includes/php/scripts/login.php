@@ -1,6 +1,8 @@
 <?php
-include('includes/php/utils/Validator.class.php');
-include('includes/php/utils/QueryHelper.class.php');
+include_once('includes/php/utils/Validator.class.php');
+include_once('includes/php/utils/QueryHelper.class.php');
+include_once('includes/php/utils/QueryHelper.class.php');
+
 $db = new Database();
 $val = new Validator();
 $qh = new QueryHelper();

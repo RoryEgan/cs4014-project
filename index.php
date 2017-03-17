@@ -1,9 +1,5 @@
 <?php include('includes/head.php');?>
 <?php include('includes/header.php');?>
-<?php include('includes/php/utils/User.class.php');
-      include('includes/php/utils/TaskRetriever.class.php');
-      include('includes/php/utils/TaskPrinter.class.php');
-       ?>
 <div class="page-content my-5">
   <div class="container">
 
@@ -29,15 +25,7 @@
         </div>
       </div>
     </section>
-    <?php
-      $retriever = new TaskRetriever();
-      $taskPrinter = new TaskPrinter();
-      $allTasks = $retriever -> getAllTasks();
-
-      for($i = 0; $i < sizeof($allTasks) && $i < 6; $i++){
-        $taskPrinter -> printDefaultTask($allTasks[$i]);
-      }
-    ?>
+    <?php include_once('includes/php/scripts/display-tasks-main.php') ?>
   </div>
 </div>
 <?php include('includes/footer.php');?>

@@ -1,6 +1,6 @@
 <?php
 
-include('includes/php/utils/DateFormatConverter.class.php');
+include_once('includes/php/utils/DateFormatConverter.class.php');
 
 class TaskPrinter{
 

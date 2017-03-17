@@ -1,6 +1,6 @@
 <?php
 
-include('includes/php/utils/Database.class.php');
+include_once('includes/php/utils/Database.class.php');
 
 $database = new Database();
 

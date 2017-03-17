@@ -1,5 +1,7 @@
 <?php
 
+include_once('includes/php/utils/QueryHelper.class.php');
+
 class User{
   private $userID;
   private $subject;

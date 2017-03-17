@@ -1,8 +1,8 @@
 <?php
 
-include('includes/php/utils/TaskRetriever.class.php');
-include('includes/php/utils/User.class.php');
-include('includes/php/utils/DateFormatConverter.class.php');
+include_once('includes/php/utils/TaskRetriever.class.php');
+include_once('includes/php/utils/User.class.php');
+include_once('includes/php/utils/DateFormatConverter.class.php');
 
 if(isset($_GET['taskID'])){
   $taskID = $_GET['taskID'];

@@ -6,6 +6,7 @@
 
     <section>
       <?php
+        $target = "task-modal";
         $modalTitle = 'New Task';
         $includeURL = 'includes/partial/new-task-modal.php';
         include('includes/php/scripts/dynamic-modal.php');

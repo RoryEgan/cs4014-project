@@ -37,12 +37,14 @@
     <?php if($status == "Pending Claim" && $userID != $owner){
       ?> <br><br> <?php
       $modalTitle = 'Claim Task';
+      $target = 'claim-modal';
       $includeURL = 'includes/partial/claim-task-modal.php';
       include('includes/php/scripts/dynamic-modal.php');
     }?>
   <?php
   ?> <br><br> <?php
     $modalTitle = 'Flag Task';
+    $target = 'flag-modal';
     $includeURL = 'includes/partial/flag-task-modal.php';
     include('includes/php/scripts/dynamic-modal.php');
   ?>

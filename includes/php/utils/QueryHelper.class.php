@@ -1,6 +1,6 @@
 <?php
-
-include('includes/php/utils/Database.class.php');
+include_once('/var/www/html/CS4014_project/config.php');
+include_once(SITE_PATH . '/includes/php/utils/Database.class.php');
 
 $database = new Database();
 
@@ -344,10 +344,10 @@ class QueryHelper{
 
 
 
- function getJoinedTaskView(){
+ function getJoinedTaskView($start, $end){
    global $database;
 
-   $joinedTaskSQL =  "SELECT * FROM JoinedTask;";
+   $joinedTaskSQL =  "SELECT * FROM JoinedTask LIMIT $start, $end;";
 
    $result = $database -> select($joinedTaskSQL);
 
@@ -364,10 +364,10 @@ class QueryHelper{
    return $result;
  }
 
- function getJoinedTagView(){
+ function getJoinedTags($taskID){
    global $database;
 
-   $joinedTaskSQL =  "SELECT * FROM JoinedTag;";
+   $joinedTaskSQL =  "SELECT * FROM JoinedTag WHERE Task_TaskID = $taskID;";
 
    $result = $database -> select($joinedTaskSQL);
 

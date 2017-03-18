@@ -1,6 +1,6 @@
 <?php
-
-include('includes/php/utils/DateFormatConverter.class.php');
+include_once('/var/www/html/CS4014_project/config.php');
+include_once(SITE_PATH . '/includes/php/utils/DateFormatConverter.class.php');
 
 class TaskPrinter{
 
@@ -18,7 +18,7 @@ class TaskPrinter{
       $claimDate = $converter -> convert($claimDate);
       $completeDate = $converter -> convert($completeDate);
 
-      include('includes/partial/default-task.php');
+      include(SITE_PATH . '/includes/partial/default-task.php');
     }
 
     function printClaimedTask($task){

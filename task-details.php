@@ -1,6 +1,6 @@
 <?php include('includes/head.php');?>
 <?php include('includes/header.php');?>
-<?php include('includes/php/scripts/task-click.php'); ?>
+<?php include_once('includes/php/scripts/task-click.php'); ?>
 
 <body>
   <div class="container">

@@ -1,11 +1,8 @@
 <?php include('includes/head.php');?>
 <?php include('includes/header.php');?>
+<?php include_once('includes/php/utils/QueryHelper.class.php');?>
+<?php include_once('includes/php/utils/User.class.php');?>
 <?php
-include('includes/php/utils/Validator.class.php');
-include('includes/php/utils/QueryHelper.class.php');
-include('includes/php/utils/User.class.php');
-$db = new Database();
-$val = new Validator();
 $qh = new QueryHelper();
 $currentUser = User::getCurrentUser($_SESSION['email']);
 $subject = $currentUser -> getSubject();

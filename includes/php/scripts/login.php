@@ -22,8 +22,10 @@ function emailFailed() {
 </script>
 
 <?php
-include('includes/php/utils/Validator.class.php');
-include('includes/php/utils/QueryHelper.class.php');
+include_once('includes/php/utils/Validator.class.php');
+include_once('includes/php/utils/QueryHelper.class.php');
+include_once('includes/php/utils/QueryHelper.class.php');
+
 $db = new Database();
 $val = new Validator();
 $qh = new QueryHelper();
@@ -46,14 +48,17 @@ if (isset($_POST['loginSubmitButton'])) {
         $hashedPassword = hash('sha256', $saltyPassword);
 
         $res = $qh -> getUser($signInEmail, $hashedPassword);
-
-        session_start();
-        $_SESSION['email'] = $signInEmail;
-        header("Location: index.php");
-        mysqli_close($connection);
-        unset($connection);
-        exit();
-
+        if(!$res){
+          echo "<script>alert('Sign in failure');</script>";
+        }
+        else{
+          session_start();
+          $_SESSION['email'] = $signInEmail;
+          header("Location: index.php");
+          mysqli_close($connection);
+          unset($connection);
+          exit();
+        }
       }
     }
     else {

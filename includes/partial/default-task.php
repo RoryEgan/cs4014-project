@@ -13,7 +13,7 @@
             <li>Number of words: <?php echo "$numWords"; ?></li>
           </ul>
         </div>
-        <div class="col-md-2.7 offset-md-3">
+        <div class="col-md-3 offset-md-3">
           <?php echo "Claim Deadline: $claimDate"; ?>
           <br><br><?php echo "Completion Deadline: $completeDate"; ?>
         </div>

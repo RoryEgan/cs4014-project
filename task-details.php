@@ -1,6 +1,11 @@
 <?php include('includes/head.php');?>
 <?php include('includes/header.php');?>
 <?php include_once('includes/php/scripts/task-click.php'); ?>
+<?php include_once('includes/php/scripts/claim-task.php'); ?>
+<?php  if(!isset($_GET['taskID'])){
+    header('location: index.php');
+  }
+?>
 
 <body>
   <div class="container">
@@ -30,9 +35,18 @@
        } ?>
 
     <?php if($status == "Pending Claim" && $userID != $owner){
-        echo '<br><br><input type="button" class="btn btn-default" value="Claim Task" name="signUpButton" role="button"/>';
+      ?> <br><br> <?php
+      $modalTitle = 'Claim Task';
+      $includeURL = 'includes/partial/claim-task-modal.php';
+      include('includes/php/scripts/dynamic-modal.php');
     }?>
-    <br><br><input type="button" class="btn btn-default" value="Flag Task" name="signUpButton" role="button"/><br><br>
+  <?php
+  ?> <br><br> <?php
+    $modalTitle = 'Flag Task';
+    $includeURL = 'includes/partial/flag-task-modal.php';
+    include('includes/php/scripts/dynamic-modal.php');
+  ?>
+    <br><br>
   </div>
 </body>
 

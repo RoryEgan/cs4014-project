@@ -16,11 +16,10 @@ else{
 function dynamicPrintTasks($count){
   $tasksPerPage = 5;
   $start = $count * $tasksPerPage;
-  $end = $count * $tasksPerPage + $tasksPerPage;
 
   $retriever = new TaskRetriever();
   $taskPrinter = new TaskPrinter();
-  $allTasks = $retriever -> getTasks($start, $end);
+  $allTasks = $retriever -> getTasksMain($start, $tasksPerPage);
 
   $size = sizeof($allTasks);
 
@@ -30,7 +29,7 @@ function dynamicPrintTasks($count){
 
 
   if($size < 5){
-    echo '<p id="stop-loading"> **No More Tasks To Show**</p>';
+    echo '<p id="stop-loading" class="offset-md-5"> **No More Tasks To Show**</p>';
   }
 }
 ?>

@@ -1,12 +1,36 @@
 <?php
-include('includes/php/utils/TaskRetriever.class.php');
-include('includes/php/utils/TaskPrinter.class.php');
+include_once('/var/www/html/CS4014_project/config.php');
+
+include(SITE_PATH.'/includes/php/utils/TaskRetriever.class.php');
+include(SITE_PATH.'/includes/php/utils/TaskPrinter.class.php');
+
+if(isset($_POST['count'])){
+  $count = $_POST['count'];
+  dynamicPrintTasks($count);
+}
+else{
+  dynamicPrintTasks(0);
+}
+
+
+function dynamicPrintTasks($count){
+  $tasksPerPage = 5;
+  $start = $count * $tasksPerPage;
+  $end = $count * $tasksPerPage + $tasksPerPage;
 
   $retriever = new TaskRetriever();
   $taskPrinter = new TaskPrinter();
-  $allTasks = $retriever -> getTasks();
+  $allTasks = $retriever -> getTasks($start, $end);
 
-  for($i = 0; $i < sizeof($allTasks) && $i < 6; $i++){
+  $size = sizeof($allTasks);
+
+  for($i = 0; $i < sizeof($allTasks); $i++){
     $taskPrinter -> printDefaultTask($allTasks[$i]);
   }
+
+
+  if($size < 5){
+    echo '<p id="stop-loading"> **No More Tasks To Show**</p>';
+  }
+}
 ?>

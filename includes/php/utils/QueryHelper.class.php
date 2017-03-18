@@ -1,5 +1,6 @@
 <?php
 include_once('/var/www/html/CS4014_project/config.php');
+include_once(SITE_PATH . '/includes/php/utils/User.class.php');
 include_once(SITE_PATH . '/includes/php/utils/Database.class.php');
 
 $database = new Database();
@@ -344,10 +345,16 @@ class QueryHelper{
 
 
 
- function getJoinedTaskView($start, $end){
+ function getTasksMain($start, $number){
    global $database;
 
-   $joinedTaskSQL =  "SELECT * FROM JoinedTask LIMIT $start, $end;";
+   $currentUser = User::getCurrentUser($_SESSION['email']);
+   $currentUserID = $currentUser -> getUserID();
+
+   $joinedTaskSQL =  "SELECT * FROM JoinedTask
+                      WHERE StatusVal = 'Pending Claim'
+                      AND User_UserID <> '$currentUserID'
+                      LIMIT $start, $number;";
 
    $result = $database -> select($joinedTaskSQL);
 
@@ -408,6 +415,32 @@ class QueryHelper{
    $subjectName = $subjectNameResult[0]['SubjectName'];
 
    return $subjectName;
+ }
+
+ function getUserEmailFromID($userID){
+   global $database;
+
+   $selectID = "SELECT * FROM User WHERE UserID = '$userID';";
+
+   $result = $database -> select($selectID);
+
+   return $result[0]['EmailAddress'];
+ }
+
+ function setClaimed($taskID){
+   global $database;
+
+   $statusIdSQL = "SELECT * FROM Status WHERE StatusVal = 'Claimed';";
+   $statusRes = $database -> select($statusIdSQL);
+
+   $statusID = $statusRes[0]['StatusID'];
+
+   $currentUser = User::getCurrentUser($_SESSION['email']);
+   $currentUserID = $currentUser -> getUserID();
+
+   $updateTask = "UPDATE `Task` SET `Status_StatusID`=$statusID,`ClaimantID`=$currentUserID WHERE TaskID = $taskID";
+
+   $database -> query($updateTask);
  }
 
 

@@ -47,6 +47,9 @@ if(isset($_POST['taskSubmitButton']) ){
         echo "<script>alert('Failed to insert task');</script>";
       }
     }
+    else{
+      echo "<script>alert('Failed to establish connection');</script>";
+    }
   }
   else{
     echo "<script>alert('Error: atleast one entry was invalid');</script>";

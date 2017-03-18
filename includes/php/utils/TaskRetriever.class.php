@@ -7,9 +7,10 @@ $qh = new queryHelper();
 
   class TaskRetriever{
 
-    function getTasks($start, $end){
+    function getTasksMain($start, $number){
       global $qh;
-      $taskTable = $qh -> getJoinedTaskView($start, $end);
+      $taskTable = $qh -> getTasksMain($start, $number);
+      $tasktablesize = sizeof($taskTable);
       $allTasksArray = array();
 
 

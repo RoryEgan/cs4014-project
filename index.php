@@ -13,7 +13,7 @@
       ?>
     </section>
     <div id="display-tasks">
-    <?php include_once('includes/php/scripts/display-tasks-main.php') ?>
+    <?php include_once('includes/php/scripts/display-tasks-main.php'); ?>
   </div>
     <div id="remove_row">
         <td><button type="button" name="btn_more"  id="btn_more" class="btn-success btn form-control" role="button">more</button></td>

@@ -26,7 +26,12 @@
               <li class="active nav-item"><a href="index.php">Home</a></li>
               <li class="active nav-item"><a href="profile.php">Profile</a></li>
               <li class="active nav-item"><a href="faq.php">FAQS</a></li>
-              <li class="active nav-item"><a href="#">Page 4</a></li>
+              <?php if(false){
+                ?>
+                <li class="active nav-item"><a href="#flagged-tasks.php">Flagged Tasks</a></li>
+                <?php
+              }
+              ?>
             </ul>
           </div>
         </div>

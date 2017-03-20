@@ -1,11 +1,17 @@
 $(document).ready(function() {
 
 	$( "#my-button" ).click(function() {
-		$('#test').fadeIn(300);
+		$.post('includes/php/scripts/display-my-tasks.php', function(data){
+			$('#display-tasks').empty();
+			$('#display-tasks').append(data);
+		});
 	});
 
 	$( "#claimed-button" ).click(function() {
-		$('#test').fadeOut(300);
+		$.post('includes/php/scripts/display-claimed-tasks.php', function(data){
+			$('#display-tasks').empty();
+			$('#display-tasks').append(data);
+		});
 	});
 	// Back to Top Navigation
 	// ---------------------------------------------------------------------------

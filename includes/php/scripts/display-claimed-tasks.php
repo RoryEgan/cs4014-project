@@ -1,26 +1,25 @@
 <?php
 session_start();
 include_once('/var/www/html/cs4014/config.php');
-
 include(SITE_PATH.'/includes/php/utils/TaskRetriever.class.php');
 include(SITE_PATH.'/includes/php/utils/TaskPrinter.class.php');
 
 if(isset($_POST['count'])){
   $count = $_POST['count'];
-  printMyTasks($count);
+  printClaimedTasks($count);
 }
 else{
-  printMyTasks(0);
+  printClaimedTasks(0);
 }
 
 
-function printMyTasks($count){
+function printClaimedTasks($count){
   $tasksPerPage = 5;
   $start = $count * $tasksPerPage;
 
   $retriever = new TaskRetriever();
   $taskPrinter = new TaskPrinter();
-  $allTasks = $retriever -> getMyTasks($start, $tasksPerPage);
+  $allTasks = $retriever -> getClaimedTasks($start, $tasksPerPage);
 
   $size = sizeof($allTasks);
 

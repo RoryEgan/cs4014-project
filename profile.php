@@ -2,7 +2,6 @@
 <?php include('includes/header.php');?>
 <?php include_once('includes/php/utils/User.class.php');?>
 <?php
-$qh = new QueryHelper();
 $currentUser = User::getCurrentUser($_SESSION['email']);
 $subject = $currentUser -> getSubject();
 $email = $currentUser -> getEmailAddress();
@@ -37,3 +36,4 @@ $lastname = $currentUser -> getLastname();
 </div>
 <?php include('includes/footer.php') ?>
 <script src="assets/scripts/load-my-tasks.js"> </script>
+<script src="assets/scripts/load-claimed-tasks.js"> </script>

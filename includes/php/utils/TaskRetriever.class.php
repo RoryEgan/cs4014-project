@@ -35,6 +35,20 @@ $qh = new queryHelper();
       return $allTasksArray;
     }
 
+    function getClaimedTasks($start, $number) {
+      global $qh;
+      $taskTable = $qh -> getClaimedTasks($start, $number);
+      $tasktablesize = sizeof($taskTable);
+      $allTasksArray = array();
+
+
+      for($i = 0; $i < sizeof($taskTable); $i++){
+        $allTasksArray[$i] = $this -> initializeTask($taskTable, $i);
+      }
+
+      return $allTasksArray;
+    }
+
     function getTask($taskID){
       global $qh;
       $taskTable = $qh -> getJoinedTask($taskID);

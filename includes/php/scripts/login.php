@@ -30,10 +30,6 @@ $db = new Database();
 $val = new Validator();
 $qh = new QueryHelper();
 
-session_start();
-session_destroy();
-
-
 if (isset($_POST['loginSubmitButton'])) {
   $signInEmail = $db->quote(strtolower($_POST['signInEmail']));
   $signInPassword = $db->quote(trim($_POST['signInPassword']));

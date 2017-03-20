@@ -2,7 +2,6 @@
 include_once('/var/www/html/CS4014_project/config.php');
 include_once(SITE_PATH . '/includes/php/utils/User.class.php');
 include_once(SITE_PATH . '/includes/php/utils/Database.class.php');
-
 $database = new Database();
 
 class QueryHelper{

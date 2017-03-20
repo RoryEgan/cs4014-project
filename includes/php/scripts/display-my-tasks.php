@@ -6,20 +6,20 @@ include(SITE_PATH.'/includes/php/utils/TaskPrinter.class.php');
 
 if(isset($_POST['count'])){
   $count = $_POST['count'];
-  dynamicPrintTasks($count);
+  printMyTasks($count);
 }
 else{
-  dynamicPrintTasks(0);
+  printMyTasks(0);
 }
 
 
-function dynamicPrintTasks($count){
+function printMyTasks($count){
   $tasksPerPage = 5;
   $start = $count * $tasksPerPage;
 
   $retriever = new TaskRetriever();
   $taskPrinter = new TaskPrinter();
-  $allTasks = $retriever -> getTasksMain($start, $tasksPerPage);
+  $allTasks = $retriever -> getMyTasks($start, $tasksPerPage);
 
   $size = sizeof($allTasks);
 
@@ -32,5 +32,4 @@ function dynamicPrintTasks($count){
     echo '<p id="stop-loading" class="offset-md-5"> **No More Tasks To Show**</p>';
   }
 }
-
 ?>

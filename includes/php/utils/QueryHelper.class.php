@@ -1,5 +1,5 @@
 <?php
-include_once('/var/www/html/CS4014_project/config.php');
+include_once('/var/www/html/cs4014/config.php');
 include_once(SITE_PATH . '/includes/php/utils/User.class.php');
 include_once(SITE_PATH . '/includes/php/utils/Database.class.php');
 
@@ -354,6 +354,21 @@ class QueryHelper{
    $joinedTaskSQL =  "SELECT * FROM JoinedTask
                       WHERE StatusVal = 'Pending Claim'
                       AND User_UserID <> '$currentUserID'
+                      LIMIT $start, $number;";
+
+   $result = $database -> select($joinedTaskSQL);
+
+   return $result;
+ }
+
+ function getMyTasks($start, $number){
+   global $database;
+
+   $currentUser = User::getCurrentUser($_SESSION['email']);
+   $currentUserID = $currentUser -> getUserID();
+
+   $joinedTaskSQL =  "SELECT * FROM JoinedTask
+                      WHERE User_UserID = '$currentUserID'
                       LIMIT $start, $number;";
 
    $result = $database -> select($joinedTaskSQL);

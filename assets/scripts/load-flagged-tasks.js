@@ -4,11 +4,11 @@ $(document).ready(function() {
     $("#remove_row").remove();
   }
 
-  $('#btn_more').on('click', function(){
+  $('#btn_more_flagged').on('click', function(){
 
     $.post('includes/php/scripts/display-tasks-flag.php',{'count': count} ,function(data){
       $("#display-tasks").append(data);
-      if($("#stop-loading").length){
+      if($("#stop-loading-flagged").length){
         $("#remove_row").remove();
       }
       count++;

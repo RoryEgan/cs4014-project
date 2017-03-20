@@ -9,9 +9,9 @@
     <div id="display-tasks">
     <?php include_once('includes/php/scripts/display-tasks-flag.php'); ?>
   </div>
-    <div id="remove_row">
-        <td><button type="button" name="btn_more"  id="btn_more" class="btn-success btn form-control" role="button">more</button></td>
-   </div>
+  <!--  <div id="remove_row">
+        <td><button type="button" name="btn_more_flagged"  id="btn_more" class="btn-success btn form-control" role="button">more</button></td>
+   </div> -->
   </div>
 </div>
 <?php include('includes/footer.php') ?>

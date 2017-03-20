@@ -28,20 +28,12 @@ $lastname = $currentUser -> getLastname();
       <div id="display-tasks">
         <?php include_once('includes/php/scripts/display-my-tasks.php'); ?>
       </div>
-      <div id="remove_row">
-        <td><button type="button" name="btn_more"  id="btn_more" class="btn-success btn form-control" role="button">more</button></td>
-      </div>
+<!--      <div id="remove_row">
+        <td><button type="button" name="btn_more_profile"  id="btn_more" class="btn-success btn form-control" role="button">more</button></td>
+      </div> -->
     </div>
   </div>
 </div>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <?php include('includes/footer.php') ?>
 <script src="assets/scripts/load-my-tasks.js"> </script>
 <script src="assets/scripts/load-claimed-tasks.js"> </script>

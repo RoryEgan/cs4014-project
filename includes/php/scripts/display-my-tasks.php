@@ -1,9 +1,10 @@
 <?php
 session_start();
-include_once('/var/www/html/cs4014/config.php');
+include_once('/var/www/html/CS4014_project/config.php');
 
 include(SITE_PATH.'/includes/php/utils/TaskRetriever.class.php');
 include(SITE_PATH.'/includes/php/utils/TaskPrinter.class.php');
+
 
 if(isset($_POST['count'])){
   $count = $_POST['count'];
@@ -30,7 +31,7 @@ function printMyTasks($count){
 
 
   if($size < 5){
-    echo '<p id="stop-loading" class="offset-md-5"> **No More Tasks To Show**</p>';
+    echo '<p id="stop-loading-my" class="offset-md-5"> **No More Tasks To Show**</p>';
   }
 }
 ?>

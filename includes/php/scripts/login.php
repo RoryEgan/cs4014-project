@@ -26,6 +26,11 @@ include_once('includes/php/utils/Validator.class.php');
 include_once('includes/php/utils/QueryHelper.class.php');
 include_once('includes/php/utils/QueryHelper.class.php');
 
+if(isset($_SESSION))
+{
+  session_destroy();
+}  
+
 $db = new Database();
 $val = new Validator();
 $qh = new QueryHelper();

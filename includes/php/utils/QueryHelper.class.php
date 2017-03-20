@@ -376,6 +376,23 @@ class QueryHelper{
    return $result;
  }
 
+ function getClaimedTasks($start, $number){
+   global $database;
+
+   $currentUser = User::getCurrentUser($_SESSION['email']);
+   $currentUserID = $currentUser -> getUserID();
+
+   $joinedTaskSQL =  "SELECT * FROM JoinedTask
+                      WHERE ClaimantID = '$currentUserID'
+                      AND ClaimantID IS NOT NULL
+                      LIMIT $start, $number;";
+
+   $result = $database -> select($joinedTaskSQL);
+
+   return $result;
+ }
+
+
  function getJoinedTask($taskID){
    global $database;
 

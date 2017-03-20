@@ -4,6 +4,7 @@ $(document).ready(function() {
 		$.post('includes/php/scripts/display-my-tasks.php', function(data){
 			$('#display-tasks').empty();
 			$('#display-tasks').append(data);
+			$('#btn_more').removeClass('more-claimed').addClass('more-mine');
 		});
 	});
 
@@ -11,6 +12,7 @@ $(document).ready(function() {
 		$.post('includes/php/scripts/display-claimed-tasks.php', function(data){
 			$('#display-tasks').empty();
 			$('#display-tasks').append(data);
+			$('#btn_more').removeClass('more-mine').addClass('more-claimed');
 		});
 	});
 	// Back to Top Navigation

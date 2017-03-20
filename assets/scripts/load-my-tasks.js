@@ -4,7 +4,7 @@ $(document).ready(function() {
     $("#remove_row").remove();
   }
 
-  $('#btn_more').on('click', function(){
+  $('.more-mine').on('click', function(){
 
     $.post('includes/php/scripts/display-my-tasks.php',{'count': count} ,function(data){
       $("#display-tasks").append(data);

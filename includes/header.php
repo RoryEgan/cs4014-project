@@ -1,6 +1,7 @@
 
 <?php
-      include('includes/php/scripts/check-session.php');
+      include_once('includes/php/scripts/check-session.php');
+      include_once('includes/php/utils/User.class.php');
       ?>
 <header class="banner hidden-sm-down">
   <div class="container">
@@ -26,9 +27,13 @@
               <li class="active nav-item"><a href="index.php">Home</a></li>
               <li class="active nav-item"><a href="profile.php">Profile</a></li>
               <li class="active nav-item"><a href="faq.php">FAQS</a></li>
-              <?php if(false){
+              <?php
+              $currentUser = User::getCurrentUser($_SESSION['email']);
+              $reputation = $currentUser -> getReputation();
+
+              if($reputation >= 40){
                 ?>
-                <li class="active nav-item"><a href="#flagged-tasks.php">Flagged Tasks</a></li>
+                <li class="active nav-item"><a href="flagged-tasks.php">Flagged Tasks</a></li>
                 <?php
               }
               ?>

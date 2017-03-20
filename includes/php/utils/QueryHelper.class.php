@@ -1,5 +1,5 @@
 <?php
-include_once('/var/www/html/cs4014/config.php');
+include_once('/var/www/html/CS4014_project/config.php');
 include_once(SITE_PATH . '/includes/php/utils/User.class.php');
 include_once(SITE_PATH . '/includes/php/utils/Database.class.php');
 
@@ -32,6 +32,7 @@ class QueryHelper{
 
   function insertUser($studentID, $subjectID, $firstName, $lastName, $signUpEmail, $signUpPassword, $passwordSalt){
     global $database;
+    echo "student ID: $studentID subjectID: $subjectID fname: $firstName lname: $lastName email: $signUpEmail pword: $signUpPassword salt:  $passwordSalt";
 
     $insertSql = "INSERT INTO   `CS4014_project_database`.`User` (
                           `UserID` ,
@@ -47,7 +48,7 @@ class QueryHelper{
                           )
                           VALUES (
 
-                         NULL,  '$subjectID',  '$firstName',  '$lastName',  '$signUpEmail', '$studentID', '$signUpPassword',  '0',  '0', '$passwordSalt'
+                         NULL,  $subjectID,  '$firstName',  '$lastName',  '$signUpEmail', $studentID, '$signUpPassword',  '0',  '0', '$passwordSalt'
                         );";
 
     $result = $database -> query($insertSql);
@@ -475,7 +476,29 @@ class QueryHelper{
    $database -> query($updateTask);
  }
 
+ function insertFlag($taskID, $complaint){
+   global $database;
 
+   $sql = "INSERT INTO `CS4014_project_database`.`Flag`(`FlagID`, `Task_TaskID`, `Complaint`) VALUES (NULL,$taskID,'$complaint');";
+
+   $res = $database -> query($sql);
+ }
+
+ function getFlaggedTasks($start, $number){
+   global $database;
+
+   $currentUser = User::getCurrentUser($_SESSION['email']);
+   $currentUserID = $currentUser -> getUserID();
+
+   $joinedTaskSQL =  "SELECT *
+                      FROM  `JoinedTask` ,  `Flag`
+                      WHERE  `JoinedTask`.TaskID =  `Flag`.Task_TaskID
+                      LIMIT $start, $number";
+
+   $result = $database -> select($joinedTaskSQL);
+
+   return $result;
+ }
 
 }
 

@@ -2,6 +2,7 @@
 <?php include('includes/header.php');?>
 <?php include_once('includes/php/scripts/task-click.php'); ?>
 <?php include_once('includes/php/scripts/claim-task.php'); ?>
+<?php include_once('includes/php/scripts/flag-task.php'); ?>
 <?php  if(!isset($_GET['taskID'])){
     header('location: index.php');
   }
@@ -9,7 +10,9 @@
 
 <body>
   <div class="container">
-    <h1 class="">Task Details</h1>
+    <div class="offset-md-5">
+      <h1 class="">Task Details</h1>
+    </div>
     <br><br><h2><b>Task Title:</b> <?php echo $title?></h2>
     <br><br><p><b>Description:</b> <?php echo $description?></p>
     <br><br><p><b>Paper Type:</b> <?php echo "$docType"; ?></p>

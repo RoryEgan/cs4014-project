@@ -1,5 +1,5 @@
 <?php
-include_once('/var/www/html/cs4014/config.php');
+include_once('/var/www/html/CS4014_project/config.php');
 include_once(SITE_PATH . '/includes/php/utils/QueryHelper.class.php');
 include_once(SITE_PATH . '/includes/php/utils/Task.class.php');
 
@@ -10,7 +10,6 @@ $qh = new queryHelper();
     function getTasksMain($start, $number){
       global $qh;
       $taskTable = $qh -> getTasksMain($start, $number);
-      $tasktablesize = sizeof($taskTable);
       $allTasksArray = array();
 
 
@@ -24,7 +23,19 @@ $qh = new queryHelper();
     function getMyTasks($start, $number) {
       global $qh;
       $taskTable = $qh -> getMyTasks($start, $number);
-      $tasktablesize = sizeof($taskTable);
+      $allTasksArray = array();
+
+
+      for($i = 0; $i < sizeof($taskTable); $i++){
+        $allTasksArray[$i] = $this -> initializeTask($taskTable, $i);
+      }
+
+      return $allTasksArray;
+    }
+
+    function getFlaggedTasks($start, $number){
+      global $qh;
+      $taskTable = $qh -> getFlaggedTasks($start, $number);
       $allTasksArray = array();
 
 

@@ -45,7 +45,7 @@ if (isset($_POST['loginSubmitButton'])) {
 
         $res = $qh -> getUser($signInEmail, $hashedPassword);
         if(!$res){
-          echo "<script>alert('Sign in failure');</script>";
+          echo "<script>alert('Invalid email or password');</script>";
         }
         else{
           session_start();

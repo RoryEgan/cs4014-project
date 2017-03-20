@@ -19,7 +19,7 @@ function dynamicPrintTasks($count){
 
   $retriever = new TaskRetriever();
   $taskPrinter = new TaskPrinter();
-  $allTasks = $retriever -> getTasksMain($start, $tasksPerPage);
+  $allTasks = $retriever -> getFlaggedTasks($start, $tasksPerPage);
 
   $size = sizeof($allTasks);
 

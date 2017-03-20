@@ -34,6 +34,14 @@ $lastname = $currentUser -> getLastname();
     </div>
   </div>
 </div>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <?php include('includes/footer.php') ?>
 <script src="assets/scripts/load-my-tasks.js"> </script>
 <script src="assets/scripts/load-claimed-tasks.js"> </script>

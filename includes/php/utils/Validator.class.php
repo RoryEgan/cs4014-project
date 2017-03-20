@@ -1,5 +1,5 @@
 <?php
-include_once('/var/www/html/cs4014/config.php');
+include_once('/var/www/html/CS4014_project/config.php');
 include_once(SITE_PATH . '/includes/php/utils/QueryHelper.class.php');
 
 class Validator{

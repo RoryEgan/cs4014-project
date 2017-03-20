@@ -15,6 +15,7 @@ class TaskPrinter{
       $claimDate = $task -> getClaimDeadline();
       $completeDate = $task -> getCompleteDeadline();
       $description = $task -> getTaskDescription();
+      $subject = $task->getSubject();
       $converter = new DateFormatConverter();
       $claimDate = $converter -> convert($claimDate);
       $completeDate = $converter -> convert($completeDate);

@@ -3,7 +3,9 @@
 <?php include_once('includes/php/scripts/new-task.php');?>
 <div class="page-content my-5">
   <div class="container">
-
+    <div class="offset-md-5">
+      <h2>Browse Tasks</h2>
+    </div>
     <section>
       <?php
         $target = "task-modal";

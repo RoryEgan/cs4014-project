@@ -2,6 +2,7 @@ $(document).ready(function() {
 
 	$( "#my-button" ).click(function() {
 		$.post('includes/php/scripts/display-my-tasks.php', function(data){
+			
 			$('#display-tasks').empty();
 			$('#display-tasks').append(data);
 			$('#btn_more').removeClass('more-claimed').addClass('more-mine');

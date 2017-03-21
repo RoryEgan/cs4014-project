@@ -24,7 +24,14 @@ function emailFailed() {
 <?php
 include_once('includes/php/utils/Validator.class.php');
 include_once('includes/php/utils/QueryHelper.class.php');
-include_once('includes/php/utils/QueryHelper.class.php');
+include_once('includes/php/utils/Database.class.php');
+
+
+session_start();
+
+if(isset($_SESSION['userID'])){
+  session_destroy();
+}
 
 $db = new Database();
 $val = new Validator();
@@ -49,7 +56,7 @@ if (isset($_POST['loginSubmitButton'])) {
         }
         else{
           session_start();
-          $_SESSION['email'] = $signInEmail;
+          $_SESSION['userID'] = $qh -> getUserIDFromEmail($signInEmail);
           header("Location: index.php");
           mysqli_close($connection);
           unset($connection);

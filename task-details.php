@@ -33,7 +33,7 @@
        ?>
 
     <?php
-      if($userID == $owner || $userReputation >= 40){
+      if($userID == $owner || $reputation >= 40){
          echo '<br><br><input type="button" class="btn btn-default" value="Remove Task" name="signUpButton" role="button"/>';
        } ?>
 

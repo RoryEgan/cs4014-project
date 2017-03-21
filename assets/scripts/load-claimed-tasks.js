@@ -1,3 +1,4 @@
+
 $(document).ready(function() {
   var count = 1;
   if($("#stop-loading").length){

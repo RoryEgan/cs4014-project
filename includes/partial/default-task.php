@@ -12,9 +12,11 @@
             <li>Paper Type: <?php echo "$docType"; ?></li>
             <li>Number of Pages: <?php echo "$numPages"; ?></li>
             <li>Number of words: <?php echo "$numWords"; ?></li>
+            <li>Field: <?php echo "$subject"; ?></li>
+
           </ul>
         </div>
-        <div class="col-md-3 offset-md-3">
+        <div class="col-md-2.7 offset-md-3">
           <?php echo "Claim Deadline: $claimDate"; ?>
           <br><br><?php echo "Completion Deadline: $completeDate"; ?>
         </div>
@@ -23,5 +25,3 @@
     </div>
   </div>
 </div>
-<!--
-<li>Field: <?php //echo "$subject"; ?></li> -->

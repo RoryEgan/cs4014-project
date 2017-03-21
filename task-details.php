@@ -3,9 +3,13 @@
 <?php include_once('includes/php/scripts/task-click.php'); ?>
 <?php include_once('includes/php/scripts/claim-task.php'); ?>
 <?php include_once('includes/php/scripts/flag-task.php'); ?>
-<?php  if(!isset($_GET['taskID'])){
+<?php include_once('includes/php/scripts/remove-task.php'); ?>
+<?php include_once('includes/php/scripts/complete-task.php'); ?>
+<?php include_once('includes/php/scripts/cancel-task.php'); ?>
+<?php  if(!isset($_GET['taskID']) || !isset($title)){
     header('location: index.php');
   }
+
 ?>
 
 <body>
@@ -13,28 +17,39 @@
     <div class="offset-md-5">
       <h1 class="">Task Details</h1>
     </div>
-    <br><br><h2><b>Task Title:</b> <?php echo $title?></h2>
-    <br><br><p><b>Description:</b> <?php echo $description?></p>
-    <br><br><p><b>Paper Type:</b> <?php echo "$docType"; ?></p>
-    <br><br><p><b>Number of Pages:</b> <?php echo "$numPages"; ?></p>
-    <br><br><p><b>Number of words:</b> <?php echo "$numWords"; ?></p>
-    <br><br><p><?php echo "<b>Claim Deadline:</b> $claimDate"; ?> </p>
-    <br><br><p><?php echo "<b>Completion Deadline:</b> $completeDate"; ?></p>
-    <br><br><p><b>Status:</b> <?php echo "$status"; ?></p>
-    <br><br><p><b>Tags:</b> <?php echo "$tag1 $tag2 $tag3 $tag4"; ?></p>
-    <br><br><p><b>Document:</b><a href=" <?php echo "$documentURL"; ?> " download>Get Document</a></p>
+    <br><h2><b>Task Title:</b> <?php echo $title?></h2>
+    <br><p><b>Description:</b> <?php echo $description?></p>
+    <br><p><b>Paper Type:</b> <?php echo "$docType"; ?></p>
+    <br><p><b>Number of Pages:</b> <?php echo "$numPages"; ?></p>
+    <br><p><b>Number of words:</b> <?php echo "$numWords"; ?></p>
+    <br><p><?php echo "<b>Claim Deadline:</b> $claimDate"; ?> </p>
+    <br><p><?php echo "<b>Completion Deadline:</b> $completeDate"; ?></p>
+    <br><p><b>Status:</b> <?php echo "$status"; ?></p>
+    <br><p><b>Tags:</b> <?php echo "$tag1 $tag2 $tag3 $tag4"; ?></p>
+    <br><p><b>Document: </b><a href=" <?php echo "$documentURL"; ?> " download>Get Document</a></p>
 
     <?php
-      if($claimant == $userID){
-        echo '<br><br><input type="button" class="btn btn-default" value="Request Full File" name="signUpButton" role="button"/>';
-        echo '<br><br><input type="button" class="btn btn-default" value="Mark Complete" name="signUpButton" role="button"/>';
-        echo '<br><br><input type="button" class="btn btn-default" value="Cancel Task" name="signUpButton" role="button"/>';
+      if($claimant == $userID && $status == 'Claimed'){
+        $modalTitle = 'Complete Task';
+        $target = 'complete-modal';
+        $includeURL = 'includes/partial/complete-task-modal.php';
+        include('includes/php/scripts/dynamic-modal.php');
+
+        ?> <br><br> <?php
+        $modalTitle = 'Cancel Task';
+        $target = 'cancel-modal';
+        $includeURL = 'includes/partial/cancel-task-modal.php';
+        include('includes/php/scripts/dynamic-modal.php');
       }
        ?>
 
     <?php
       if($userID == $owner || $reputation >= 40){
-         echo '<br><br><input type="button" class="btn btn-default" value="Remove Task" name="signUpButton" role="button"/>';
+        ?> <br><br> <?php
+        $modalTitle = 'Remove Task';
+        $target = 'remove-modal';
+        $includeURL = 'includes/partial/remove-task-modal.php';
+        include('includes/php/scripts/dynamic-modal.php');
        } ?>
 
     <?php if($status == "Pending Claim" && $userID != $owner){

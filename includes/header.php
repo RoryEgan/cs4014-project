@@ -25,7 +25,7 @@
           <div class="nav-menu">
             <ul class="navbar-nav mr-auto mt-2 mt-md-0">
               <li class="active nav-item"><a href="index.php">Home</a></li>
-              <li class="active nav-item"><a href="profile.php?userID=<?php echo "$userID"?>">Profile</a></li>
+              <li class="active nav-item"><a href="profile.php">Profile</a></li>
               <li class="active nav-item"><a href="faq.php">FAQS</a></li>
               <?php
 
@@ -40,11 +40,11 @@
         </div>
       </div>
       <div class="col-md-5">
-        <form class="form-inline my-2 my-lg-0">
-          <input class="form-control mr-sm-2" type="text" placeholder="Search">
-          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
+        <form class="form-inline my-2 my-lg-0" action="search-results.php" method="post">
+          <input name="search-query" class="form-control mr-sm-2" type="text" placeholder="Search">
+          <button name='submit-search' class="btn btn-outline-success my-2 my-sm-0" type="submit">
             <i class="fa fa-search">
-              <a href="#"></a>
+              <a href="search-results.php"></a>
             </i>
           </button>
         </form>
@@ -56,7 +56,7 @@
           </button>
           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
             <a class="dropdown-item" href="#">You are logged in as: <?php echo "$firstname $lastname";?>
-            <a class="dropdown-item" href="profile.php?userID=<?php echo "$userID"?>">View Profile</a>
+            <a class="dropdown-item" href="profile.php">View Profile</a>
             <a class="dropdown-item" href="login.php">Logout</a>
           </div>
         </div>

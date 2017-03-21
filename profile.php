@@ -2,10 +2,6 @@
 <?php include('includes/header.php');?>
 <?php include_once('includes/php/utils/User.class.php');
 ?>
-<?php  if(!isset($_GET['userID'])){
-          header('location: index.php');
-       }
-?>
 <div class="container">
   <div class="row my-5">
     <div class="col-md-3">

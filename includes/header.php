@@ -25,7 +25,7 @@
           <div class="nav-menu">
             <ul class="navbar-nav mr-auto mt-2 mt-md-0">
               <li class="active nav-item"><a href="index.php">Home</a></li>
-              <li class="active nav-item"><a href="profile.php?userID=<?php echo "$userID"?>">Profile</a></li>
+              <li class="active nav-item"><a href="profile.php">Profile</a></li>
               <li class="active nav-item"><a href="faq.php">FAQS</a></li>
               <?php
 
@@ -56,7 +56,7 @@
           </button>
           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
             <a class="dropdown-item" href="#">You are logged in as: <?php echo "$firstname $lastname";?>
-            <a class="dropdown-item" href="profile.php?userID=<?php echo "$userID"?>">View Profile</a>
+            <a class="dropdown-item" href="profile.php">View Profile</a>
             <a class="dropdown-item" href="login.php">Logout</a>
           </div>
         </div>

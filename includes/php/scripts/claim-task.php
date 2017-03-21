@@ -7,5 +7,7 @@
   $ownerEmail = $qh -> getUserEmailFromID($owner);
   if(isset($_POST['claim-task'])){
     $qh -> setClaimed($taskID);
+    $qh -> changeReputation($userID, 10);
+    header("location: task-details.php?taskID=$taskID");
   }
  ?>

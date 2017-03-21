@@ -391,6 +391,7 @@ class QueryHelper{
    $joinedTaskSQL =  "SELECT * FROM JoinedTask
                       WHERE ClaimantID = '$currentUserID'
                       AND ClaimantID IS NOT NULL
+                      AND StatusVal = 'Claimed'
                       LIMIT $start, $number;";
 
    $result = $database -> select($joinedTaskSQL);
@@ -519,6 +520,49 @@ class QueryHelper{
    $res = $database -> select($userSQL);
 
    return $res[0]['UserID'];
+ }
+
+ function removeTask($taskID){
+   global $database;
+
+   $sql = "DELETE FROM `Task` WHERE TaskID = $taskID;";
+
+   $res = $database -> query($sql);
+
+   return $res;
+ }
+
+ function setComplete($taskID){
+   global $database;
+
+   $statusIdSQL = "SELECT * FROM Status WHERE StatusVal = 'Complete';";
+   $statusRes = $database -> select($statusIdSQL);
+
+   $statusID = $statusRes[0]['StatusID'];
+
+   $updateTask = "UPDATE `Task` SET `Status_StatusID`=$statusID WHERE TaskID = $taskID;";
+
+   $database -> query($updateTask);
+ }
+
+ function setPendingClaim($taskID){
+   global $database;
+
+   $statusIdSQL = "SELECT * FROM Status WHERE StatusVal = 'Pending Claim';";
+   $statusRes = $database -> select($statusIdSQL);
+   $statusID = $statusRes[0]['StatusID'];
+
+   $updateTask = "UPDATE `Task` SET `Status_StatusID`=$statusID,`ClaimantID`= NULL WHERE TaskID = $taskID;";
+
+   $database -> query($updateTask);
+ }
+
+ function changeReputation($userID, $amount){
+   global $database;
+
+   $sql = "UPDATE `User` SET `reputation`=reputation + $amount WHERE UserID = $userID;";
+
+   $database -> query($sql);
  }
 
 

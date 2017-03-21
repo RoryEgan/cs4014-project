@@ -1,13 +1,10 @@
 <?php include('includes/head.php');?>
 <?php include('includes/header.php');?>
-<?php include_once('includes/php/utils/User.class.php');?>
-<?php
-$currentUser = User::getCurrentUser($_SESSION['email']);
-$subject = $currentUser -> getSubject();
-$email = $currentUser -> getEmailAddress();
-$reputation = $currentUser -> getReputation();
-$firstname = $currentUser -> getForeName();
-$lastname = $currentUser -> getLastname();
+<?php include_once('includes/php/utils/User.class.php');
+?>
+<?php  if(!isset($_GET['userID'])){
+          header('location: index.php');
+       }
 ?>
 <div class="container">
   <div class="row my-5">
@@ -15,7 +12,7 @@ $lastname = $currentUser -> getLastname();
       <h2>My Profile</h2>
       <br>Name: <?php echo "$firstname $lastname";?>
       <br><br>Field of expertise:<br> <?php echo "$subject";?>
-      <br><br>Email Addrress: <?php echo "$email";?>
+      <br><br>Email Addrress: <?php echo "$emailAddress";?>
       <br><br>Reputation: <?php echo "$reputation";?>
     </div>
     <div class="col-md-9">
@@ -28,12 +25,10 @@ $lastname = $currentUser -> getLastname();
       <div id="display-tasks">
         <?php include_once('includes/php/scripts/display-my-tasks.php'); ?>
       </div>
-<!--      <div id="remove_row">
-        <td><button type="button" name="btn_more_profile"  id="btn_more" class="btn-success btn form-control" role="button">more</button></td>
-      </div> -->
+      <div id="remove_row_profile">
+        <td><button type="button" name="btn_more" id="btn_more" class="btn-success btn form-control" role="button">more</button></td>
+      </div>
     </div>
   </div>
 </div>
 <?php include('includes/footer.php') ?>
-<script src="assets/scripts/load-my-tasks.js"> </script>
-<script src="assets/scripts/load-claimed-tasks.js"> </script>

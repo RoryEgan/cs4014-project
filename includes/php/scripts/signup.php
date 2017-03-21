@@ -40,7 +40,8 @@ if(isset($_POST['signUpButton'])) {
 
         if($result){
           session_start();
-          $_SESSION['email'] = $signUpEmail;
+          $_SESSION['userID'] = $qh -> getLastInsertID();
+          print_r($_SESSION);
           header('Location: thank-you.php');
           exit();
         }

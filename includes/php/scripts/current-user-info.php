@@ -1,0 +1,11 @@
+<?php
+  include_once('includes/php/utils/User.class.php');
+  $userID =  $_SESSION['userID'];
+  $currentUser = User::getCurrentUser($userID);
+  $reputation = $currentUser -> getReputation();
+  $subject = $currentUser -> getSubject();
+  $firstname = $currentUser -> getForeName();
+  $lastname = $currentUser -> getLastname();
+  $emailAddress = $currentUser -> getEmailAddress();
+  $studentID = $currentUser -> getStudentID();
+?>

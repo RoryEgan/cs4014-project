@@ -31,25 +31,31 @@ class User{
 
   //This function is a static method used to return the current user of the website.
   //Allows us to access info on the current user without having to query the database each time.
-  public static function getCurrentUser($email){
+  public static function getCurrentUser($userID){
     $qh = new QueryHelper();
 
     $userInfo = array();
 
-    $userInfo = $qh -> getUserInfo($email);
+    $userInfo = $qh -> getUserInfo($userID);
 
     $currentUser = new User();
 
-    $currentUser -> setUserID($userInfo[0]);
-    $currentUser -> setSubject($userInfo[1]);
-    $currentUser -> setForeName($userInfo[2]);
-    $currentUser -> setLastname($userInfo[3]);
-    $currentUser -> setEmailAddress($email);
+    $currentUser -> setUserID($userID);
+    $currentUser -> setSubject($userInfo[0]);
+    $currentUser -> setForeName($userInfo[1]);
+    $currentUser -> setLastname($userInfo[2]);
+    $currentUser -> setEmailAddress($userInfo[3]);
     $currentUser -> setStudentID($userInfo[4]);
     $currentUser -> setReputation($userInfo[5]);
     $currentUser -> setIsMod($userInfo[6]);
 
     return $currentUser;
+  }
+
+  function getUserIDFromEmail($userEmail){
+    $qh = new QueryHelper();
+
+    return $qh -> getUserIDFromEmail();
   }
 }
 

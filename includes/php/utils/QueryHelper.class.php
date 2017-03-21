@@ -138,7 +138,7 @@ class QueryHelper{
     $numWords = $task -> getNumWords();
 
 
-    $currentUser = User::getCurrentUser($_SESSION['email']);
+    $currentUser = User::getCurrentUser($_SESSION['userID']);
     $userID = $currentUser -> getUserID();
     echo "user ID is: $userID";
 
@@ -158,7 +158,7 @@ class QueryHelper{
     //execute query
     $taskInsertSuccess = $database -> query($taskInsert);
 
-    $taskID = $database -> getLastInsertID();
+    $taskID = $this -> getLastInsertID();
     $task -> setTaskID($taskID);
 
 
@@ -348,7 +348,9 @@ class QueryHelper{
  function getTasksMain($start, $number){
    global $database;
 
-   $currentUser = User::getCurrentUser($_SESSION['email']);
+   session_start();
+
+   $currentUser = User::getCurrentUser($_SESSION['userID']);
    $currentUserID = $currentUser -> getUserID();
 
    $joinedTaskSQL =  "SELECT * FROM JoinedTask
@@ -364,7 +366,9 @@ class QueryHelper{
  function getMyTasks($start, $number){
    global $database;
 
-   $currentUser = User::getCurrentUser($_SESSION['email']);
+   session_start();
+
+   $currentUser = User::getCurrentUser($_SESSION['userID']);
    $currentUserID = $currentUser -> getUserID();
 
    $joinedTaskSQL =  "SELECT * FROM JoinedTask
@@ -379,7 +383,9 @@ class QueryHelper{
  function getClaimedTasks($start, $number){
    global $database;
 
-   $currentUser = User::getCurrentUser($_SESSION['email']);
+   session_start();
+
+   $currentUser = User::getCurrentUser($_SESSION['userID']);
    $currentUserID = $currentUser -> getUserID();
 
    $joinedTaskSQL =  "SELECT * FROM JoinedTask
@@ -415,10 +421,10 @@ class QueryHelper{
 
 
 
- function getUserInfo($emailAddress){
+ function getUserInfo($userID){
    global $database;
 
-   $userSQL = "SELECT * FROM User WHERE EmailAddress = '$emailAddress';";
+   $userSQL = "SELECT * FROM User WHERE UserID = '$userID';";
 
    $userResult = $database -> select($userSQL);
 
@@ -429,8 +435,8 @@ class QueryHelper{
      $isMod = true;
    }
 
-   $userInfo = array($userResult[0]['UserID'], $subject, $userResult[0]['ForeName'], $userResult[0]['Lastname'],
-                      $userResult[0]['StudentID'], $userResult[0]['reputation'], $isMod);
+   $userInfo = array($subject, $userResult[0]['ForeName'], $userResult[0]['Lastname'],
+                      $userResult[0]['EmailAddress'], $userResult[0]['StudentID'], $userResult[0]['reputation'], $isMod);
     return $userInfo;
  }
 
@@ -467,7 +473,7 @@ class QueryHelper{
 
    $statusID = $statusRes[0]['StatusID'];
 
-   $currentUser = User::getCurrentUser($_SESSION['email']);
+   $currentUser = User::getCurrentUser($_SESSION['userID']);
    $currentUserID = $currentUser -> getUserID();
 
    $updateTask = "UPDATE `Task` SET `Status_StatusID`=$statusID,`ClaimantID`=$currentUserID WHERE TaskID = $taskID";
@@ -486,7 +492,7 @@ class QueryHelper{
  function getFlaggedTasks($start, $number){
    global $database;
 
-   $currentUser = User::getCurrentUser($_SESSION['email']);
+   $currentUser = User::getCurrentUser($_SESSION['userID']);
    $currentUserID = $currentUser -> getUserID();
 
    $joinedTaskSQL =  "SELECT *
@@ -498,6 +504,23 @@ class QueryHelper{
 
    return $result;
  }
+
+ function getLastInsertID(){
+   global $database;
+   $lastID = $database -> getLastInsertID();
+   return $lastID;
+ }
+
+ function getUserIDFromEmail($email){
+   global $database;
+
+   $userSQL = "SELECT * FROM User WHERE EmailAddress = '$email';";
+
+   $res = $database -> select($userSQL);
+
+   return $res[0]['UserID'];
+ }
+
 
 }
 

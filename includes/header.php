@@ -40,11 +40,11 @@
         </div>
       </div>
       <div class="col-md-5">
-        <form class="form-inline my-2 my-lg-0">
-          <input class="form-control mr-sm-2" type="text" placeholder="Search">
-          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
+        <form class="form-inline my-2 my-lg-0" action="search-results.php" method="post">
+          <input name="search-query" class="form-control mr-sm-2" type="text" placeholder="Search">
+          <button name='submit-search' class="btn btn-outline-success my-2 my-sm-0" type="submit">
             <i class="fa fa-search">
-              <a href="#"></a>
+              <a href="search-results.php"></a>
             </i>
           </button>
         </form>

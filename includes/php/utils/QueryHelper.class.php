@@ -565,6 +565,15 @@ class QueryHelper{
    $database -> query($sql);
  }
 
+ function search($query){
+   global $database;
+
+   $sql = "SELECT * FROM JoinedTask WHERE Title LIKE '%$query%';";
+
+   $res = $database -> select($sql);
+   return $res;
+ }
+
 
 }
 

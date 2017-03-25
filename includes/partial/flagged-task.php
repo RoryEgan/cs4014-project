@@ -12,12 +12,12 @@
             <li>Paper Type: <?php echo "$docType"; ?></li>
             <li>Number of Pages: <?php echo "$numPages"; ?></li>
             <li>Number of words: <?php echo "$numWords"; ?></li>
-            <?php
+            <b><?php
               for($i = 0; $i < sizeof($flags); $i++){
                 $complaint = $flags[$i] -> getComplaint();
-                echo "<li>complaint: " . $complaint . "</li>";
+                echo "<li>Complaint: " . $complaint . "</li>";
               }
-             ?>
+             ?></b>
 
           </ul>
         </div>

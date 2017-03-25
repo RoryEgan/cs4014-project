@@ -24,7 +24,8 @@ function dynamicPrintTasks($count){
   $size = sizeof($allTasks);
 
   for($i = 0; $i < sizeof($allTasks); $i++){
-    $taskPrinter -> printDefaultTask($allTasks[$i]);
+    $flags = $retriever -> getRelevantFlags($allTasks[$i] -> getTaskID() );
+    $taskPrinter -> printFlaggedTask($allTasks[$i], $flags);
   }
 
 

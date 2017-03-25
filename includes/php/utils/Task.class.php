@@ -19,7 +19,6 @@ class Task{
   private $claimDeadline;
   private $completeDeadline;
   private $claimantID;
-
   function __construct($taskTitle, $taskType, $taskDescription, $numPages, $numWords, $docFormat, $docType, $subject, $document,
                               $tag1, $tag2, $tag3, $tag4, $claimDeadline, $completeDeadline){
 

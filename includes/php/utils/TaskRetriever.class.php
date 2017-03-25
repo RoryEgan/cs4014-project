@@ -2,6 +2,7 @@
 include_once('/var/www/html/CS4014_project/config.php');
 include_once(SITE_PATH . '/includes/php/utils/QueryHelper.class.php');
 include_once(SITE_PATH . '/includes/php/utils/Task.class.php');
+include_once(SITE_PATH . '/includes/php/utils/Flag.class.php');
 
 $qh = new queryHelper();
 
@@ -49,9 +50,20 @@ $qh = new queryHelper();
     function getClaimedTasks($start, $number) {
       global $qh;
       $taskTable = $qh -> getClaimedTasks($start, $number);
-      $tasktablesize = sizeof($taskTable);
       $allTasksArray = array();
 
+
+      for($i = 0; $i < sizeof($taskTable); $i++){
+        $allTasksArray[$i] = $this -> initializeTask($taskTable, $i);
+      }
+
+      return $allTasksArray;
+    }
+
+    function getSearchResults($searchQuery){
+      global $qh;
+      $taskTable = $qh -> search($searchQuery);
+      $allTasksArray = array();
 
       for($i = 0; $i < sizeof($taskTable); $i++){
         $allTasksArray[$i] = $this -> initializeTask($taskTable, $i);
@@ -83,6 +95,19 @@ $qh = new queryHelper();
         $returnTags[$i] = 'Tag';
       }
       return $returnTags;
+    }
+
+    function getRelevantFlags($taskID){
+      global $qh;
+
+      $flags = $qh -> getFlags($taskID);
+
+      $returnFlags = array();
+
+      for($i = 0; $i < sizeof($flags); $i++){
+        $returnFlags[$i] = new Flag($flags[$i]['FlagID'], $flags[$i]['Task_TaskID'], $flags[$i]['Complaint']);
+      }
+      return $returnFlags;
     }
 
     private function initializeTask($tasks, $index){

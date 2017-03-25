@@ -620,6 +620,17 @@ class QueryHelper{
    $this->database->query($sql);
  }
 
+ function getClickInfo($userID){
+   $sql = "SELECT * FROM JoinedTag
+           JOIN Click
+           ON JoinedTag.Task_TaskID = Click.Task_TaskID
+           WHERE Click.User_UserID = $userID;";
+
+  $res = $this->database->select($sql);
+  
+  return $res;
+ }
+
 
 }
 

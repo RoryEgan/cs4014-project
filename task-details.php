@@ -1,11 +1,7 @@
 <?php include('includes/head.php');?>
 <?php include('includes/header.php');?>
 <?php include_once('includes/php/scripts/task-click.php'); ?>
-<?php include_once('includes/php/scripts/claim-task.php'); ?>
-<?php include_once('includes/php/scripts/flag-task.php'); ?>
-<?php include_once('includes/php/scripts/remove-task.php'); ?>
-<?php include_once('includes/php/scripts/complete-task.php'); ?>
-<?php include_once('includes/php/scripts/cancel-task.php'); ?>
+<?php include_once('includes/php/scripts/task-actions.php'); ?>
 <?php  if(!isset($_GET['taskID']) || !isset($title)){
     header('location: index.php');
   }

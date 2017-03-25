@@ -6,6 +6,7 @@ if(!isset($_GET['userID'])){
   header("location: index.php");
 }
       include_once('includes/php/scripts/profile-info.php');
+      include_once('includes/php/scripts/ban-user.php');
 ?>
 <div class="container">
   <div class="row my-5">

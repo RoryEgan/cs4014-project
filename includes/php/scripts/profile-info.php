@@ -22,7 +22,13 @@
       $profileStudentID = $profileUser -> getStudentID();
     }
     else{
-      header("location: index.php");
+      if(isset($_SERVER['HTTP_REFERRER'])){
+        $referrer = $_SERVER['HTTP_REFERRER'];
+        header("location: $referrer");
+      }
+      else{
+        header("location: index.php");
+      }
     }
   }
 

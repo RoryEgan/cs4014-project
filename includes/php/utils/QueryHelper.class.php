@@ -2,21 +2,27 @@
 include_once('/var/www/html/CS4014_project/config.php');
 include_once(SITE_PATH . '/includes/php/utils/User.class.php');
 include_once(SITE_PATH . '/includes/php/utils/Database.class.php');
-$database = new Database();
 
 class QueryHelper{
+
+  private $database;
+
+
+  function __construct(){
+    $this->database = new Database();
+  }
 
   //The database class is paired with this class exclusively (to simplify includes) thus we require this
   //functionality at times.
   function select($query){
-    global $database;
+    $database = $this->database;
 
     $res = $database -> select($query);
     return $res;
   }
 
   function getSubjectIdFromSubjectName($subject){
-    global $database;
+    $database = $this->database;
 
     $selectSubjectIdQuery = "SELECT *
                              FROM Subject
@@ -30,7 +36,7 @@ class QueryHelper{
   }
 
   function insertUser($studentID, $subjectID, $firstName, $lastName, $signUpEmail, $signUpPassword, $passwordSalt){
-    global $database;
+    $database = $this->database;
     echo "student ID: $studentID subjectID: $subjectID fname: $firstName lname: $lastName email: $signUpEmail pword: $signUpPassword salt:  $passwordSalt";
 
     $insertSql = "INSERT INTO   `CS4014_project_database`.`User` (
@@ -57,7 +63,7 @@ class QueryHelper{
 
   //returns the password salt that belongs to a particular user.
   function getPasswordSalt($email){
-    global $database;
+    $database = $this->database;
     $query = "SELECT *
               FROM User
               WHERE EmailAddress = '$email';";
@@ -70,7 +76,7 @@ class QueryHelper{
 
   //returns a user with the specified email and password or false if the user does not exist.
   function getUser($email, $hashedPassword){
-    global $database;
+    $database = $this->database;
 
     $sql = "SELECT *
     FROM User
@@ -85,7 +91,7 @@ class QueryHelper{
 
   //check if the email is already used or belongs to banned user.
   function isUniqueEmail($inputEmail){
-    global $database;
+    $database = $this->database;
 
     $bannedUserQuery = "SELECT EmailAddress
                         From BannedUser
@@ -114,7 +120,7 @@ class QueryHelper{
   }
 
   function verifyDropDownInput($input, $selectQuery, $columnName){
-    global $database;
+    $database = $this->database;
 
     $result = $database -> select($selectQuery);
 
@@ -127,7 +133,7 @@ class QueryHelper{
   }
 
   function insertTask($task){
-    global $database;
+    $database = $this->database;
 
     //collect the data required to insert into task table.
     $taskTypeID = $this -> getTaskTypeIDFromTaskType($task->getTaskType());
@@ -190,7 +196,7 @@ class QueryHelper{
 
 
   function insertDocument($task){
-    global $database;
+    $database = $this->database;
 
     $document = $task -> getDocument();
     $location = $document['tmp_name'];
@@ -233,7 +239,7 @@ class QueryHelper{
   }
 
   function insertDeadlines($task){
-    global $database;
+    $database = $this->database;
 
     $claimDeadline = $task -> getClaimDeadline();
     $completeDeadline = $task -> getCompleteDeadline();
@@ -248,7 +254,7 @@ class QueryHelper{
   }
 
   function insertTaskTags($task){
-    global $database;
+    $database = $this->database;
     $insertSuccess = true;
 
     //get each tag for the task
@@ -285,7 +291,7 @@ class QueryHelper{
   }
 
   function getTagIDFromTagVal($tagVal){
-    global $database;
+    $database = $this->database;
 
     $sql = "SELECT * FROM Tag WHERE Value = '$tagVal'";
 
@@ -302,7 +308,7 @@ class QueryHelper{
   }
 
   function getTaskTypeIDFromTaskType($taskType){
-    global $database;
+    $database = $this->database;
 
     $taskTypeIDArray = $database -> select("SELECT TaskTypeID FROM TaskType
                                        WHERE TaskTypeVal = '$taskType';");
@@ -313,7 +319,7 @@ class QueryHelper{
 
 
   function getFormatIDFromFormat($format){
-    global $database;
+    $database = $this->database;
 
     $formatArray = $database -> select("SELECT * FROM Format
                                        WHERE FormatVal = '$format';");
@@ -323,7 +329,7 @@ class QueryHelper{
   }
 
   function getDocTypeIDFromDocType($docType){
-    global $database;
+    $database = $this->database;
 
     $docTypeArray = $database -> select("SELECT * FROM DocumentType
                                        WHERE DocumentTypeVal = '$docType';");
@@ -334,7 +340,7 @@ class QueryHelper{
 
   public function getTasksCount() {
 
-    global $database;
+    $database = $this->database;
 
     $query = "SELECT COUNT(*) FROM Task;";
 
@@ -346,7 +352,7 @@ class QueryHelper{
 
 
  function getTasksMain($start, $number){
-   global $database;
+   $database = $this->database;
 
    session_start();
 
@@ -364,7 +370,7 @@ class QueryHelper{
  }
 
  function getMyTasks($start, $number){
-   global $database;
+   $database = $this->database;
 
    session_start();
 
@@ -381,7 +387,7 @@ class QueryHelper{
  }
 
  function getClaimedTasks($start, $number){
-   global $database;
+   $database = $this->database;
 
    session_start();
 
@@ -401,7 +407,7 @@ class QueryHelper{
 
 
  function getJoinedTask($taskID){
-   global $database;
+   $database = $this->database;
 
    $joinedTaskSQL =  "SELECT * FROM JoinedTask WHERE TaskID = '$taskID';";
 
@@ -411,7 +417,7 @@ class QueryHelper{
  }
 
  function getJoinedTags($taskID){
-   global $database;
+   $database = $this->database;
 
    $joinedTaskSQL =  "SELECT * FROM JoinedTag WHERE Task_TaskID = $taskID;";
 
@@ -423,7 +429,7 @@ class QueryHelper{
 
 
  function getUserInfo($userID){
-   global $database;
+   $database = $this->database;
 
    $userSQL = "SELECT * FROM User WHERE UserID = '$userID';";
 
@@ -447,7 +453,7 @@ class QueryHelper{
 
 
  function getSubjectNameFromSubjectId($subjectID){
-   global $database;
+   $database = $this->database;
 
    $selectSubjectNameQuery = "SELECT *
                             FROM Subject
@@ -461,7 +467,7 @@ class QueryHelper{
  }
 
  function getUserEmailFromID($userID){
-   global $database;
+   $database = $this->database;
 
    $selectID = "SELECT * FROM User WHERE UserID = '$userID';";
 
@@ -471,7 +477,7 @@ class QueryHelper{
  }
 
  function setClaimed($taskID){
-   global $database;
+   $database = $this->database;
 
    $statusIdSQL = "SELECT * FROM Status WHERE StatusVal = 'Claimed';";
    $statusRes = $database -> select($statusIdSQL);
@@ -487,7 +493,7 @@ class QueryHelper{
  }
 
  function insertFlag($taskID, $complaint){
-   global $database;
+   $database = $this->database;
 
    $sql = "INSERT INTO `CS4014_project_database`.`Flag`(`FlagID`, `Task_TaskID`, `Complaint`) VALUES (NULL,$taskID,'$complaint');";
 
@@ -495,7 +501,7 @@ class QueryHelper{
  }
 
  function getFlaggedTasks($start, $number){
-   global $database;
+   $database = $this->database;
 
    $ctr = 0;
 
@@ -520,7 +526,7 @@ class QueryHelper{
  }
 
  function getFlags($taskID){
-   global $database;
+   $database = $this->database;
 
    $sql = "SELECT * FROM Flag WHERE Task_TaskID = $taskID;";
 
@@ -529,13 +535,13 @@ class QueryHelper{
  }
 
  function getLastInsertID(){
-   global $database;
+   $database = $this->database;
    $lastID = $database -> getLastInsertID();
    return $lastID;
  }
 
  function getUserIDFromEmail($email){
-   global $database;
+   $database = $this->database;
 
    $userSQL = "SELECT * FROM User WHERE EmailAddress = '$email';";
 
@@ -545,7 +551,7 @@ class QueryHelper{
  }
 
  function removeTask($taskID){
-   global $database;
+   $database = $this->database;
 
    $sql = "DELETE FROM `Task` WHERE TaskID = $taskID;";
 
@@ -555,7 +561,7 @@ class QueryHelper{
  }
 
  function setComplete($taskID){
-   global $database;
+   $database = $this->database;
 
    $statusIdSQL = "SELECT * FROM Status WHERE StatusVal = 'Complete';";
    $statusRes = $database -> select($statusIdSQL);
@@ -568,7 +574,7 @@ class QueryHelper{
  }
 
  function setPendingClaim($taskID){
-   global $database;
+   $database = $this->database;
 
    $statusIdSQL = "SELECT * FROM Status WHERE StatusVal = 'Pending Claim';";
    $statusRes = $database -> select($statusIdSQL);
@@ -580,7 +586,7 @@ class QueryHelper{
  }
 
  function changeReputation($userID, $amount){
-   global $database;
+   $database = $this->database;
 
    $sql = "UPDATE `User` SET `reputation`=reputation + $amount WHERE UserID = $userID;";
 
@@ -588,12 +594,30 @@ class QueryHelper{
  }
 
  function search($query){
-   global $database;
+   $database = $this->database;
 
    $sql = "SELECT * FROM JoinedTask WHERE Title LIKE '%$query%';";
 
    $res = $database -> select($sql);
    return $res;
+ }
+
+ function deleteUser($userID){
+
+   $database = $this->database;
+
+   $sql = "DELETE FROM `User` WHERE UserID = $userID;";
+
+   $res = $database -> query($sql);
+
+   return $res;
+ }
+
+ function insertClick($userID, $taskID){
+   $sql = "INSERT INTO `Click`(`clickID`, `Task_TaskID`, `User_UserID`)
+            VALUES (NULL,$taskID,$userID);";
+
+   $this->database->query($sql);
  }
 
 

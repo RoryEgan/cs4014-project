@@ -3,6 +3,7 @@
 include_once('includes/php/utils/TaskRetriever.class.php');
 include_once('includes/php/utils/User.class.php');
 include_once('includes/php/utils/DateFormatConverter.class.php');
+include_once('includes/php/util/QueryHelper.class.php');
 
 if(isset($_GET['taskID'])){
   $taskID = $_GET['taskID'];
@@ -37,6 +38,11 @@ if(isset($_GET['taskID'])){
   $userID = $_SESSION['userID'];
   $userReputation = $currentUser -> getReputation();
 
+  $pageWasRefreshed = isset($_SERVER['HTTP_CACHE_CONTROL']) && $_SERVER['HTTP_CACHE_CONTROL'] === 'max-age=0';
+  if(!$pageWasRefreshed){
+    $qh = new QueryHelper();
+    $qh -> insertClick($userID, $taskID);
+  }
 
 }
 ?>

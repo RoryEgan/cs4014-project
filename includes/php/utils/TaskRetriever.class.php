@@ -13,7 +13,6 @@ $qh = new queryHelper();
       $taskTable = $qh -> getTasksMain($start, $number);
       $allTasksArray = array();
 
-
       for($i = 0; $i < sizeof($taskTable); $i++){
         $allTasksArray[$i] = $this -> initializeTask($taskTable, $i);
       }

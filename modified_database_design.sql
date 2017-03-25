@@ -268,7 +268,7 @@ SELECT * FROM Document, DocumentType, Format
 	WHERE Document.DocumentType_DocumentTypeID = DocumentType.DocumentTypeID
 	AND Document.Format_FormatID = Format.FormatID;
 
-  DROP VIEW IF EXISTS JoinedTag;
+DROP VIEW IF EXISTS JoinedTag;
 
 CREATE VIEW JoinedTag AS
 
@@ -277,7 +277,7 @@ SELECT *
 	JOIN Tag
 	ON TaskTag.Tag_TagID = Tag.TagID;
 
-  DROP VIEW IF EXISTS JoinedTask;
+DROP VIEW IF EXISTS JoinedTask;
 
 CREATE VIEW JoinedTask AS
 
@@ -296,6 +296,8 @@ LEFT JOIN Subject
 ON Task.Subject_SubjectID = Subject.subjectID
 LEFT JOIN Status
 ON Task.Status_StatusID = Status.StatusID;
+
+
 
 
 USE `CS4014_project_database` ;

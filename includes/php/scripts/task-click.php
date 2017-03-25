@@ -32,7 +32,7 @@ if(isset($_GET['taskID'])){
   $claimDate = $converter -> convert($claimDate);
   $completeDate = $converter -> convert($completeDate);
 
-  $currentUser = User::getCurrentUser($_SESSION['userID']);
+  $currentUser = User::getUser($_SESSION['userID']);
 
   $userID = $_SESSION['userID'];
   $userReputation = $currentUser -> getReputation();

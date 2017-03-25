@@ -1,15 +1,30 @@
 <?php include('includes/head.php');?>
 <?php include('includes/header.php');?>
 <?php include_once('includes/php/utils/User.class.php');
+
+if(!isset($_GET['userID'])){
+  header("location: index.php");
+}
+      include_once('includes/php/scripts/profile-info.php');
 ?>
 <div class="container">
   <div class="row my-5">
     <div class="col-md-3">
       <h2>My Profile</h2>
-      <br>Name: <?php echo "$firstname $lastname";?>
-      <br><br>Field of expertise:<br> <?php echo "$subject";?>
-      <br><br>Email Addrress: <?php echo "$emailAddress";?>
-      <br><br>Reputation: <?php echo "$reputation";?>
+      <br>Name: <?php echo "$profileFirstname $profileLastname";?>
+      <br><br>Field of expertise:<br> <?php echo "$profileSubject";?>
+      <br><br>Email Addrress: <?php echo "$profileEmailAddress";?>
+      <br><br>Reputation: <?php echo "$profileReputation";?>
+      <?php
+        if($reputation >= 40){
+          ?> <br><br> <?php
+          $modalTitle = 'Ban User';
+          $target = 'ban-modal';
+          $includeURL = 'includes/partial/ban-user-modal.php';
+          include('includes/php/scripts/dynamic-modal.php');
+         }
+
+       ?>
     </div>
     <div class="col-md-9">
       <button id="my-button" type="button" class="btn btn-success mb-5" role="button">

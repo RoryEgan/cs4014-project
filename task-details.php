@@ -19,6 +19,7 @@
     </div>
     <br><h2><b>Task Title:</b> <?php echo $title?></h2>
     <br><p><b>Description:</b> <?php echo $description?></p>
+    <br><p><b>Owner: </b><a href="profile.php?userID=<?php echo $owner?>">Profile</a></p>
     <br><p><b>Paper Type:</b> <?php echo "$docType"; ?></p>
     <br><p><b>Number of Pages:</b> <?php echo "$numPages"; ?></p>
     <br><p><b>Number of words:</b> <?php echo "$numWords"; ?></p>

@@ -138,7 +138,7 @@ class QueryHelper{
     $numWords = $task -> getNumWords();
 
 
-    $currentUser = User::getCurrentUser($_SESSION['userID']);
+    $currentUser = User::getUser($_SESSION['userID']);
     $userID = $currentUser -> getUserID();
     echo "user ID is: $userID";
 
@@ -350,7 +350,7 @@ class QueryHelper{
 
    session_start();
 
-   $currentUser = User::getCurrentUser($_SESSION['userID']);
+   $currentUser = User::getUser($_SESSION['userID']);
    $currentUserID = $currentUser -> getUserID();
 
    $joinedTaskSQL =  "SELECT * FROM JoinedTask
@@ -368,7 +368,7 @@ class QueryHelper{
 
    session_start();
 
-   $currentUser = User::getCurrentUser($_SESSION['userID']);
+   $currentUser = User::getUser($_SESSION['profileID']);
    $currentUserID = $currentUser -> getUserID();
 
    $joinedTaskSQL =  "SELECT * FROM JoinedTask
@@ -385,7 +385,7 @@ class QueryHelper{
 
    session_start();
 
-   $currentUser = User::getCurrentUser($_SESSION['userID']);
+   $currentUser = User::getUser($_SESSION['profileID']);
    $currentUserID = $currentUser -> getUserID();
 
    $joinedTaskSQL =  "SELECT * FROM JoinedTask
@@ -428,17 +428,21 @@ class QueryHelper{
    $userSQL = "SELECT * FROM User WHERE UserID = '$userID';";
 
    $userResult = $database -> select($userSQL);
+   if($userResult){
+     $subject = $this -> getSubjectNameFromSubjectId($userResult[0]['Subject_SubjectID']);
+     $isMod = false;
 
-   $subject = $this -> getSubjectNameFromSubjectId($userResult[0]['Subject_SubjectID']);
-   $isMod = false;
+     if($userResult[0]['IsMod'] != 0){
+       $isMod = true;
+     }
 
-   if($userResult[0]['IsMod'] != 0){
-     $isMod = true;
+     $userInfo = array($subject, $userResult[0]['ForeName'], $userResult[0]['Lastname'],
+                        $userResult[0]['EmailAddress'], $userResult[0]['StudentID'], $userResult[0]['reputation'], $isMod);
+      return $userInfo;
    }
-
-   $userInfo = array($subject, $userResult[0]['ForeName'], $userResult[0]['Lastname'],
-                      $userResult[0]['EmailAddress'], $userResult[0]['StudentID'], $userResult[0]['reputation'], $isMod);
-    return $userInfo;
+   else{
+     return false;
+   }
  }
 
 
@@ -474,7 +478,7 @@ class QueryHelper{
 
    $statusID = $statusRes[0]['StatusID'];
 
-   $currentUser = User::getCurrentUser($_SESSION['userID']);
+   $currentUser = User::getUser($_SESSION['userID']);
    $currentUserID = $currentUser -> getUserID();
 
    $updateTask = "UPDATE `Task` SET `Status_StatusID`=$statusID,`ClaimantID`=$currentUserID WHERE TaskID = $taskID";
@@ -495,7 +499,7 @@ class QueryHelper{
 
    $ctr = 0;
 
-   $currentUser = User::getCurrentUser($_SESSION['userID']);
+   $currentUser = User::getUser($_SESSION['userID']);
    $currentUserID = $currentUser -> getUserID();
 
    $joinedTaskSQL =  "SELECT *

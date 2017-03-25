@@ -28,8 +28,24 @@ class TaskPrinter{
 
     }
 
-    function printFlaggedTask($task, $flag){
+    function printFlaggedTask($task, $flags){
+      $taskID = $task -> getTaskID();
+      $title = $task -> getTaskTitle();
+      $type = $task -> getTaskType();
+      $docType = $task -> getDocType();
+      $numPages = $task -> getNumPages();
+      $numWords = $task -> getNumWords();
+      $claimDate = $task -> getClaimDeadline();
+      $completeDate = $task -> getCompleteDeadline();
+      $description = $task -> getTaskDescription();
+      $subject = $task->getSubject();
+      $ownerID = $task -> getOwnerID();
+      $converter = new DateFormatConverter();
+      $claimDate = $converter -> convert($claimDate);
+      $completeDate = $converter -> convert($completeDate);
 
+
+      include(SITE_PATH . '/includes/partial/flagged-task.php');
     }
 
     function printMyTask($task){

@@ -493,17 +493,35 @@ class QueryHelper{
  function getFlaggedTasks($start, $number){
    global $database;
 
+   $ctr = 0;
+
    $currentUser = User::getCurrentUser($_SESSION['userID']);
    $currentUserID = $currentUser -> getUserID();
 
    $joinedTaskSQL =  "SELECT *
                       FROM  `JoinedTask` ,  `Flag`
                       WHERE  `JoinedTask`.TaskID =  `Flag`.Task_TaskID
-                      LIMIT $start, $number";
+                      ORDER BY TaskID
+                      LIMIT $start, $number;";
 
    $result = $database -> select($joinedTaskSQL);
+   $uniqueResult = array();
+   for($i = 0; $i < sizeof($result) + 1; $i++){
+     if($result[$i]['TaskID'] != $result[$i + 1]['TaskID']){
+       $uniqueResult[$ctr] = $result[$i];
+       $ctr++;
+     }
+   }
+   return $uniqueResult;
+ }
 
-   return $result;
+ function getFlags($taskID){
+   global $database;
+
+   $sql = "SELECT * FROM Flag WHERE Task_TaskID = $taskID;";
+
+   $res = $database -> select($sql);
+   return $res;
  }
 
  function getLastInsertID(){

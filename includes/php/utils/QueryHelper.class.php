@@ -362,6 +362,7 @@ class QueryHelper{
    $joinedTaskSQL =  "SELECT * FROM JoinedTask
                       WHERE StatusVal = 'Pending Claim'
                       AND User_UserID <> '$currentUserID'
+                      ORDER BY Claim
                       LIMIT $start, $number;";
 
    $result = $database -> select($joinedTaskSQL);
@@ -476,6 +477,34 @@ class QueryHelper{
    return $result[0]['EmailAddress'];
  }
 
+ function setCancelled($taskID){
+   $statusIdSQL = "SELECT * FROM Status WHERE StatusVal = 'Cancelled';";
+   $statusRes = $this->database -> select($statusIdSQL);
+
+   $statusID = $statusRes[0]['StatusID'];
+
+   $currentUser = User::getUser($_SESSION['userID']);
+   $currentUserID = $currentUser -> getUserID();
+
+   $updateTask = "UPDATE `Task` SET `Status_StatusID`=$statusID WHERE TaskID = $taskID";
+
+   $this->database -> query($updateTask);
+ }
+
+ function setUnclaimed($taskID){
+   $statusIdSQL = "SELECT * FROM Status WHERE StatusVal = 'Unclaimed';";
+   $statusRes = $this->database -> select($statusIdSQL);
+
+   $statusID = $statusRes[0]['StatusID'];
+
+   $currentUser = User::getUser($_SESSION['userID']);
+   $currentUserID = $currentUser -> getUserID();
+
+   $updateTask = "UPDATE `Task` SET `Status_StatusID`=$statusID WHERE TaskID = $taskID";
+
+   $this->database -> query($updateTask);
+ }
+
  function setClaimed($taskID){
    $database = $this->database;
 
@@ -504,6 +533,8 @@ class QueryHelper{
    $database = $this->database;
 
    $ctr = 0;
+
+   session_start();
 
    $currentUser = User::getUser($_SESSION['userID']);
    $currentUserID = $currentUser -> getUserID();
@@ -627,8 +658,16 @@ class QueryHelper{
            WHERE Click.User_UserID = $userID;";
 
   $res = $this->database->select($sql);
-  
+
   return $res;
+ }
+
+ function getAllTasks(){
+   $sql = "SELECT * FROM JoinedTask;";
+
+   $res = $this->database->select($sql);
+
+   return $res;
  }
 
 

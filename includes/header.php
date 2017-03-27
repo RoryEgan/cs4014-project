@@ -57,6 +57,9 @@
             <a class="dropdown-item" href="profile.php?userID=<?php echo $userID;?>">View Profile</a>
             <hr>
             <a class="dropdown-item" href="login.php">Logout</a>
+            <a class="dropdown-item" href="index.php">Home</a>
+            <a class="dropdown-item" href="profile.php?userID=<?php echo $userID;?>">Profile</a>
+            <a class="dropdown-item" href="faq.php">FAQS</a>
           </div>
         </div>
       </div>

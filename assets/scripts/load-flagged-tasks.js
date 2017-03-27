@@ -1,6 +1,6 @@
 $(document).ready(function() {
   var count = 1;
-  if($("#stop-loading").length){
+  if($("#stop-loading-flagged").length){
     $("#remove_row").remove();
   }
 

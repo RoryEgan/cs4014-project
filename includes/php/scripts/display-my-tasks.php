@@ -22,7 +22,7 @@ function printMyTasks($count){
     $taskPrinter -> printDefaultTask($allTasks[$i]);
   }
   if($size < 5){
-    echo '<p id="stop-loading" class="offset-md-5"> **No More Tasks To Show**</p>';
+    echo '<p id="stop-loading-my" class="offset-md-5">No More Tasks To Show</p>';
   }
 }
 ?>

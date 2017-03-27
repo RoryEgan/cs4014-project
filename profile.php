@@ -37,8 +37,10 @@ if(!isset($_GET['userID'])){
       <div id="display-tasks">
         <?php include_once('includes/php/scripts/display-my-tasks.php'); ?>
       </div>
-      <div id="remove_row_profile">
-        <td><button type="button" name="btn_more" id="btn_more" class="btn-success btn form-control" role="button">more</button></td>
+      <div id="wrap-more-button">
+        <div id="remove_row">
+          <td><button type="button" name="btn_more_profile" id="btn_more_profile" class="btn-success btn form-control" role="button">more</button></td>
+        </div>
       </div>
     </div>
   </div>

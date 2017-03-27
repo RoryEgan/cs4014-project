@@ -30,7 +30,7 @@ function dynamicPrintTasks($count){
 
 
   if($size < $tasksPerPage){
-    echo '<p id="stop-loading-flagged" class="offset-md-5"> **No More Tasks To Show**</p>';
+    echo '<p id="stop-loading-flagged" class="offset-md-5"></p>';
   }
 }
 

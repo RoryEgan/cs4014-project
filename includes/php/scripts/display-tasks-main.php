@@ -21,6 +21,7 @@ function dynamicPrintTasks($count){
   $retriever = new TaskRetriever();
   $taskPrinter = new TaskPrinter();
 
+  session_start();
   $qh = new QueryHelper();
   $clickInfo = $qh->getClickInfo($_SESSION['userID']);
 
@@ -54,7 +55,7 @@ function dynamicPrintTasks($count){
     }
 
     if($size < $tasksPerPage){
-      echo '<p id="stop-loading-main" class="offset-md-5">No more tasks to show</p>';
+      echo '<p id="stop-loading-main" class="offset-md-5"></p>';
     }
   }
 }

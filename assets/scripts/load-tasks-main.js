@@ -1,5 +1,6 @@
 $(document).ready(function() {
   var count = 1;
+  var nonsense;
 
   if($("#stop-loading-main").length){
     $("#remove_row").remove();

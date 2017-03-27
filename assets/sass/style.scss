@@ -24,3 +24,9 @@
   border-color: #000;
 
 }
+
+@media (max-width: 576px) {
+  .nav-container {
+    margin-left: 0;
+  }
+}

@@ -53,9 +53,8 @@ function dynamicPrintTasks($count){
       $taskPrinter -> printDefaultTask($allTasks[$i]);
     }
 
-
     if($size < $tasksPerPage){
-      echo '<p id="stop-loading-main" class="offset-md-5"></p>';
+      echo '<p id="stop-loading-main" class="offset-md-5">No more tasks to show</p>';
     }
   }
 }

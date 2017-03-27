@@ -4,13 +4,28 @@ include_once(SITE_PATH . '/includes/php/utils/QueryHelper.class.php');
 include_once(SITE_PATH . '/includes/php/utils/Task.class.php');
 include_once(SITE_PATH . '/includes/php/utils/Flag.class.php');
 
-$qh = new queryHelper();
 
   class TaskRetriever{
+    private $qh;
+
+    function __construct(){
+      $this->qh = new queryHelper();
+    }
+
+    function getAllTasks(){
+      $taskTable = $this->qh -> getAllTasks($start, $number);
+      $allTasksArray = array();
+
+      for($i = 0; $i < sizeof($taskTable); $i++){
+        $allTasksArray[$i] = $this -> initializeTask($taskTable, $i);
+      }
+
+      return $allTasksArray;
+    }
 
     function getTasksMain($start, $number){
-      global $qh;
-      $taskTable = $qh -> getTasksMain($start, $number);
+
+      $taskTable = $this->qh -> getTasksMain($start, $number);
       $allTasksArray = array();
 
       for($i = 0; $i < sizeof($taskTable); $i++){
@@ -21,8 +36,8 @@ $qh = new queryHelper();
     }
 
     function getMyTasks($start, $number) {
-      global $qh;
-      $taskTable = $qh -> getMyTasks($start, $number);
+
+      $taskTable = $this->qh -> getMyTasks($start, $number);
       $allTasksArray = array();
 
 
@@ -34,8 +49,8 @@ $qh = new queryHelper();
     }
 
     function getFlaggedTasks($start, $number){
-      global $qh;
-      $taskTable = $qh -> getFlaggedTasks($start, $number);
+
+      $taskTable = $this->qh -> getFlaggedTasks($start, $number);
       $allTasksArray = array();
 
 
@@ -47,8 +62,8 @@ $qh = new queryHelper();
     }
 
     function getClaimedTasks($start, $number) {
-      global $qh;
-      $taskTable = $qh -> getClaimedTasks($start, $number);
+
+      $taskTable = $this->qh -> getClaimedTasks($start, $number);
       $allTasksArray = array();
 
 
@@ -60,8 +75,8 @@ $qh = new queryHelper();
     }
 
     function getSearchResults($searchQuery){
-      global $qh;
-      $taskTable = $qh -> search($searchQuery);
+
+      $taskTable = $this->qh -> search($searchQuery);
       $allTasksArray = array();
 
       for($i = 0; $i < sizeof($taskTable); $i++){
@@ -72,8 +87,8 @@ $qh = new queryHelper();
     }
 
     function getTask($taskID){
-      global $qh;
-      $taskTable = $qh -> getJoinedTask($taskID);
+
+      $taskTable = $this->qh -> getJoinedTask($taskID);
 
       $task = $this -> initializeTask($taskTable, 0);
 
@@ -81,9 +96,9 @@ $qh = new queryHelper();
     }
 
     function getRelevantTags($taskID){
-      global $qh;
 
-      $tags = $qh -> getJoinedTags($taskID);
+
+      $tags = $this->qh -> getJoinedTags($taskID);
 
       $returnTags = array();
 
@@ -97,9 +112,9 @@ $qh = new queryHelper();
     }
 
     function getRelevantFlags($taskID){
-      global $qh;
 
-      $flags = $qh -> getFlags($taskID);
+
+      $flags = $this->qh -> getFlags($taskID);
 
       $returnFlags = array();
 

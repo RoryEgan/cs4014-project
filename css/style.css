@@ -42,7 +42,7 @@ header.banner {
   padding: 1.25rem 0 1.25rem 0;
   width: 100%;
   text-align: center;
-  background-color: #000;
+  background-color: #0a1236;
 }
 
 .header-heading {
@@ -50,7 +50,7 @@ header.banner {
 }
 
 .navbar-static-top {
-  background-color: grey;
+  background-color: #000;
   transition: .7s;
 }
 
@@ -59,7 +59,7 @@ header.banner {
 }
 
 .fixed-top {
-  background-color: #000;
+  background-color: #0a1236;
   transition: .7s;
 }
 

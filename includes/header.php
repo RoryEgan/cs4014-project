@@ -8,7 +8,7 @@
     <div class="flex-row">
       <div class="col-xs-12 text-center">
         <a href="#">
-          <h1 class="header-heading">Our Website</h1>
+          <h1 class="header-heading">Peer Review Centre</h1>
         </a>
       </div>
     </div>

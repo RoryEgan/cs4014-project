@@ -23,7 +23,7 @@ header.banner {
   padding: 1.25rem 0 1.25rem 0;
   width: 100%;
   text-align: center;
-  background-color: #000;
+  background-color: $banner-background;
 }
 
 .header-heading {
@@ -31,7 +31,7 @@ header.banner {
 }
 
 .navbar-static-top {
-  background-color: grey;
+  background-color: $static-nav-background;
   transition: .7s;
 }
 
@@ -44,7 +44,7 @@ header.banner {
 }
 
 .fixed-top {
-  background-color: #000;
+  background-color: $fixed-top-background;
   transition: .7s;
 }
 

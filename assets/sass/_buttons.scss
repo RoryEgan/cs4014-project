@@ -26,3 +26,22 @@
   }
 
 }
+
+.btn-outline {
+
+  color: $btn-outline-colour;
+  border-color: $btn-outline-border;
+  background-color: transparent;
+  a {
+    color: $btn-outline-colour;
+  }
+}
+
+.btn-outline:hover {
+  color: #fff;
+  border-color: $btn-outline-border;
+  background-color: $btn-outline-border;
+  a {
+    color: #fff;
+  }
+}

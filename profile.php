@@ -28,10 +28,10 @@ if(!isset($_GET['userID'])){
        ?>
     </div>
     <div class="col-md-9">
-      <button id="my-button" type="button" class="btn btn-success mb-5" role="button">
+      <button id="my-button" type="button" class="btn btn-outline mb-5" role="button">
         My Tasks
       </button>
-      <button id="claimed-button" type="button" class="btn btn-success mb-5" role="button">
+      <button id="claimed-button" type="button" class="btn btn-outline mb-5" role="button">
         Claimed Tasks
       </button>
       <div id="display-tasks">

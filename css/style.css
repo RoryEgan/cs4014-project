@@ -20,6 +20,24 @@
   font-size: 1.125rem;
 }
 
+.btn-outline {
+  color: #0a1236;
+  border-color: #0a1236;
+  background-color: transparent;
+}
+.btn-outline a {
+  color: #0a1236;
+}
+
+.btn-outline:hover {
+  color: #fff;
+  border-color: #0a1236;
+  background-color: #0a1236;
+}
+.btn-outline:hover a {
+  color: #fff;
+}
+
 .navbar {
   width: 100%;
   text-transform: uppercase;

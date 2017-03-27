@@ -3,26 +3,37 @@ $(document).ready(function() {
 
 	$('#btn_more_profile').addClass('more-mine');
 
+
 	$( "#my-button" ).click(function() {
 		$.post('includes/php/scripts/display-my-tasks.php', function(data){
-			if(! $("#remove_row").length){
-				$('#wrap-more-button').append(copy.html());
-			}
 			$('#display-tasks').empty();
 			$('#display-tasks').append(data);
+			if((! $("#remove_row").length) && (! $('#stop-loading-my').length)){
+				$('#wrap-more-button').append(copy.html());
+			}
 			$('#btn_more_profile').removeClass('more-claimed').addClass('more-mine');
 		});
+		setTimeout(function(){
+			if($("#stop-loading-my").length){
+		    $("#remove_row").remove();
+		  }
+		}, 20);
 	});
 
 	$( "#claimed-button" ).click(function() {
 		$.post('includes/php/scripts/display-claimed-tasks.php', function(data){
-			if(! $("#remove_row").length){
-				$('#wrap-more-button').append(copy.html());
-			}
 			$('#display-tasks').empty();
 			$('#display-tasks').append(data);
+			if((! $("#remove_row").length) && (! $('#stop-loading-claimed').length)){
+				$('#wrap-more-button').append(copy.html());
+			}
 			$('#btn_more_profile').removeClass('more-mine').addClass('more-claimed');
 		});
+		setTimeout(function(){
+			if($("#stop-loading-claimed").length){
+		    $("#remove_row").remove();
+		  }
+		}, 20);
 	});
 	// Back to Top Navigation
 	// ---------------------------------------------------------------------------

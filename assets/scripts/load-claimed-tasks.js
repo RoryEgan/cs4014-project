@@ -4,6 +4,7 @@ $(document).ready(function() {
   if($("#stop-loading-claimed").length){
     $("#remove_row").remove();
     count = 1;
+    alert("removed form claimed");
   }
 
   $(document).on('click', '.more-claimed', function(){

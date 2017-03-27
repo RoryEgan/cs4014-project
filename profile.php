@@ -26,6 +26,16 @@ if(!isset($_GET['userID'])){
          }
 
        ?>
+       <?php
+         if($userID === $profileID){
+           ?> <br><br> <?php
+           $modalTitle = 'Remove Profile';
+           $target = 'remove-profile';
+           $includeURL = 'includes/partial/remove-profile-modal.php';
+           include('includes/php/scripts/dynamic-modal.php');
+          }
+
+        ?>
     </div>
     <div class="col-md-9">
       <button id="my-button" type="button" class="btn btn-outline mb-5" role="button">

@@ -21,8 +21,11 @@ function printMyTasks($count){
   for($i = 0; $i < sizeof($allTasks); $i++){
     $taskPrinter -> printDefaultTask($allTasks[$i]);
   }
-  if($size < 5){
-    echo '<p id="stop-loading-my" class="offset-md-5">No More Tasks To Show</p>';
+  if($count == 0 && $size == 0){
+    echo '<p id="stop-loading-my" class="offset-md-5">You have not created any tasks.</p>';
+  }
+  else if($size < 5){
+    echo '<p id="stop-loading-my" class="offset-md-5">No More Tasks To Show.</p>';
   }
 }
 ?>

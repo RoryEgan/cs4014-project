@@ -20,8 +20,11 @@ function printClaimedTasks($count){
   for($i = 0; $i < sizeof($allTasks); $i++){
     $taskPrinter -> printDefaultTask($allTasks[$i]);
   }
-  if($size < 5){
-    echo '<p id="stop-loading-claimed" class="offset-md-5">No More Tasks To Show</p>';
+  if($count == 0 && $size == 0){
+    echo '<p id="stop-loading-claimed" class="offset-md-5">You have not claimed any tasks.</p>';
+  }
+  else if($size < 5){
+    echo '<p id="stop-loading-claimed" class="offset-md-5">No More Tasks To Show.</p>';
   }
 }
 ?>

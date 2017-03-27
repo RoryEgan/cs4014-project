@@ -1,28 +1,49 @@
 $(document).ready(function() {
 	var copy = $("#wrap-more-button").clone();
 
+	//by default we want to load more 'mytasks'
+	//this line adds a css class to the more button that will signal jquery
+	//in 'load-my-tasks.js' that we want to load more mytasks (rather than claimed tasks)
 	$('#btn_more_profile').addClass('more-mine');
+
 
 	$( "#my-button" ).click(function() {
 		$.post('includes/php/scripts/display-my-tasks.php', function(data){
-			if(! $("#remove_row").length){
-				$('#wrap-more-button').append(copy.html());
-			}
+			//write the returned list of tasks to the page
 			$('#display-tasks').empty();
 			$('#display-tasks').append(data);
+			//If the 'more' button does not exist and we have not output the 'stop-loading' flag
+			// element to the page we want to add the more button back to the page.
+			if((! $("#remove_row").length) && (! $('#stop-loading-my').length)){
+				$('#wrap-more-button').append(copy.html());
+			}
+			//set the
 			$('#btn_more_profile').removeClass('more-claimed').addClass('more-mine');
 		});
+		//we must wait for the above code to append the 'data' (returned from the php script)
+		// to the DOM before checking if there are more items to load. If not we remove the
+		// more button.  
+		setTimeout(function(){
+			if($("#stop-loading-my").length){
+		    $("#remove_row").remove();
+		  }
+		}, 20);
 	});
 
 	$( "#claimed-button" ).click(function() {
 		$.post('includes/php/scripts/display-claimed-tasks.php', function(data){
-			if(! $("#remove_row").length){
-				$('#wrap-more-button').append(copy.html());
-			}
 			$('#display-tasks').empty();
 			$('#display-tasks').append(data);
+			if((! $("#remove_row").length) && (! $('#stop-loading-claimed').length)){
+				$('#wrap-more-button').append(copy.html());
+			}
 			$('#btn_more_profile').removeClass('more-mine').addClass('more-claimed');
 		});
+		setTimeout(function(){
+			if($("#stop-loading-claimed").length){
+		    $("#remove_row").remove();
+		  }
+		}, 20);
 	});
 	// Back to Top Navigation
 	// ---------------------------------------------------------------------------

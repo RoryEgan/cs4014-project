@@ -3,78 +3,42 @@
 <?php include_once('includes/php/scripts/new-task.php');?>
 <div class="page-content my-5">
   <div class="container">
-    <div class="offset-md-5">
-      <h2>Browse Tasks</h2>
+    <div class="my-5">
+      <p>Welcome to the peer review centre website, an interactive web
+        platform to facilitate the proofreading of student theses,
+        dissertations, assignments and research papers alike among students
+        and staff. The main idea behind the website is to allow students
+        to publish their academic documents and get them proofread/reviewed
+        by peers. Members will create profiles and based on their actions
+        will gain a reputation score.
+      </p>
     </div>
-
-
-    <div class="card task-card mb-3">
-      <div class="card-block">
-        <h2>Filter Content:</h2>
-        <div class="card-text">
-          <div class="row">
-            <form class="form-inline form" method="post" action="index.php">
-              <div class="form-group">
-                  <select class="form-control my-2" name="signUpSubject">
-                    <option selected hidden>Subject / Discipline</option>
-                    <?php
-                    include('includes/php/utils/DropdownOptionGenerator.class.php');
-                    $gen = new DropdownOptionGenerator();
-                    $query = "SELECT * FROM Subject;";
-                    $gen -> generateOptions($query, 'SubjectName');
-                    ?>
-                  </select>
-
-                  <select class="form-control my-2" name="signUpSubject">
-                    <option selected hidden>Task Type</option>
-                    <?php
-                    $gen = new DropdownOptionGenerator();
-                    $query = "SELECT * FROM TaskType;";
-                    $gen -> generateOptions($query, 'TaskTypeVal');
-                    ?>
-                  </select>
-
-                  <select class="form-control my-2" name="signUpSubject">
-                    <option selected hidden>Document Type</option>
-                    <?php
-                    $gen = new DropdownOptionGenerator();
-                    $query = "SELECT * FROM DocumentType;";
-                    $gen -> generateOptions($query, 'DocumentTypeVal');
-                    ?>
-                  </select>
-
-                  <select class="form-control my-2" name="signUpSubject">
-                    <option selected hidden>Tag</option>
-                    <?php
-                    $gen = new DropdownOptionGenerator();
-                    $query = "SELECT * FROM Tag;";
-                    $gen -> generateOptions($query, 'Value');
-                    ?>
-                  </select>
-
-                  <input type="submit" class="btn btn-default" value="Apply" name="signUpButton" role="button"/>
-              </div>
-            </form>
-
-          </div>
-        </div>
+    <div class="row">
+      <div class="col-md-3">
+        <h2>Current Tasks</h2>
       </div>
-    </div>
-
-    <section>
-      <?php
+      <div class="col-md-3 offset-md-6">
+        <?php
+        $target = "filter-modal";
+        $modalTitle = 'Filter Tasks';
+        $includeURL = 'includes/partial/filter-modal.php';
+        include('includes/php/scripts/dynamic-modal.php');
+        ?>
+        <?php
         $target = "task-modal";
         $modalTitle = 'New Task';
         $includeURL = 'includes/partial/new-task-modal.php';
         include('includes/php/scripts/dynamic-modal.php');
-      ?>
-    </section>
-    <div id="display-tasks">
-    <?php include_once('includes/php/scripts/display-tasks-main.php'); ?>
-  </div>
+        ?>
+      </div>
+    </div>
+
+    <div id="display-tasks" class="my-5">
+      <?php include_once('includes/php/scripts/display-tasks-main.php'); ?>
+    </div>
     <div id="remove_row">
-        <td><button type="button" name="btn_more"  id="btn_more" class="btn-success btn form-control" role="button">more</button></td>
-   </div>
+      <td><button type="button" name="btn_more"  id="btn_more" class="btn-success btn form-control" role="button">more</button></td>
+    </div>
   </div>
 </div>
 

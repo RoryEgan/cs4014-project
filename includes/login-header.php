@@ -1,12 +1,12 @@
 <header class="banner hidden-sm-down">
   <div class="container">
     <div class="row">
-      <div class="col-md-3 text-left">
+      <div class="col-md-4 text-left">
         <a href="/CS4014_project/login.php">
-          <h1 class="header-heading">Our Website</h1>
+          <h2 class="header-heading">Peer Review Centre</h2>
         </a>
       </div>
-      <div class="login-form col-md-7 offset-md-2">
+      <div class="login-form col-md-6 offset-md-2">
         <form class="form-inline" action="login.php" novalidate="novalidate" method="post" onsubmit="">
           <div class="form-group">
             <div id="emailSignInGroup" class="form-group">

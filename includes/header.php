@@ -17,11 +17,8 @@
 <div id="sticky-nav-wrap">
   <header class="navbar navbar-toggleable-md navbar-default navbar-inverse navbar-static-top">
     <div class="container nav-container">
-      <button class="pull-left navbar-toggler navbar-toggler-left" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
       <div class="col-md-6">
-        <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+        <div class="collapse navbar-collapse">
           <div class="nav-menu">
             <ul class="navbar-nav mr-auto mt-2 mt-md-0">
               <li class="active nav-item"><a href="index.php">Home</a></li>
@@ -60,6 +57,9 @@
             <a class="dropdown-item" href="profile.php?userID=<?php echo $userID;?>">View Profile</a>
             <hr>
             <a class="dropdown-item" href="login.php">Logout</a>
+            <a class="dropdown-item" href="index.php">Home</a>
+            <a class="dropdown-item" href="profile.php?userID=<?php echo $userID;?>">Profile</a>
+            <a class="dropdown-item" href="faq.php">FAQS</a>
           </div>
         </div>
       </div>

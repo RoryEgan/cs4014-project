@@ -54,3 +54,12 @@ header.banner {
   right: 0;
   left: inherit;
 }
+
+@media (max-width: 576px) {
+  .dropdown-menu {
+    position: absolute;
+    top: 100%;
+    //right: 0;
+    left: 0;
+  }
+}

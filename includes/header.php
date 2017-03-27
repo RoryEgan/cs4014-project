@@ -16,8 +16,8 @@
 </header>
 <div id="sticky-nav-wrap">
   <header class="navbar navbar-toggleable-md navbar-default navbar-inverse navbar-static-top">
-    <div class="container">
-      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+    <div class="container nav-container">
+      <button class="pull-left navbar-toggler navbar-toggler-left" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="col-md-6">
@@ -39,7 +39,7 @@
           </div>
         </div>
       </div>
-      <div class="col-md-5">
+      <div class="col-md-5 hidden-sm-down">
         <form class="form-inline my-2 my-lg-0" action="search-results.php" method="post">
           <input name="search-query" class="form-control mr-sm-2" type="text" placeholder="Search">
           <button name='submit-search' class="btn btn-outline-success my-2 my-sm-0" type="submit">
@@ -55,8 +55,10 @@
             <i class="fa fa-bars"></i>
           </button>
           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <a class="dropdown-item" href="#">You are logged in as: <?php echo "$firstname $lastname";?>
+            <a class="dropdown-item" href="#">Current user: <br><?php echo "$firstname $lastname";?></a>
+            <hr>
             <a class="dropdown-item" href="profile.php?userID=<?php echo $userID;?>">View Profile</a>
+            <hr>
             <a class="dropdown-item" href="login.php">Logout</a>
           </div>
         </div>

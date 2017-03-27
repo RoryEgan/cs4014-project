@@ -88,6 +88,13 @@ header.banner {
   left: inherit;
 }
 
+@media (max-width: 576px) {
+  .dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+  }
+}
 footer {
   background-color: #0a1236;
   color: #fff;
@@ -132,4 +139,10 @@ footer {
 
 .task-card {
   border-color: #000;
+}
+
+@media (max-width: 576px) {
+  .nav-container {
+    margin-left: 0;
+  }
 }

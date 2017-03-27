@@ -1,17 +1,18 @@
 $(document).ready(function() {
   var count = 1;
-  if($("#stop-loading").length){
+  if($("#stop-loading-my").length){
     $("#remove_row").remove();
+    count = 1;
   }
 
-  $('.more-mine').on('click', function(){
-
+  $(document).on("click", ".more-mine", function(){
     $.post('includes/php/scripts/display-my-tasks.php',{'count': count} ,function(data){
       $("#display-tasks").append(data);
-      if($("#stop-loading").length){
-        $("#remove_row").remove();
-      }
       count++;
+      if($("#stop-loading-my").length){
+        $("#remove_row").remove();
+        count = 1;
+      }
     });
 
   });

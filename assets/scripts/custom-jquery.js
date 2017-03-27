@@ -1,19 +1,27 @@
 $(document).ready(function() {
+	var copy = $("#wrap-more-button").clone();
+
+	$('#btn_more_profile').addClass('more-mine');
 
 	$( "#my-button" ).click(function() {
 		$.post('includes/php/scripts/display-my-tasks.php', function(data){
-
+			if(! $("#remove_row").length){
+				$('#wrap-more-button').append(copy.html());
+			}
 			$('#display-tasks').empty();
 			$('#display-tasks').append(data);
-			$('#btn_more').removeClass('more-claimed').addClass('more-mine');
+			$('#btn_more_profile').removeClass('more-claimed').addClass('more-mine');
 		});
 	});
 
 	$( "#claimed-button" ).click(function() {
 		$.post('includes/php/scripts/display-claimed-tasks.php', function(data){
+			if(! $("#remove_row").length){
+				$('#wrap-more-button').append(copy.html());
+			}
 			$('#display-tasks').empty();
 			$('#display-tasks').append(data);
-			$('#btn_more').removeClass('more-mine').addClass('more-claimed');
+			$('#btn_more_profile').removeClass('more-mine').addClass('more-claimed');
 		});
 	});
 	// Back to Top Navigation

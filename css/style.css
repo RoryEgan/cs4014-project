@@ -153,6 +153,10 @@ footer {
   border-color: #000;
 }
 
+.editable-text {
+  background-color: #D3D3D3;
+}
+
 @media (max-width: 576px) {
   .nav-container {
     margin-left: 0;

@@ -143,7 +143,6 @@ class QueryHelper{
     $numPages = $task -> getNumPages();
     $numWords = $task -> getNumWords();
 
-
     $currentUser = User::getUser($_SESSION['userID']);
     $userID = $currentUser -> getUserID();
     echo "user ID is: $userID";
@@ -206,6 +205,8 @@ class QueryHelper{
     $fileNameNew = uniqid('', true) . $ext;
 
     $fileDestination = 'files/documents/' . $fileNameNew;
+    var_dump($fileDestination);
+    $excerpt = file_get_contents($fileDestination, NULL, NULL, 10, 7);
 
     echo "<pre>\noriginal location: $location\t new location: $fileDestination\n</pre>";
 

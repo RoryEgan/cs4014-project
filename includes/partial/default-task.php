@@ -13,7 +13,6 @@
             <li>Number of Pages: <?php echo "$numPages"; ?></li>
             <li>Number of words: <?php echo "$numWords"; ?></li>
             <li>Field: <?php echo "$subject"; ?></li>
-
           </ul>
         </div>
         <div class="col-md-2.7 offset-md-3">

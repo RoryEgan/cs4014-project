@@ -17,6 +17,8 @@ if(isset($_GET['taskID'])){
   $docType = $task -> getDocType();
   $numWords = $task -> getNumWords();
   $numPages = $task -> getNumPages();
+  $docFormat = $task -> getDocFormat();
+  $document = $task -> getDocument();
   $completeDate = $task -> getCompleteDeadline();
   $claimDate = $task -> getClaimDeadline();
   $status = $task -> getStatus();
@@ -27,7 +29,6 @@ if(isset($_GET['taskID'])){
   $tag2 = $tags[1];
   $tag3 = $tags[2];
   $tag4 = $tags[3];
-  $documentURL = $task->getDocument();
 
   $converter = new DateFormatConverter();
   $claimDate = $converter -> convert($claimDate);

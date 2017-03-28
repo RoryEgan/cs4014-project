@@ -1,6 +1,7 @@
 <?php include('includes/head.php');?>
 <?php include('includes/header.php');?>
 <?php include_once('includes/php/utils/User.class.php');
+      include_once('includes/php/scripts/edit-profile.php');
 
 if(!isset($_GET['userID'])){
   header("location: index.php");
@@ -12,10 +13,40 @@ if(!isset($_GET['userID'])){
   <div class="row my-5">
     <div class="col-md-3">
       <h2>My Profile</h2>
-      <br>Name: <?php echo "$profileFirstname $profileLastname";?>
-      <br><br>Field of expertise:<br> <?php echo "$profileSubject";?>
-      <br><br>Email Addrress: <?php echo "$profileEmailAddress";?>
+      <?php if($profileID == $userID){
+        include_once('includes/php/utils/DropdownOptionGenerator.class.php');
+        $gen = new DropdownOptionGenerator();
+        $query = "SELECT * FROM Subject;";
+      ?>
+      <br>Name: <span class="editable-text" id="editable-name" contenteditable="true"><?php echo "$profileFirstname $profileLastname";?>
+                <a href="" id="username"><i class="fa fa-pencil"></i></a></span>
+      <br><br>Field of expertise:<br><span id="dropdown-subject" contenteditable="true" class="editable-text"><?php echo "$profileSubject";?>
+                <a href="" id="username"><i class="fa fa-pencil"></i></a></span>
+
+      <br><br>Email Address: <span contenteditable="true" id="editable-email" class="editable-text"><?php echo "$profileEmailAddress";?>
+                <a href="" id="username"><i class="fa fa-pencil"></i></a></span>
+      <br><br>Student ID: <span contenteditable="true" id="editable-studentid" class="editable-text"><?php echo "$profileStudentID";?>
+                <a href="" id="username"><i class="fa fa-pencil"></i></a></span>
       <br><br>Reputation: <?php echo "$profileReputation";?>
+      <form id="edit-profile-form" action="profile.php?userID=<?php echo $profileID?>" method="post">
+        <input  class="form-control my-2" maxlength="74" type="hidden" id="edit-name-input" name="editable-name" value="" placeholder="Task Title"/>
+        <input  class="form-control my-2" maxlength="74" type="hidden" id="edit-subject-input" name="editable-subject" value="" placeholder="Task Title"/>
+        <input  class="form-control my-2" maxlength="74" type="hidden" id="edit-studentid-input" name="editable-studentid" value="" placeholder="Task Title"/>
+        <input  class="form-control my-2" maxlength="74" type="hidden" id="edit-email-input" name="editable-email" value="" placeholder="Task Title"/>
+      </form>
+
+      <?php }
+            else{
+              ?>
+              <br>Name: <?php echo "$profileFirstname $profileLastname";?>
+              <br><br>Field of expertise:<br> <?php echo "$profileSubject";?>
+              <br><br>Email Addrress: <?php echo "$profileEmailAddress";?>
+              <br><br>Reputation: <?php echo "$profileReputation";?>
+              <br><br>StudentID: <?php echo "$profileStudentID";?>
+
+            <?php }
+      ?>
+
       <?php
         if($reputation >= 40){
           ?> <br><br> <?php
@@ -55,4 +86,67 @@ if(!isset($_GET['userID'])){
     </div>
   </div>
 </div>
-<?php include('includes/footer.php') ?>
+<?php include('includes/footer.php'); ?>
+<script>
+  $(document).ready(function(){
+    var email = $("#editable-email").text();
+    $("#edit-email-input").val(email);
+
+    var subjectName = $("#dropdown-subject").text();
+    $("#edit-subject-input").val(subjectName);
+
+
+    var id = $("#editable-studentid").text();
+    $("#edit-studentid-input").val(id);
+
+
+    var name = $("#editable-name").text();
+    $("#edit-name-input").val(name);
+
+  })
+
+  $("#dropdown-subject").on('click', function(){
+
+    $("#dropdown-subject").html("<select></select>");
+    $("#dropdown-subject").children("select").html('<option selected hidden>Select Subject</option><?php $gen->generateOptions($query, 'SubjectName');?>' );
+
+
+  });
+
+  $("#dropdown-subject").on('change', function(){
+    var subjectName = $('#dropdown-subject').find(":selected").text();
+
+    $("#dropdown-subject").html(subjectName + '<a href="" id="username"><i class="fa fa-pencil"></i></a>');
+    $("#edit-subject-input").val(subjectName);
+    if(!$('#submit-edit').length){
+      $("#edit-profile-form").append('<br><br><input type="submit" id="submit-edit" class="btn btn-default" value="Submit Changes" name="submit-edit" role="button"/>');
+    }
+
+  });
+
+  $("#editable-name").on('input', function(){
+    var name = $("#editable-name").text();
+    $("#edit-name-input").val(name);
+    if(!$('#submit-edit').length){
+      $("#edit-profile-form").append('<br><br><input type="submit" id="submit-edit" class="btn btn-default" value="Submit Changes" name="submit-edit" role="button"/>');
+    }
+  });
+
+  $("#editable-email").on('input', function(){
+    var email = $("#editable-email").text();
+    $("#edit-email-input").val(email);
+    if(!$('#submit-edit').length){
+      $("#edit-profile-form").append('<br><br><input type="submit" id="submit-edit" class="btn btn-default" value="Submit Changes" name="submit-edit" role="button"/>');
+    }
+  });
+
+  $("#editable-studentid").on('input', function(){
+    var id = $("#editable-studentid").text();
+    $("#edit-studentid-input").val(id);
+
+    if(!$('#submit-edit').length){
+      $("#edit-profile-form").append('<br><br><input type="submit" id="submit-edit" class="btn btn-default" value="Submit Changes" name="submit-edit" role="button"/>');
+    }
+  });
+
+</script>

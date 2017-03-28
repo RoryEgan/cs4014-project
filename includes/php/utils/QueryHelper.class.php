@@ -482,7 +482,6 @@ class QueryHelper{
    $statusRes = $this->database -> select($statusIdSQL);
 
    $statusID = $statusRes[0]['StatusID'];
-
    $currentUser = User::getUser($_SESSION['userID']);
    $currentUserID = $currentUser -> getUserID();
 
@@ -634,7 +633,6 @@ class QueryHelper{
  }
 
  function deleteUser($userID){
-
    $database = $this->database;
 
    $sql = "DELETE FROM `User` WHERE UserID = $userID;";
@@ -668,6 +666,31 @@ class QueryHelper{
    $res = $this->database->select($sql);
 
    return $res;
+ }
+
+ function updateName($firstName, $lastName, $userID){
+
+   $sql = "UPDATE `User` SET `ForeName`='$firstName', `Lastname`='$lastName' WHERE UserID = $userID;";
+
+   $this->database->query($sql);
+ }
+
+ function updateEmail($email, $userID){
+   $sql = "UPDATE `User` SET `EmailAddress`='$email' WHERE UserID = $userID;";
+
+   $this->database->query($sql);
+ }
+
+ function updateStudentID($studentID, $userID){
+   $sql = "UPDATE `User` SET `StudentID`='$studentID' WHERE UserID = $userID;";
+
+   $this->database->query($sql);
+ }
+
+ function updateSubject($subject, $userID){
+   $subjectID = $this->getSubjectIdFromSubjectName($subject);
+   $sql = "UPDATE `User` SET `Subject_SubjectID`=$subjectID WHERE UserID = $userID;";
+   $this->database->query($sql);
  }
 
 

@@ -10,6 +10,19 @@ class Validator{
     && ($signUpPassword == $passwordConfirm));
   }
 
+  function isValidProfileEdit($name, $email, $studentID, $subject){
+    $names = explode(' ', $name);
+    if(sizeof($names) == 2){
+      $fname = $names[0];
+      $lname = $names[1];
+      
+      return ($this->isValidName($fname) && $this -> isValidName($lname) && $this->isValidEmail($email) && $this->isValidSubject($subject) && $this->isValidStudentID($studentID));
+    }
+    else{
+      return false;
+    }
+  }
+
   function isValidTask($taskTitle, $taskDescription, $numPages, $numWords, $docFormat, $docType, $subject, $tags, $document,
   $claimDeadline, $completeDeadline){
 

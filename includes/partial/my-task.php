@@ -13,9 +13,17 @@
             <li>Number of Pages: <?php echo "$numPages"; ?></li>
             <li>Number of Words: <?php echo "$numWords"; ?></li>
             <li>Field: <?php echo "$subject"; ?></li>
+            <li>Status: <?php echo "$status"; ?></li>
+            <?php
+            session_start();
+            $userID = $_SESSION['userID'];
+            if(isset($claimantEmail) && $userID == $ownerID){
+              echo "<li>Claimant Email: " . $claimantEmail . "</li>";
+            }
+            ?>
           </ul>
         </div>
-        <div class="col-md-2.7 offset-md-3">
+        <div class="col-md-3 offset-md-3">
           <?php echo "Claim Deadline: $claimDate"; ?>
           <br><br><?php echo "Completion Deadline: $completeDate"; ?>
         </div>

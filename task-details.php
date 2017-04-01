@@ -45,7 +45,7 @@
         $modalTitle = 'Remove Task';
         $target = 'remove-modal';
         $includeURL = 'includes/partial/remove-task-modal.php';
-        include('includes/php/scripts/dynamic-modal.php');
+        include('includes/php/scripts/dynamic-modal-danger.php');
       } ?>
 
       <?php if($status == "Pending Claim" && $userID != $owner){

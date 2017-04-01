@@ -2,6 +2,8 @@
 <?php include('includes/header.php');?>
 <?php include_once('includes/php/utils/User.class.php');
       include_once('includes/php/scripts/edit-profile.php');
+      include_once('includes/php/utils/DropdownOptionGenerator.class.php');
+      $gen = new DropdownOptionGenerator();
 
 if(!isset($_GET['userID'])){
   header("location: index.php");
@@ -14,8 +16,6 @@ if(!isset($_GET['userID'])){
     <div class="col-md-3">
       <h2>My Profile</h2>
       <?php if($profileID == $userID){
-        include_once('includes/php/utils/DropdownOptionGenerator.class.php');
-        $gen = new DropdownOptionGenerator();
         $query = "SELECT * FROM Subject;";
       ?>
       <br>Name: <span class="editable-text" id="editable-name" contenteditable="true"><?php echo "$profileFirstname $profileLastname";?>
@@ -40,20 +40,18 @@ if(!isset($_GET['userID'])){
               ?>
               <br>Name: <?php echo "$profileFirstname $profileLastname";?>
               <br><br>Field of expertise:<br> <?php echo "$profileSubject";?>
-              <br><br>Email Addrress: <?php echo "$profileEmailAddress";?>
               <br><br>Reputation: <?php echo "$profileReputation";?>
-              <br><br>StudentID: <?php echo "$profileStudentID";?>
 
             <?php }
       ?>
 
       <?php
-        if($reputation >= 40){
+        if($reputation >= 40 && $profileID != $userID){
           ?> <br><br> <?php
           $modalTitle = 'Ban User';
           $target = 'ban-modal';
           $includeURL = 'includes/partial/ban-user-modal.php';
-          include('includes/php/scripts/dynamic-modal.php');
+          include('includes/php/scripts/dynamic-modal-danger.php');
          }
 
        ?>
@@ -63,7 +61,7 @@ if(!isset($_GET['userID'])){
            $modalTitle = 'Remove Profile';
            $target = 'remove-profile';
            $includeURL = 'includes/partial/remove-profile-modal.php';
-           include('includes/php/scripts/dynamic-modal.php');
+           include('includes/php/scripts/dynamic-modal-danger.php');
           }
 
         ?>

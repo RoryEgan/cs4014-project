@@ -13,7 +13,7 @@ include_once(SITE_PATH . '/includes/php/utils/Flag.class.php');
     }
 
     function getAllTasks(){
-      $taskTable = $this->qh -> getAllTasks($start, $number);
+      $taskTable = $this->qh -> getAllTasks();
       $allTasksArray = array();
 
       for($i = 0; $i < sizeof($taskTable); $i++){
@@ -27,6 +27,22 @@ include_once(SITE_PATH . '/includes/php/utils/Flag.class.php');
 
       $taskTable = $this->qh -> getTasksMain($start, $number);
       $allTasksArray = array();
+
+      for($i = 0; $i < sizeof($taskTable); $i++){
+        $allTasksArray[$i] = $this -> initializeTask($taskTable, $i);
+      }
+
+      return $allTasksArray;
+    }
+
+    function getPersonalizedTasks($start, $number){
+      $favouriteTags = $this->getFavouriteTags();
+      $favouriteSubjects = $this->getFavouriteSubjects();
+
+      $taskTable = $this->qh->getPersonalizedTasks($start, $number, $favouriteTags, $favouriteSubjects);
+
+      $allTasksArray = array();
+
 
       for($i = 0; $i < sizeof($taskTable); $i++){
         $allTasksArray[$i] = $this -> initializeTask($taskTable, $i);
@@ -155,6 +171,48 @@ include_once(SITE_PATH . '/includes/php/utils/Flag.class.php');
 
       return $task;
     }
+
+    //This function returns the current users favourite 3 tags
+    //i.e the 3 tags contained by the most tasks that the user has clicked on
+    function getFavouriteTags(){
+      //first we get all the info on tags that belong to tasks that the current user has clicked on
+      $clickInfo = $this->qh->getClickTagInfo($_SESSION['userID']);
+      return $this->getFavourites($clickInfo, 'TagID');
+    }
+
+    function getFavouriteSubjects(){
+      $clickInfo = $this->qh->getClickTaskInfo($_SESSION['userID']);
+      return $this->getFavourites($clickInfo, 'Subject_SubjectID');
+    }
+
+    private function getFavourites($clickInfo, $index){
+      $frequencies = array();
+      $favourites = array();
+
+      //next we form a list of frequencies of each tag (this is the frequencies array)
+      //using the tagID as the index for the array
+      for($i = 0; $i < sizeof($clickInfo) ; $i++){
+        $ID = $clickInfo[$i][$index];
+        if(isset($frequencies[$ID])){
+          $frequencies[$ID]++;
+        }
+        else{
+          $frequencies[$ID] = 1;
+        }
+      }
+      //now we sort this array to make it easier to retrieve the most commmon tags
+      arsort($frequencies);
+
+      //we get the keys of the array as these are the IDs that we are interested in.
+      $keys = array_keys($frequencies);
+
+      //Now we extract the first 3 tagIDs from the keys array
+      for($i = 0; $i < 3; $i++){
+        $favourites[$i] = $keys[$i];
+      }
+      return $favourites;
+    }
+
   }
 
  ?>

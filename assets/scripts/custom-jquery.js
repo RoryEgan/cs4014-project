@@ -22,7 +22,7 @@ $(document).ready(function() {
 		});
 		//we must wait for the above code to append the 'data' (returned from the php script)
 		// to the DOM before checking if there are more items to load. If not we remove the
-		// more button.  
+		// more button.
 		setTimeout(function(){
 			if($("#stop-loading-my").length){
 		    $("#remove_row").remove();

@@ -18,10 +18,10 @@ function printClaimedTasks($count){
   $allTasks = $retriever -> getClaimedTasks($start, $tasksPerPage);
   $size = sizeof($allTasks);
   for($i = 0; $i < sizeof($allTasks); $i++){
-    $taskPrinter -> printDefaultTask($allTasks[$i]);
+    $taskPrinter -> printClaimedTask($allTasks[$i]);
   }
   if($count == 0 && $size == 0){
-    echo '<p id="stop-loading-claimed" class="offset-md-5">You have not claimed any tasks.</p>';
+    echo '<p id="stop-loading-claimed" class="offset-md-5">No claimed tasks.</p>';
   }
   else if($size < 5){
     echo '<p id="stop-loading-claimed" class="offset-md-5">No More Tasks To Show.</p>';

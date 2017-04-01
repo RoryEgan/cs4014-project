@@ -694,6 +694,20 @@ class QueryHelper{
    $this->database->query($sql);
  }
 
+ function insertBannedUser($profileID, $reason){
+   $currentUser = User::getUser($profileID);
+   $email = $currentUser -> getEmailAddress();
+   $insertSQL = "INSERT INTO `BannedUser`(`BanID`, `EmailAddress`, `Reason`) VALUES (NULL,'$email','$reason');";
+
+   $res = $this->database -> query($insertSQL);
+   if($res){
+     return true;
+   }
+   else{
+     return false;
+   }
+ }
+
 
 }
 

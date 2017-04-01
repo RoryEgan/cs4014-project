@@ -140,6 +140,7 @@ include_once(SITE_PATH . '/includes/php/utils/Flag.class.php');
       $subject = $tasks[$index]['SubjectName'];
       $taskStatus = $tasks[$index]['StatusVal'];
       $claimantID = $tasks[$index]['ClaimantID'];
+      $rated = $tasks[$index]['Rated'];
       $tags = $this -> getRelevantTags($taskID);
 
 
@@ -150,6 +151,7 @@ include_once(SITE_PATH . '/includes/php/utils/Flag.class.php');
       $task -> setOwnerID($ownerID);
       $task -> setTaskID($taskID);
       $task -> setClaimantID($claimantID);
+      $task -> setRated($rated);
 
       return $task;
     }

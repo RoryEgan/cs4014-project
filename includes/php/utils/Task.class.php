@@ -19,6 +19,7 @@ class Task{
   private $claimDeadline;
   private $completeDeadline;
   private $claimantID;
+  private $rated;
   function __construct($taskTitle, $taskType, $taskDescription, $numPages, $numWords, $docFormat, $docType, $subject, $document,
                               $tag1, $tag2, $tag3, $tag4, $claimDeadline, $completeDeadline){
 
@@ -41,6 +42,7 @@ class Task{
     $this->claimDeadline = $claimDeadline;
     $this->completeDeadline = $completeDeadline;
     $this->claimantID = -1;
+    $this->rated = false;
   }
 
   function setTaskID($taskID) { $this->taskID = $taskID; }
@@ -81,6 +83,8 @@ class Task{
   function getCompleteDeadline() { return $this->completeDeadline; }
   function setClaimantID($claimantID) { $this->claimantID = $claimantID; }
   function getClaimantID() { return $this->claimantID; }
+  function setRated($rated) { $this->rated = $rated; }
+  function getRated() { return $this->rated; }
 
   function getTag($tagNum){
     switch ($tagNum) {

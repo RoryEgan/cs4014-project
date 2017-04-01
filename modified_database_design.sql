@@ -76,7 +76,8 @@ CREATE TABLE IF NOT EXISTS `CS4014_project_database`.`Task` (
   `Description` VARCHAR(300) NOT NULL,
   `NumPages` INT NOT NULL,
   `NumWords` INT NOT NULL,
-  `ClaimantID` VARCHAR(45) NULL,
+  `ClaimantID` INT NULL,
+  `Rated` TINYINT(1) NOT NULL,
   PRIMARY KEY (`TaskID`),
   INDEX `fk_Tasks_Subjects1_idx` (`Subject_SubjectID` ASC),
   INDEX `fk_Tasks_Users1_idx` (`User_UserID` ASC),
@@ -283,7 +284,7 @@ CREATE VIEW JoinedTask AS
 
 SELECT TaskID,User_UserID,Title,TaskTypeVal,Description,NumPages,
 NumWords,FormatVal,DocumentTypeVal,SubjectName,
-DocumentURL,Claim,Completion,StatusVal,ClaimantID
+DocumentURL,Claim,Completion,StatusVal,ClaimantID,Rated
 
 FROM Task
 LEFT JOIN Deadline

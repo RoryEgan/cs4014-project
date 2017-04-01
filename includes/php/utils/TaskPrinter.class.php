@@ -89,7 +89,8 @@ class TaskPrinter{
       $subject = $task->getSubject();
       $ownerID = $task -> getOwnerID();
       $status = $task -> getStatus();
-      if($status == "Claimed" || $status == "Completed"){
+      $rated = $task -> getRated();
+      if($status == "Claimed" || $status == "Complete"){
         $claimantID = $task -> getClaimantID();
         $claimantInfo = $qh -> getUserInfo($claimantID);
         if($claimantInfo){

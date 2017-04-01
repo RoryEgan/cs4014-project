@@ -708,6 +708,14 @@ class QueryHelper{
    }
  }
 
+ function setTaskRated($taskID){
+   $sql = "UPDATE `Task`
+          SET `Rated`=1
+          WHERE TaskID = $taskID";
+
+   $res = $this->database->query($sql);
+ }
+
 
 }
 

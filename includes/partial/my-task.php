@@ -1,3 +1,6 @@
+<?php include_once('/var/www/html/CS4014_project/config.php');
+?>
+
 <div class="card task-card mb-3">
   <div class="card-block">
     <a href="task-details.php?taskID=<?php echo "$taskID"?>">
@@ -26,6 +29,15 @@
         <div class="col-md-3 offset-md-3">
           <?php echo "Claim Deadline: $claimDate"; ?>
           <br><br><?php echo "Completion Deadline: $completeDate"; ?>
+          <br><br>
+          <?php
+            if($status == "Complete" && !boolval($rated) && $userID == $ownerID){
+              $modalTitle = 'Rate Performance';
+              $target = 'rate-modal';
+              $includeURL = SITE_PATH . '/includes/partial/rate-performance-modal.php';
+              include(SITE_PATH . '/includes/php/scripts/dynamic-modal.php');
+            }
+          ?>
         </div>
       </div>
       <p>Description: <?php echo "$description"; ?></p>

@@ -3,6 +3,7 @@
 <?php include_once('includes/php/utils/User.class.php');
       include_once('includes/php/scripts/edit-profile.php');
       include_once('includes/php/utils/DropdownOptionGenerator.class.php');
+      include_once('includes/php/scripts/rate-performance.php');
       $gen = new DropdownOptionGenerator();
 
 if(!isset($_GET['userID'])){

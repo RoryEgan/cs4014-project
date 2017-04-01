@@ -371,6 +371,67 @@ class QueryHelper{
    return $result;
  }
 
+ function getPersonalizedTasks($start, $number, $favouriteTags, $favouriteSubjects){
+   session_start();
+
+   $currentUser = User::getUser($_SESSION['userID']);
+   $currentUserID = $currentUser -> getUserID();
+   $firstT = $favouriteTags[0];
+   $secondT = $favouriteTags[1];
+   $thirdT = $favouriteTags[2];
+   $firstS = $favouriteSubjects[0];
+   $secondS = $favouriteSubjects[1];
+   $thirdS = $favouriteSubjects[2];
+
+   $joinedTaskSQL =  "SELECT * FROM(
+                        SELECT * FROM JoinedTask
+                        WHERE StatusVal = 'Pending Claim'
+                        AND User_UserID <> $currentUserID
+                        AND TaskID
+                          IN (SELECT Task_TaskID
+                              FROM TaskTag
+                              WHERE Tag_TagID = $firstT
+                                UNION
+                              SELECT TaskID
+                              FROM Task
+                              WHERE Subject_SubjectID = $firstS)
+                        UNION
+
+                        SELECT * FROM JoinedTask
+                        WHERE StatusVal = 'Pending Claim'
+                        AND User_UserID <> $currentUserID
+                        AND TaskID
+                         IN ( SELECT Task_TaskID
+                             FROM TaskTag
+                             WHERE Tag_TagID = $secondT
+                               UNION
+                             SELECT TaskID
+                             FROM Task
+                             WHERE Subject_SubjectID = $secondS)
+
+
+                        UNION
+
+                        SELECT * FROM JoinedTask
+                        WHERE StatusVal = 'Pending Claim'
+                        AND User_UserID <> $currentUserID
+                        AND TaskID
+                          IN ( SELECT Task_TaskID
+                             FROM TaskTag
+                             WHERE Tag_TagID = $thirdT
+                               UNION
+                             SELECT TaskID
+                             FROM Task
+                             WHERE Subject_SubjectID = $thirdS)) as personalized_table
+                      ORDER BY Claim
+                      LIMIT $start, $number;
+                      ";
+
+   $result = $this->database -> select($joinedTaskSQL);
+
+   return $result;
+ }
+
  function getMyTasks($start, $number){
    $database = $this->database;
 
@@ -650,7 +711,7 @@ class QueryHelper{
    $this->database->query($sql);
  }
 
- function getClickInfo($userID){
+ function getClickTagInfo($userID){
    $sql = "SELECT * FROM JoinedTag
            JOIN Click
            ON JoinedTag.Task_TaskID = Click.Task_TaskID
@@ -659,6 +720,26 @@ class QueryHelper{
   $res = $this->database->select($sql);
 
   return $res;
+ }
+
+ function getClickTaskInfo($userID){
+   $sql = "SELECT * FROM Task
+           JOIN Click
+           ON Task.TaskID = Click.Task_TaskID
+           WHERE Click.User_UserID = $userID;";
+
+  $res = $this->database->select($sql);
+
+  return $res;
+ }
+
+ function getNumberOfClicksForUser($userID){
+   $sql = "SELECT COUNT(*) as count FROM Click WHERE User_UserID = $userID;";
+
+   $res = $this->database->select($sql);
+   $count = $res[0]['count'];
+
+   return $count;
  }
 
  function getAllTasks(){
@@ -706,6 +787,14 @@ class QueryHelper{
    else{
      return false;
    }
+ }
+
+ function setTaskRated($taskID){
+   $sql = "UPDATE `Task`
+          SET `Rated`=1
+          WHERE TaskID = $taskID";
+
+   $res = $this->database->query($sql);
  }
 
 

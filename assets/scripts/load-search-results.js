@@ -9,6 +9,7 @@ $(document).ready(function() {
     }
     else{
       $("#dynamic-results").empty();
+      $(".search-dropdown").css("display","none");
     }
   });
 });

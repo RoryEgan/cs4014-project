@@ -101,8 +101,7 @@ header.banner {
 }
 
 .search-dropdown {
-  border: none;
-  width: 50%;
+  width: auto;
   top: 100%;
   position: absolute;
   right: inherit;

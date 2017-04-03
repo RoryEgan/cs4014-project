@@ -108,9 +108,9 @@ include_once(SITE_PATH . '/includes/php/utils/Flag.class.php');
       return $allTasksArray;
     }
 
-    function getSearchResults($searchQuery){
+    function getSearchResults($searchQuery, $start, $tasksPerPage){
 
-      $taskTable = $this->qh -> search($searchQuery);
+      $taskTable = $this->qh -> search($searchQuery, $start, $tasksPerPage);
       $allTasksArray = array();
 
       for($i = 0; $i < sizeof($taskTable); $i++){

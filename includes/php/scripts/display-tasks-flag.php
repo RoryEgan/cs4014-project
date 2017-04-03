@@ -1,8 +1,8 @@
 <?php
 include_once('/var/www/html/CS4014_project/config.php');
 
-include(SITE_PATH.'/includes/php/utils/TaskRetriever.class.php');
-include(SITE_PATH.'/includes/php/utils/TaskPrinter.class.php');
+include_once(SITE_PATH.'/includes/php/utils/TaskRetriever.class.php');
+include_once(SITE_PATH.'/includes/php/utils/TaskPrinter.class.php');
 
 if(isset($_POST['count'])){
   $count = $_POST['count'];

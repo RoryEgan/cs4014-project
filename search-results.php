@@ -1,30 +1,18 @@
 <?php include('includes/head.php');?>
 <?php include('includes/header.php');?>
-<?php include_once('includes/php/utils/TaskRetriever.class.php');?>
-<?php include_once('includes/php/utils/TaskPrinter.class.php');?>
 
-
-<div class="container">
-  <?php
-    if(isset($_POST['submit-search'])){
-      $searchQuery = htmlentities($_POST['search-query']);
-
-      $retriever = new TaskRetriever();
-      $allTasks = $retriever -> getSearchResults($searchQuery);
-
-      if(sizeof($allTasks) == 0){
-        echo "No results for search term: \"$searchQuery\"";
-      }
-      else{
-        $printer = new TaskPrinter();
-        for($i = 0; $i < sizeof($allTasks); $i++){
-          $printer -> printDefaultTask($allTasks[$i]);
-        }
-      }
-
-    }
-
-   ?>
+<div class="page-content my-5">
+  <div class="container">
+    <div class="offset-md-5">
+      <h2>Browse Search Results</h2>
+    </div>
+    <div id="display-tasks-search">
+    <?php include_once('includes/php/scripts/display-search-tasks.php'); ?>
+  </div>
+   <div id="remove_row_search">
+        <td><button type="button" name="btn_more_search"  id="btn_more_search" class="btn-success btn form-control" role="button">more</button></td>
+   </div>
+  </div>
 </div>
 
 <?php include('includes/footer.php');?>

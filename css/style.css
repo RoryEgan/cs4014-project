@@ -100,6 +100,14 @@ header.banner {
   left: inherit;
 }
 
+.search-dropdown {
+  display: block;
+  width: 50%;
+  top: 100%;
+  position: absolute;
+  right: inherit;
+}
+
 @media (max-width: 576px) {
   .dropdown-menu {
     position: absolute;

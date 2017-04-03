@@ -15,6 +15,7 @@ $(document).ready(function() {
     $('#footer').removeClass('invisible');
 }
 
+
 	var copy = $("#wrap-more-button").clone();
 
 	//by default we want to load more 'mytasks'

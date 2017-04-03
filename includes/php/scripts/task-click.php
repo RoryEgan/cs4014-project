@@ -15,6 +15,7 @@ if(isset($_GET['taskID'])){
   $title = $task -> getTaskTitle();
   $description = $task -> getTaskDescription();
   $docType = $task -> getDocType();
+  $taskType = $task->getTaskType();
   $numWords = $task -> getNumWords();
   $numPages = $task -> getNumPages();
   $docFormat = $task -> getDocFormat();

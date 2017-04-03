@@ -371,6 +371,33 @@ class QueryHelper{
    return $result;
  }
 
+ function getTasksMainFiltered($start, $number, $filters){
+   $filteredSubject = $filters[0];
+   $filteredTaskType = $filters[1];
+   $filteredDocType = $filters[2];
+   $filteredTag = $filters[3];
+
+   $currentUser = User::getUser($_SESSION['userID']);
+   $currentUserID = $currentUser -> getUserID();
+
+   $sql = " SELECT * FROM JoinedTask
+            WHERE StatusVal = 'Pending Claim'
+            AND User_UserID <> '$currentUserID'
+            AND TaskID IN ( SELECT DISTINCT Task_TaskID
+                            FROM JoinedTag
+                            Where JoinedTag.Value = '$filteredTag' OR '$filteredTag' = '1')
+            AND (DocumentTypeVal = '$filteredDocType' OR '$filteredDocType' = '1')
+            AND (TaskTypeVal = '$filteredTaskType' OR '$filteredTaskType' = '1')
+            AND (SubjectName = '$filteredSubject' OR '$filteredSubject' = '1')
+            ORDER BY Claim
+            LIMIT $start, $number;";
+
+  $res = $this->database->select($sql);
+
+
+  return $res;
+ }
+
  function getPersonalizedTasks($start, $number, $favouriteTags, $favouriteSubjects){
    session_start();
 
@@ -715,7 +742,9 @@ class QueryHelper{
    $sql = "SELECT * FROM JoinedTag
            JOIN Click
            ON JoinedTag.Task_TaskID = Click.Task_TaskID
-           WHERE Click.User_UserID = $userID;";
+           WHERE Click.User_UserID = $userID
+           ORDER BY clickID
+           LIMIT 0, 1000;";
 
   $res = $this->database->select($sql);
 
@@ -726,7 +755,9 @@ class QueryHelper{
    $sql = "SELECT * FROM Task
            JOIN Click
            ON Task.TaskID = Click.Task_TaskID
-           WHERE Click.User_UserID = $userID;";
+           WHERE Click.User_UserID = $userID
+           ORDER BY clickID
+           LIMIT 0,1000;";
 
   $res = $this->database->select($sql);
 

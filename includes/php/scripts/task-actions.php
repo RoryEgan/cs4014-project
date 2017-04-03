@@ -20,12 +20,13 @@
   }
 
   if(isset($_POST['complete-task'])){
-    //email user funtionality 
+    //email user funtionality
     $qh -> setComplete($taskID);
   }
 
   if(isset($_POST['flag-task'])){
     $complaint = htmlentities($_POST['complaint']);
+    $qh -> changeReputation($userID, 2);
     $qh -> insertFlag($taskID, $complaint);
   }
 

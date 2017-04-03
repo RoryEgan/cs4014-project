@@ -8,9 +8,6 @@
 
 ?>
 <div class="container">
-  <div class="offset-md-5">
-    <h1 class="my-3">Task Details</h1>
-  </div>
   <div class="row my-4">
     <div class="col-md-6">
       <h2><b>Task Title: </b> <?php echo $title?></h2>

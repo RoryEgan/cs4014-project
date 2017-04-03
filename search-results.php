@@ -1,7 +1,7 @@
 <?php include('includes/head.php');?>
 <?php include('includes/header.php');?>
-<?php include('includes/php/utils/TaskRetriever.class.php');?>
-<?php include('includes/php/utils/TaskPrinter.class.php');?>
+<?php include_once('includes/php/utils/TaskRetriever.class.php');?>
+<?php include_once('includes/php/utils/TaskPrinter.class.php');?>
 
 
 <div class="container">

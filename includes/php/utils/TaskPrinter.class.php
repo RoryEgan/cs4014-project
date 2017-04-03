@@ -104,6 +104,12 @@ class TaskPrinter{
 
       include(SITE_PATH . '/includes/partial/my-task.php');
     }
+
+    function printDynamicSearchTask($task){
+      $title = $task -> getTaskTitle();
+
+      include(SITE_PATH . '/includes/partial/dynamic-search-task.php');
+    }
 }
 
 

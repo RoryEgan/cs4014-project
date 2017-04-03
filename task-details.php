@@ -17,15 +17,23 @@
       <br><p><b>Description: </b> <?php echo $description?></p>
       <br><p><b>Owner: </b><a href="profile.php?userID=<?php echo $owner?>">Profile</a></p>
       <br><p><b>Paper Type:</b> <?php echo "$docType"; ?></p>
+      <br><p><b>Task Type:</b> <?php echo "$taskType"; ?></p>
       <br><p><b>Number of Pages: </b> <?php echo "$numPages"; ?></p>
       <br><p><b>Number of words: </b> <?php echo "$numWords"; ?></p>
       <br><p><?php echo "<b>Claim Deadline:</b> $claimDate"; ?> </p>
       <br><p><?php echo "<b>Completion Deadline:</b> $completeDate"; ?></p>
       <br><p><b>Status:</b> <?php echo "$status"; ?></p>
       <br><p><b>Tags:</b> <?php echo "$tag1 $tag2 $tag3 $tag4"; ?></p>
-      <br><p><b>Document: </b><a href=" <?php echo "$documentURL"; ?> " download>Get Document</a></p>
       <?php
       if($claimant == $userID && $status == 'Claimed'){
+        ?>
+
+        <br><p><b>Document: </b><a href=" <?php echo "$document"; ?> " download>
+          **Get Document**
+        </a></p>
+
+        <?php
+
         $modalTitle = 'Complete Task';
         $target = 'complete-modal';
         $includeURL = 'includes/partial/complete-task-modal.php';

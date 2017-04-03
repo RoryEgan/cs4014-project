@@ -275,7 +275,7 @@ CREATE VIEW JoinedTag AS
 
 SELECT *
 	FROM TaskTag
-	JOIN Tag
+	LEFT JOIN Tag
 	ON TaskTag.Tag_TagID = Tag.TagID;
 
 DROP VIEW IF EXISTS JoinedTask;

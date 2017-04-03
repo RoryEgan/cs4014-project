@@ -2,7 +2,7 @@
 
 <form class="form" method="post" action="index.php">
   <div class="form-group">
-    <select class="form-control my-2" name="signUpSubject">
+    <select class="form-control my-2" name="filter-subject-name">
       <option selected hidden>Subject / Discipline</option>
       <?php
       include('includes/php/utils/DropdownOptionGenerator.class.php');
@@ -12,7 +12,7 @@
       ?>
     </select>
 
-    <select class="form-control my-2" name="signUpSubject">
+    <select class="form-control my-2" name="filter-task-type">
       <option selected hidden>Task Type</option>
       <?php
       $gen = new DropdownOptionGenerator();
@@ -21,7 +21,7 @@
       ?>
     </select>
 
-    <select class="form-control my-2" name="signUpSubject">
+    <select class="form-control my-2" name="filter-doc-type">
       <option selected hidden>Document Type</option>
       <?php
       $gen = new DropdownOptionGenerator();
@@ -30,7 +30,7 @@
       ?>
     </select>
 
-    <select class="form-control my-2" name="signUpSubject">
+    <select class="form-control my-2" name="filter-tag-value">
       <option selected hidden>Tag</option>
       <?php
       $gen = new DropdownOptionGenerator();
@@ -39,6 +39,6 @@
       ?>
     </select>
 
-    <input type="submit" class="btn btn-default" value="Apply" name="signUpButton" role="button"/>
+    <input type="submit" class="btn btn-default" value="Apply" name="filter-tasks-button" role="button"/>
   </div>
 </form>

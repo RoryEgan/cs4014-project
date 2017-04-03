@@ -25,8 +25,15 @@ function dynamicPrintTasks($count){
 
   $qh = new QueryHelper();
   $numClicks = $qh -> getNumberOfClicksForUser($_SESSION['userID']);
-
-  if($numClicks >= 50 ){
+  if(isset($_POST['filter-tasks-button'])){
+    $filters = array();
+    $filters[0] = htmlentities($_POST['filter-subject-name']);
+    $filters[1] = htmlentities($_POST['filter-task-type']);
+    $filters[2] = htmlentities($_POST['filter-doc-type']);
+    $filters[3] = htmlentities($_POST['filter-tag-value']);
+    $allTasks = $retriever -> getTasksMainFiltered($start, $tasksPerPage, $filters);
+  }
+  else if($numClicks >= 50 ){
     $allTasks = $retriever -> getPersonalizedTasks($start, $tasksPerPage);
   }
   else{

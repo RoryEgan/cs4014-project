@@ -35,6 +35,24 @@ include_once(SITE_PATH . '/includes/php/utils/Flag.class.php');
       return $allTasksArray;
     }
 
+    function getTasksMainFiltered($start, $number, $filters){
+      $unselectedValues = array("Subject / Discipline", "Task Type", "Document Type", "Tag");
+      for($i = 0; $i < sizeof($filters); $i++){
+        if($filters[$i] == $unselectedValues[$i]){
+          $filters[$i] = 1;
+        }
+      }
+
+      $taskTable = $this->qh -> getTasksMainFiltered($start, $number, $filters);
+      $allTasksArray = array();
+
+      for($i = 0; $i < sizeof($taskTable); $i++){
+        $allTasksArray[$i] = $this -> initializeTask($taskTable, $i);
+      }
+
+      return $allTasksArray;
+    }
+
     function getPersonalizedTasks($start, $number){
       $favouriteTags = $this->getFavouriteTags();
       $favouriteSubjects = $this->getFavouriteSubjects();

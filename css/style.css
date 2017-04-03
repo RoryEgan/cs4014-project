@@ -110,6 +110,7 @@ header.banner {
 footer {
   background-color: #0a1236;
   color: #fff;
+  padding-bottom: 5rem;
 }
 
 .panel-heading i {

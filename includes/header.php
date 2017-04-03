@@ -60,6 +60,13 @@
             <a class="dropdown-item" href="index.php">Home</a>
             <a class="dropdown-item" href="profile.php?userID=<?php echo $userID;?>">Profile</a>
             <a class="dropdown-item" href="faq.php">FAQS</a>
+            <?php
+            if($reputation >= 40) {
+              ?>
+              <a class="dropdown-item" href="flagged-tasks.php">Flagged Tasks</a>
+              <?php
+            }
+            ?>
           </div>
         </div>
       </div>

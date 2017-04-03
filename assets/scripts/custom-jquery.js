@@ -1,4 +1,20 @@
 $(document).ready(function() {
+
+	setFooterStyle();
+  window.onresize = setFooterStyle;
+
+	function setFooterStyle() {
+    var docHeight = $(window).height();
+    var footerHeight = $('#footer').outerHeight();
+    var footerTop = $('#footer').position().top + footerHeight;
+    if (footerTop < docHeight) {
+        $('#footer').css('margin-top', (docHeight - footerTop)/10 + 'rem');
+    } else {
+        $('#footer').css('margin-top', '');
+    }
+    $('#footer').removeClass('invisible');
+}
+
 	var copy = $("#wrap-more-button").clone();
 
 	//by default we want to load more 'mytasks'

@@ -3,9 +3,7 @@
 
 <div class="page-content my-5">
   <div class="container">
-    <div class="offset-md-5">
       <h2>Browse Flagged Tasks</h2>
-    </div>
     <div id="display-tasks">
     <?php include_once('includes/php/scripts/display-tasks-flag.php'); ?>
   </div>

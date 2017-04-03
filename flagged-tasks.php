@@ -1,5 +1,9 @@
-<?php include('includes/head.php');?>
-<?php include('includes/header.php');?>
+<?php include_once('includes/head.php');?>
+<?php include_once('includes/header.php');
+if($reputation < 40){
+  header('location: index.php');
+}
+?>
 
 <div class="page-content my-5">
   <div class="container">

@@ -100,6 +100,14 @@ header.banner {
   left: inherit;
 }
 
+.search-dropdown {
+  border: none;
+  width: 50%;
+  top: 100%;
+  position: absolute;
+  right: inherit;
+}
+
 @media (max-width: 576px) {
   .dropdown-menu {
     position: absolute;
@@ -110,6 +118,7 @@ header.banner {
 footer {
   background-color: #0a1236;
   color: #fff;
+  padding-bottom: 5rem;
 }
 
 .panel-heading i {

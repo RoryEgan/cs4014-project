@@ -40,7 +40,9 @@
       <div class="col-md-5 hidden-sm-down">
         <form class="form-inline my-2 my-lg-0" action="search-results.php" method="get">
           <input id="dynamic-search" name="search-query" class="form-control mr-sm-2" type="text" placeholder="Search">
-
+          <ul class="dropdown-menu search-dropdown">
+            <div id="dynamic-results"></div>
+          </ul>
           <button name='submit-search' class="btn btn-outline-success my-2 my-sm-0" type="submit">
             <i class="fa fa-search">
               <a href="search-results.php"></a>
@@ -62,12 +64,16 @@
             <a class="dropdown-item" href="index.php">Home</a>
             <a class="dropdown-item" href="profile.php?userID=<?php echo $userID;?>">Profile</a>
             <a class="dropdown-item" href="faq.php">FAQS</a>
+            <?php
+            if($reputation >= 40) {
+              ?>
+              <a class="dropdown-item" href="flagged-tasks.php">Flagged Tasks</a>
+              <?php
+            }
+            ?>
           </div>
         </div>
       </div>
     </div>
   </header>
-</div>
-<div id="dynamic-results">
-
 </div>

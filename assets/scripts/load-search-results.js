@@ -4,6 +4,7 @@ $(document).ready(function() {
     if(search.length > 0){
       $.post("includes/php/scripts/dynamic-search.php", {'dynamic-search': search}, function(data){
         $("#dynamic-results").html(data);
+        $(".search-dropdown").css("display","block");
       });
     }
     else{

@@ -3,7 +3,7 @@
 include_once('includes/php/utils/TaskRetriever.class.php');
 include_once('includes/php/utils/User.class.php');
 include_once('includes/php/utils/DateFormatConverter.class.php');
-include_once('includes/php/util/QueryHelper.class.php');
+include_once('includes/php/utils/QueryHelper.class.php');
 
 if(isset($_GET['taskID'])){
   $taskID = $_GET['taskID'];

@@ -10,13 +10,14 @@ if(!isset($_GET['userID'])){
   header("location: index.php");
 }
       include_once('includes/php/scripts/profile-info.php');
-      include_once('includes/php/scripts/ban-user.php');
+      include_once('includes/php/scripts/remove-user.php');
 ?>
 <div class="container">
   <div class="row my-5">
     <div class="col-md-3">
       <h2>My Profile</h2>
-      <?php if($profileID == $userID){
+      <?php
+        if($profileID == $userID){
         $query = "SELECT * FROM Subject;";
       ?>
       <br>Name: <span class="editable-text" id="editable-name" contenteditable="true"><?php echo "$profileFirstname $profileLastname";?>
@@ -57,7 +58,7 @@ if(!isset($_GET['userID'])){
 
        ?>
        <?php
-         if($userID === $profileID){
+         if($userID == $profileID){
            ?> <br><br> <?php
            $modalTitle = 'Remove Profile';
            $target = 'remove-profile';

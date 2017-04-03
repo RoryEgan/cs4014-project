@@ -20,7 +20,7 @@
   }
 
   if(isset($_POST['complete-task'])){
-    //email user funtionality 
+    //email user funtionality
     $qh -> setComplete($taskID);
   }
 

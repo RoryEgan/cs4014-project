@@ -1,6 +1,6 @@
 <div>
   <br>
-  <p>Please rate your satisfaction with the claimant's performance:<?php echo "id: " . $userID ?> </p>
+  <p>Please rate your satisfaction with the claimant's performance: </p>
   <form action="profile.php?userID=<?php echo "$userID"?>" method="post">
     <div class="form-group">
       <input type="hidden" name="claimantID" value="<?php echo $claimantID?>">

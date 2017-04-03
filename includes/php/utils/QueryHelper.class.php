@@ -830,6 +830,18 @@ class QueryHelper{
    $res = $this->database->query($sql);
  }
 
+ function deleteTaskFlag($taskID){
+   $sql = "DELETE FROM `Flag` WHERE Task_TaskID = $taskID;";
+
+   $result = $this->database->query($sql);
+   if($result){
+     return true;
+   }
+   else{
+     return false;
+   }
+ }
+
 
 }
 

@@ -7,7 +7,7 @@ if(isset($_POST['dynamic-search'])){
   $searchQuery = htmlentities($_POST['dynamic-search']);
 
   $retriever = new TaskRetriever();
-  $allTasks = $retriever -> getSearchResults($searchQuery);
+  $allTasks = $retriever -> getSearchResults($searchQuery, 0, 5);
 
   if(sizeof($allTasks) == 0){
     echo "No results for search term: \"$searchQuery\"";

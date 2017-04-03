@@ -712,10 +712,12 @@ class QueryHelper{
    $database -> query($sql);
  }
 
- function search($query){
+ function search($query, $start, $number){
    $database = $this->database;
 
-   $sql = "SELECT * FROM JoinedTask WHERE Title LIKE '%$query%';";
+   $sql = " SELECT * FROM JoinedTask
+            WHERE Title LIKE '%$query%'
+            LIMIT $start, $number;";
 
    $res = $database -> select($sql);
    return $res;

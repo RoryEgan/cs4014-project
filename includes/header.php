@@ -38,7 +38,7 @@
         </div>
       </div>
       <div class="col-md-5 hidden-sm-down">
-        <form class="form-inline my-2 my-lg-0" action="search-results.php" method="post">
+        <form class="form-inline my-2 my-lg-0" action="search-results.php" method="get">
           <input id="dynamic-search" name="search-query" class="form-control mr-sm-2" type="text" placeholder="Search">
           <ul class="dropdown-menu search-dropdown">
             <div id="dynamic-results"></div>

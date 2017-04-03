@@ -1,5 +1,5 @@
-<?php include('includes/head.php');?>
-<?php include('includes/header.php');?>
+<?php include_once('includes/head.php');?>
+<?php include_once('includes/header.php');?>
 <?php include_once('includes/php/utils/User.class.php');
       include_once('includes/php/scripts/edit-profile.php');
       include_once('includes/php/utils/DropdownOptionGenerator.class.php');
@@ -52,7 +52,7 @@ if(!isset($_GET['userID'])){
           $modalTitle = 'Ban User';
           $target = 'ban-modal';
           $includeURL = 'includes/partial/ban-user-modal.php';
-          include('includes/php/scripts/dynamic-modal-danger.php');
+          include_once('includes/php/scripts/dynamic-modal-danger.php');
          }
 
        ?>
@@ -62,7 +62,7 @@ if(!isset($_GET['userID'])){
            $modalTitle = 'Remove Profile';
            $target = 'remove-profile';
            $includeURL = 'includes/partial/remove-profile-modal.php';
-           include('includes/php/scripts/dynamic-modal-danger.php');
+           include_once('includes/php/scripts/dynamic-modal-danger.php');
           }
 
         ?>
@@ -85,7 +85,7 @@ if(!isset($_GET['userID'])){
     </div>
   </div>
 </div>
-<?php include('includes/footer.php'); ?>
+<?php include_once('includes/footer.php'); ?>
 <script>
   $(document).ready(function(){
     var email = $("#editable-email").text();

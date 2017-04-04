@@ -6,13 +6,15 @@ include_once(SITE_PATH.'/includes/php/utils/TaskRetriever.class.php');
 include_once(SITE_PATH.'/includes/php/utils/TaskPrinter.class.php');
 include_once(SITE_PATH.'/includes/php/utils/QueryHelper.class.php');
 
-if(isset($_POST['count'])){
+/*if(isset($_POST['count'])){
   $count = $_POST['count'];
   dynamicPrintTasks($count);
 }
 else{
   dynamicPrintTasks(0);
-}
+}*/
+
+dynamicPrintTasks(0);
 
 
 function dynamicPrintTasks($count){
@@ -24,32 +26,16 @@ function dynamicPrintTasks($count){
 
   session_start();
 
-  $qh = new QueryHelper();
-  $numClicks = $qh -> getNumberOfClicksForUser($_SESSION['userID']);
-  if(isset($_POST['filter-tasks-button'])){
-    $filters = array();
-    $filters[0] = htmlentities($_POST['filter-subject-name']);
-    $filters[1] = htmlentities($_POST['filter-task-type']);
-    $filters[2] = htmlentities($_POST['filter-doc-type']);
-    $filters[3] = htmlentities($_POST['filter-tag-value']);
-    $allTasks = $retriever -> getTasksMainFiltered($start, $tasksPerPage, $filters);
-  }
-  else if($numClicks >= 50 ){
-    $allTasks = $retriever -> getPersonalizedTasks($start, $tasksPerPage);
-  }
-  else{
-    $allTasks = $retriever -> getTasksMain($start, $tasksPerPage);
+  $allTasks = $retriever->getAlsoViewed($_GET['taskID']);
+  $size = sizeof($allTasks);
+
+  for($i = 0; $i < sizeof($allTasks); $i++){
+    $taskPrinter -> printDefaultTask($allTasks[$i]);
   }
 
-    $size = sizeof($allTasks);
-
-    for($i = 0; $i < sizeof($allTasks); $i++){
-      $taskPrinter -> printDefaultTask($allTasks[$i]);
-    }
-
-    if($size < $tasksPerPage){
-      echo '<p id="stop-loading-main" class="offset-md-5"></p>';
-    }
+  if($size < $tasksPerPage){
+    echo '<p id="stop-loading-main" class="offset-md-5"></p>';
+  }
 }
 
  ?>

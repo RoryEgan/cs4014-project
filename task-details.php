@@ -76,6 +76,12 @@
       </object>
     </div>
   </div>
+  <div>
+    <h3>Users who viewed this task also viewed: </h3>
+    <div class="col-md-6">
+      <?php include_once('includes/php/scripts/display-also-viewed.php') ?>
+    </div>
+  </div>
 </div>
 
 <?php include('includes/footer.php') ?>

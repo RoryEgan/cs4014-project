@@ -463,7 +463,6 @@ class QueryHelper{
    $database = $this->database;
 
    session_start();
-
    $currentUser = User::getUser($_SESSION['profileID']);
    $currentUserID = $currentUser -> getUserID();
 
@@ -567,10 +566,8 @@ class QueryHelper{
  }
 
  function setCancelled($taskID){
-   $statusIdSQL = "SELECT * FROM Status WHERE StatusVal = 'Cancelled';";
-   $statusRes = $this->database -> select($statusIdSQL);
+   $statusID = $this->getStatusIdFromStatusVal('Cancelled');
 
-   $statusID = $statusRes[0]['StatusID'];
    $currentUser = User::getUser($_SESSION['userID']);
    $currentUserID = $currentUser -> getUserID();
 
@@ -580,10 +577,7 @@ class QueryHelper{
  }
 
  function setUnclaimed($taskID){
-   $statusIdSQL = "SELECT * FROM Status WHERE StatusVal = 'Unclaimed';";
-   $statusRes = $this->database -> select($statusIdSQL);
-
-   $statusID = $statusRes[0]['StatusID'];
+   $statusID = $this->getStatusIdFromStatusVal('Unclaimed');
 
    $currentUser = User::getUser($_SESSION['userID']);
    $currentUserID = $currentUser -> getUserID();
@@ -596,10 +590,7 @@ class QueryHelper{
  function setClaimed($taskID){
    $database = $this->database;
 
-   $statusIdSQL = "SELECT * FROM Status WHERE StatusVal = 'Claimed';";
-   $statusRes = $database -> select($statusIdSQL);
-
-   $statusID = $statusRes[0]['StatusID'];
+   $statusID = $this->getStatusIdFromStatusVal('Claimed');
 
    $currentUser = User::getUser($_SESSION['userID']);
    $currentUserID = $currentUser -> getUserID();
@@ -682,10 +673,7 @@ class QueryHelper{
  function setComplete($taskID){
    $database = $this->database;
 
-   $statusIdSQL = "SELECT * FROM Status WHERE StatusVal = 'Complete';";
-   $statusRes = $database -> select($statusIdSQL);
-
-   $statusID = $statusRes[0]['StatusID'];
+   $statusID = $this->getStatusIdFromStatusVal('Complete');
 
    $updateTask = "UPDATE `Task` SET `Status_StatusID`=$statusID WHERE TaskID = $taskID;";
 
@@ -695,9 +683,7 @@ class QueryHelper{
  function setPendingClaim($taskID){
    $database = $this->database;
 
-   $statusIdSQL = "SELECT * FROM Status WHERE StatusVal = 'Pending Claim';";
-   $statusRes = $database -> select($statusIdSQL);
-   $statusID = $statusRes[0]['StatusID'];
+   $statusID = $this->getStatusIdFromStatusVal('Pending Claim');
 
    $updateTask = "UPDATE `Task` SET `Status_StatusID`=$statusID,`ClaimantID`= NULL WHERE TaskID = $taskID;";
 
@@ -840,6 +826,91 @@ class QueryHelper{
    else{
      return false;
    }
+ }
+
+ function handleClaimedTasksOnUserDelete($userID){
+   echo "USERID IN HANDLECLAIMED: $userID";
+   $newStatusID = $this->getStatusIdFromStatusVal('Pending Claim');
+   echo "statusID: $newStatusID";
+
+   $sql = " UPDATE `Task`
+            SET `Status_StatusID`=$newStatusID,`ClaimantID`=DEFAULT
+            WHERE `ClaimantID` = $userID;";
+
+   $result = $this->database->query($sql);
+
+   return $result;
+ }
+
+ function getStatusIdFromStatusVal($statusVal){
+   $sql = "SELECT * FROM Status WHERE StatusVal = '$statusVal';";
+
+   $statusRes = $this->database -> select($sql);
+
+   $statusID = $statusRes[0]['StatusID'];
+   return $statusID;
+ }
+
+ function getAlsoViewed($taskID, $userID){
+
+   $sql ="SELECT Task_TaskID
+          FROM Click
+          WHERE User_UserID IN ( SELECT DISTINCT User_UserID
+                                FROM Click
+                                WHERE Task_TaskID = $taskID)
+          AND Task_TaskID <> $taskID
+          AND User_UserID <> $userID;";
+
+  $alsoViewedTasks = $this->database->select($sql);
+  $size = sizeof($alsoViewedTasks);
+
+  if($size > 0){
+    $frequencies = array();
+
+    //get the most common results for Task_TaskID from the above query using the same method as
+    //is used in TaskRetriever getFavourites() function.
+    for($i = 0; $i < sizeof($alsoViewedTasks); $i++){
+      $taskID = $alsoViewedTasks[$i]['Task_TaskID'];
+      if(isset($frequencies[$taskID])){
+        $frequencies[$taskID]++;
+      }
+      else{
+        $frequencies[$taskID] = 1;
+      }
+    }
+
+    arsort($frequencies);
+    $keys = array_keys($frequencies);
+    $mostViewed = array();
+
+    for($i = 0; $i < 5 && $i<sizeof($keys) ; $i++){
+      $mostViewed[$i] = $keys[$i];
+    }
+
+    $taskIDs = join(',', array_map('intval', $mostViewed));
+
+    $sqlGetTasks = "SELECT * FROM JoinedTask
+                    WHERE TaskID IN  ($taskIDs);";
+
+    $res = $this->database->select($sqlGetTasks);
+
+    //nested loop but max 5x5 iterations so efficiency is not really a problem
+    for($i = 0; $i < sizeof($res); $i++){
+      if($mostViewed[$i] != $res[$i]['TaskID']){
+        $temp = $res[$i];
+        for($j = 0; $j < sizeof($res); $j++){
+          if($mostViewed[$i] == $res[$j]['TaskID']){
+            $res[$i] = $res[$j];
+            $res[$j] = $temp;
+          }
+        }
+      }
+    }
+    return $res;
+  }
+  else{
+    return false;
+  }
  }
 
 

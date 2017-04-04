@@ -466,8 +466,15 @@ class QueryHelper{
    $currentUser = User::getUser($_SESSION['profileID']);
    $currentUserID = $currentUser -> getUserID();
 
+   //display the tasks that have been completed but not rated first.
    $joinedTaskSQL =  "SELECT * FROM JoinedTask
+                      WHERE StatusVal = 'Complete'
+                      AND Rated = 0
+                      AND User_UserID = '$currentUserID'
+                      UNION
+                      SELECT * FROM JoinedTask
                       WHERE User_UserID = '$currentUserID'
+                      GROUP BY TaskID
                       LIMIT $start, $number;";
 
    $result = $database -> select($joinedTaskSQL);

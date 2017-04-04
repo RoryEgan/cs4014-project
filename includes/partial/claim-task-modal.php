@@ -7,13 +7,19 @@
   </div>
   <div class="card-block">
     <h2>Send Email:</h2>
-    <p>If you click send we will send an email to the owner of the task notifying them that you have claimed the task.<p>
+    <p>We highly recommend that you notify the owner that you will be claiming their task. This will aid future correspondence between you and the owner.<p>
     <form action="task-details.php?taskID=<?php echo "$taskID"?>" method="post">
       <div>
-        <label>
-          Add a message to the email:
-        </label>
-        <textarea name="email-text" class="form-control my-2 input-large" maxlength="300" type="text" value="" placeholder="email"></textarea>
+    <?php
+              $caseref = "123";
+              $name = "Bob";
+              $email_subject = "PEER REVIEW WEBSITE USER: $firstname $lastname CLAIMED YOUR TASK";
+              $email_message .= "Message Body: \n";
+              $email_message .= "\n";
+              $email_message .= "\n";
+
+              echo '<a href="mailto:'.$ownerEmail.'?subject='.urlencode($email_subject).'&body='.urlencode($email_message).'">Email The Task Owner!</a>'; ?>
+      <br>
       </div>
       <div class="form-group">
         <input name='claim-task' type="submit" class="btn-outline btn" value="Send" role="button"></input>

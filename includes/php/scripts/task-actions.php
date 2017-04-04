@@ -22,6 +22,7 @@
   if(isset($_POST['complete-task'])){
     //email user funtionality
     $qh -> setComplete($taskID);
+    header("location: task-details.php?taskID=$taskID");
   }
 
   if(isset($_POST['flag-task'])){

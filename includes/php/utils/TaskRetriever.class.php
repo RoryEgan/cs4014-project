@@ -120,8 +120,11 @@ include_once(SITE_PATH . '/includes/php/utils/Flag.class.php');
       return $allTasksArray;
     }
 
-    function getAlsoViewed($taskID){
-      $taskTable = $this->qh->getAlsoViewed($taskID);
+    function getAlsoViewed($taskID, $userID){
+      $taskTable = $this->qh->getAlsoViewed($taskID, $userID);
+      if(!$taskTable){
+        return false;
+      }
 
       $allTasksArray = array();
 

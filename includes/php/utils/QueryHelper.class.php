@@ -851,60 +851,66 @@ class QueryHelper{
    return $statusID;
  }
 
- function getAlsoViewed($taskID){
-
+ function getAlsoViewed($taskID, $userID){
 
    $sql ="SELECT Task_TaskID
           FROM Click
           WHERE User_UserID IN ( SELECT DISTINCT User_UserID
                                 FROM Click
                                 WHERE Task_TaskID = $taskID)
-          AND Task_TaskID <> $taskID;";
+          AND Task_TaskID <> $taskID
+          AND User_UserID <> $userID;";
+
   $alsoViewedTasks = $this->database->select($sql);
+  $size = sizeof($alsoViewedTasks);
 
-  $frequencies = array();
+  if($size > 0){
+    $frequencies = array();
 
-  //get the most common results for Task_TaskID from the above query using the same method as
-  //is used in TaskRetriever getFavourites() function.
-  for($i = 0; $i < sizeof($alsoViewedTasks); $i++){
-    $taskID = $alsoViewedTasks[$i]['Task_TaskID'];
-    if(isset($frequencies[$taskID])){
-      $frequencies[$taskID]++;
+    //get the most common results for Task_TaskID from the above query using the same method as
+    //is used in TaskRetriever getFavourites() function.
+    for($i = 0; $i < sizeof($alsoViewedTasks); $i++){
+      $taskID = $alsoViewedTasks[$i]['Task_TaskID'];
+      if(isset($frequencies[$taskID])){
+        $frequencies[$taskID]++;
+      }
+      else{
+        $frequencies[$taskID] = 1;
+      }
     }
-    else{
-      $frequencies[$taskID] = 1;
+
+    arsort($frequencies);
+    $keys = array_keys($frequencies);
+    $mostViewed = array();
+
+    for($i = 0; $i < 5 && $i<sizeof($keys) ; $i++){
+      $mostViewed[$i] = $keys[$i];
     }
-  }
 
-  arsort($frequencies);
-  $keys = array_keys($frequencies);
-  $mostViewed = array();
+    $taskIDs = join(',', array_map('intval', $mostViewed));
 
-  for($i = 0; $i < 5 && $i<sizeof($keys) ; $i++){
-    $mostViewed[$i] = $keys[$i];
-  }
+    $sqlGetTasks = "SELECT * FROM JoinedTask
+                    WHERE TaskID IN  ($taskIDs);";
 
-  $taskIDs = join(',', array_map('intval', $mostViewed));
+    $res = $this->database->select($sqlGetTasks);
 
-  $sqlGetTasks = "SELECT * FROM JoinedTask
-                  WHERE TaskID IN  ($taskIDs);";
-
-  $res = $this->database->select($sqlGetTasks);
-
-  //nested loop but max 5x5 iterations so efficiency is not really a problem
-  for($i = 0; $i < sizeof($res); $i++){
-    if($mostViewed[$i] != $res[$i]['TaskID']){
-      $temp = $res[$i];
-      for($j = 0; $j < sizeof($res); $j++){
-        if($mostViewed[$i] == $res[$j]['TaskID']){
-          $res[$i] = $res[$j];
-          $res[$j] = $temp;
+    //nested loop but max 5x5 iterations so efficiency is not really a problem
+    for($i = 0; $i < sizeof($res); $i++){
+      if($mostViewed[$i] != $res[$i]['TaskID']){
+        $temp = $res[$i];
+        for($j = 0; $j < sizeof($res); $j++){
+          if($mostViewed[$i] == $res[$j]['TaskID']){
+            $res[$i] = $res[$j];
+            $res[$j] = $temp;
+          }
         }
       }
     }
+    return $res;
   }
-
-  return $res;
+  else{
+    return false;
+  }
  }
 
 

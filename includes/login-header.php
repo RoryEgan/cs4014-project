@@ -8,7 +8,7 @@
       </div>
       <div class="login-form col-md-4 offset-md-2">
         <div class="collapse navbar-collapse" id="log-in">
-          <form class="form-inline" action="login.php" novalidate="novalidate" method="post" onsubmit="">
+          <form class="form-inline" action="login.php" novalidate="novalidate" method="post" onsubmit="window.location.reload()">
             <div class="form-group">
               <div id="emailSignInGroup" class="form-group">
                 <input id="signInEmail" name="signInEmail" class="form-control" type="email" placeholder="email" />

@@ -11,6 +11,7 @@ class User{
   private $studentID;
   private $reputation;
   private $isMod;
+  private $profilePicURL;
 
   function setUserID($userID) { $this->userID = $userID; }
   function getUserID() { return $this->userID; }
@@ -28,6 +29,8 @@ class User{
   function getReputation() { return $this->reputation; }
   function setIsMod($isMod) { $this->isMod = $isMod; }
   function getIsMod() { return $this->isMod; }
+  function setProfilePicURL($profilePicURL) { $this->profilePicURL = $profilePicURL; }
+  function getProfilePicURL() { return $this->profilePicURL; }
 
   //This function is a static method used to return the current user of the website.
   //Allows us to access info on the current user without having to query the database each time.
@@ -37,7 +40,7 @@ class User{
     $userInfo = array();
 
     $userInfo = $qh -> getUserInfo($userID);
-    
+
     if($userInfo){
 
       $user = new User();
@@ -49,6 +52,7 @@ class User{
       $user -> setStudentID($userInfo[4]);
       $user -> setReputation($userInfo[5]);
       $user -> setIsMod($userInfo[6]);
+      $user -> setProfilePicURL($userInfo[7]);
 
       return $user;
     }

@@ -17,10 +17,22 @@ if(!isset($_GET['userID'])){
     <div class="col-md-3">
       <h2>My Profile</h2>
       <?php
+        $testURL  = $profilePicURL;
+        clearstatcache();
+        if(file_exists($testURL)){
+          $picTopBeUsed = 'http://localhost/CS4014_project/' . $profilePicURL;
+        }
+        else{
+          echo "<br>else<br>";
+          $picTopBeUsed = 'http://localhost/CS4014_project/files/images/default-profile-image.png';
+        }
+      ?>
+      <img src="<?php echo $picTopBeUsed ?>" alt="face" height="200" width="200">
+      <?php
         if($profileID == $userID){
         $query = "SELECT * FROM Subject;";
       ?>
-      <br>Name: <span class="editable-text" id="editable-name" contenteditable="true"><?php echo "$profileFirstname $profileLastname";?>
+      <br><br>Name: <span class="editable-text" id="editable-name" contenteditable="true"><?php echo "$profileFirstname $profileLastname";?>
                 <a href="" id="username"><i class="fa fa-pencil"></i></a></span>
       <br><br>Field of expertise:<br><span id="dropdown-subject" contenteditable="true" class="editable-text"><?php echo "$profileSubject";?>
                 <a href="" id="username"><i class="fa fa-pencil"></i></a></span>
@@ -30,7 +42,9 @@ if(!isset($_GET['userID'])){
       <br><br>Student ID: <span contenteditable="true" id="editable-studentid" class="editable-text"><?php echo "$profileStudentID";?>
                 <a href="" id="username"><i class="fa fa-pencil"></i></a></span>
       <br><br>Reputation: <?php echo "$profileReputation";?>
-      <form id="edit-profile-form" action="profile.php?userID=<?php echo $profileID?>" method="post">
+      <br><br><label for="profile-pic">Change your profile picture:</label>
+      <form id="edit-profile-form" enctype="multipart/form-data" action="profile.php?userID=<?php echo $profileID?>" method="post">
+        <input id="profile-pic" name="profile-pic" type="file" class="my-2 btn-default btn-file"/>
         <input  class="form-control my-2" maxlength="74" type="hidden" id="edit-name-input" name="editable-name" value="" placeholder="Task Title"/>
         <input  class="form-control my-2" maxlength="74" type="hidden" id="edit-subject-input" name="editable-subject" value="" placeholder="Task Title"/>
         <input  class="form-control my-2" maxlength="74" type="hidden" id="edit-studentid-input" name="editable-studentid" value="" placeholder="Task Title"/>
@@ -111,6 +125,12 @@ if(!isset($_GET['userID'])){
     $("#dropdown-subject").children("select").html('<option selected hidden>Select Subject</option><?php $gen->generateOptions($query, 'SubjectName');?>' );
 
 
+  });
+
+  $("#profile-pic").on('change', function(){
+    if(!$('#submit-edit').length){
+      $("#edit-profile-form").append('<br><br><input type="submit" id="submit-edit" class="btn btn-default" value="Submit Changes" name="submit-edit" role="button"/>');
+    }
   });
 
   $("#dropdown-subject").on('change', function(){

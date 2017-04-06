@@ -8,4 +8,5 @@
   $lastname = $currentUser -> getLastname();
   $emailAddress = $currentUser -> getEmailAddress();
   $studentID = $currentUser -> getStudentID();
+  $picURL = $currentUser -> getProfilePicURL();
 ?>

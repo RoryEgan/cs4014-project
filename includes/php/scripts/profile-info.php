@@ -9,6 +9,7 @@
     $profileLastname = $lastname;
     $profileEmailAddress = $emailAddress;
     $profileStudentID = $studentID;
+    $profilePicURL = $picURL;
   }
   else{
     include_once('includes/php/utils/User.class.php');
@@ -20,6 +21,7 @@
       $profileLastname = $profileUser -> getLastname();
       $profileEmailAddress = $profileUser -> getEmailAddress();
       $profileStudentID = $profileUser -> getStudentID();
+      $profilePicURL = $profileUser -> getProfilePicURL();
     }
     else{
       if(isset($_SERVER['HTTP_REFERRER'])){

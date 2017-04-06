@@ -22,7 +22,7 @@
       <br>
       </div>
       <div class="form-group">
-        <input name='claim-task' type="submit" class="btn-outline btn" value="Send" role="button"></input>
+        <input name='claim-task' type="submit" class="btn-outline btn" value="Claim" role="button"></input>
       </div>
     </form>
   </div>

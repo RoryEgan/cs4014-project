@@ -6,17 +6,14 @@ function passwordFailed() {
 
   passwordGroup.className = "form-group has-danger";
   password.className = "form-control form-control-danger";
-  console.log("Javascript password failed.");
-
 }
 function emailFailed() {
 
   var email = document.getElementById('signInEmail');
-  var emailGroup = document.getElementById('passwordSignInGroup');
+  var emailGroup = document.getElementById('emailSignInGroup');
 
   emailGroup.className = "from-group has-danger";
   email.className = "form-control form-control-danger";
-  console.log("Javascript email failed.");
 
 }
 </script>
@@ -52,7 +49,9 @@ if (isset($_POST['loginSubmitButton'])) {
 
         $res = $qh -> getUser($signInEmail, $hashedPassword);
         if(!$res){
-          echo "<script>alert('Invalid email or password');</script>";
+          echo '<script type="text/javascript">',
+          'emailFailed();',
+          '</script>';
         }
         else{
           session_start();
@@ -67,17 +66,13 @@ if (isset($_POST['loginSubmitButton'])) {
     else {
       echo '<script type="text/javascript">',
       'passwordFailed();',
-      '</script>'
-      ;
-      echo "password failed";
+      '</script>';
     }
   }
   else {
     echo '<script type="text/javascript">',
     'emailFailed();',
-    '</script>'
-    ;
-    echo "email failed";
+    '</script>';
   }
 }
 

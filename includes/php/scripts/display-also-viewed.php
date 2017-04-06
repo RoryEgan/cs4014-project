@@ -27,13 +27,12 @@ function dynamicPrintTasks($count){
   session_start();
 
   $allTasks = $retriever->getAlsoViewed($_GET['taskID'], $_SESSION['userID']);
-  if(!$allTasks){
-    echo "<i>None to display</i>";
-    return;
-  }
-  $size = sizeof($allTasks);
 
-  for($i = 0; $i < sizeof($allTasks); $i++){
+  $size = sizeof($allTasks);
+  if($allTasks != false){
+    echo "<h3>Users who viewed this task also viewed: </h3>";
+  }
+  for($i = 0; $i < sizeof($allTasks) && $allTasks != false; $i++){
     $taskPrinter -> printDefaultTask($allTasks[$i]);
   }
 

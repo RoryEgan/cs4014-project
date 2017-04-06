@@ -205,10 +205,7 @@ class QueryHelper{
     $fileNameNew = uniqid('', true) . $ext;
 
     $fileDestination = 'files/documents/' . $fileNameNew;
-    var_dump($fileDestination);
     $excerpt = file_get_contents($fileDestination, NULL, NULL, 10, 7);
-
-    echo "<pre>\noriginal location: $location\t new location: $fileDestination\n</pre>";
 
     if(move_uploaded_file($location, $fileDestination)){
       $taskID = $task -> getTaskID();
@@ -216,8 +213,6 @@ class QueryHelper{
       $docType = $task -> getDocType();
       $formatID = $this -> getFormatIDFromFormat($format);
       $documentTypeID = $this -> getDocTypeIDFromDocType($docType);
-
-      echo "task id: $taskID formatID: $formatID docType: $documentTypeID fileDest: $fileDestination format: $format";
 
 
       $insertSQL = "INSERT INTO `CS4014_project_database`.`Document`(
@@ -539,7 +534,7 @@ class QueryHelper{
      }
 
      $userInfo = array($subject, $userResult[0]['ForeName'], $userResult[0]['Lastname'],
-                        $userResult[0]['EmailAddress'], $userResult[0]['StudentID'], $userResult[0]['reputation'], $isMod);
+                        $userResult[0]['EmailAddress'], $userResult[0]['StudentID'], $userResult[0]['reputation'], $isMod, $userResult[0]['ProfilePicURL']);
       return $userInfo;
    }
    else{
@@ -708,12 +703,17 @@ class QueryHelper{
  function search($query, $start, $number){
    $database = $this->database;
 
-   $sql = " SELECT * FROM JoinedTask
-            WHERE Title LIKE '%$query%'
-            LIMIT $start, $number;";
+   if($query != "" && $query != null){
+     $sql = " SELECT * FROM JoinedTask
+              WHERE Title LIKE '%$query%'
+              LIMIT $start, $number;";
 
-   $res = $database -> select($sql);
-   return $res;
+     $res = $database -> select($sql);
+     return $res;
+   }
+   else{
+     return false;
+   }
  }
 
  function deleteUser($userID){
@@ -902,6 +902,7 @@ class QueryHelper{
     $res = $this->database->select($sqlGetTasks);
 
     //nested loop but max 5x5 iterations so efficiency is not really a problem
+    //ensures tasks are in descending order by number of views
     for($i = 0; $i < sizeof($res); $i++){
       if($mostViewed[$i] != $res[$i]['TaskID']){
         $temp = $res[$i];
@@ -918,6 +919,16 @@ class QueryHelper{
   else{
     return false;
   }
+ }
+
+ function updateProfilePic($picURL, $userID){
+
+   $sql = " UPDATE `User` SET `ProfilePicURL`='$picURL'
+            WHERE UserID = $userID;";
+
+   $this->database->query($sql);
+
+
  }
 
 

@@ -4,6 +4,7 @@
   include_once('includes/php/utils/Database.class.php');
   include_once('includes/php/scripts/profile-info.php');
   if(isset($_POST['submit-edit'])){
+    echo "edit";
     $qh = new QueryHelper();
     $db = new Database();
     $val = new Validator();
@@ -14,6 +15,27 @@
     $editEmail = trim($db -> quote($_POST['editable-email']));
     $editStudentID = trim($db -> quote($_POST['editable-studentid']));
     $editSubject = trim($db -> quote($_POST['editable-subject']));
+    $profileImage = $_FILES['profile-pic'];
+
+    $name = $profileImage['name'];
+    $ext = explode('.', $name);
+    $ext = '.' . $ext[1];
+    if($ext != '.jpg' && $ext != '.png'){
+      echo "<script>alert(Invalid image format);</script>";
+      return false;
+    }
+    else{
+      $location = $profileImage['tmp_name'];
+      $targetFile = basename($profileImage['name']);;
+
+      $fileNameNew = uniqid('', true) . $ext;
+
+      $fileDestination = 'files/images/profile/' . $fileNameNew;
+      if(move_uploaded_file($location, $fileDestination)){
+        $qh->updateProfilePic($fileDestination, $_SESSION['profileID']);
+        $update = true;
+      }
+    }
 
     if($val -> isValidProfileEdit($editName, $editEmail, $editStudentID, $editSubject)){
       if(!($editName == $profileFirstname." ".$profileLastname)){

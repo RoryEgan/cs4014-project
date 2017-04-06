@@ -26,7 +26,7 @@
         ?>
 
         <br><p><b>Document: </b><a href=" <?php echo "$document"; ?> " download>
-          **Get Document**
+          <img src="http://localhost/CS4014_project/files/images/document_download.jpg" alt="face" height="42" width="42">
         </a></p>
 
         <?php
@@ -77,7 +77,6 @@
     </div>
   </div>
   <div>
-    <h3>Users who viewed this task also viewed: </h3>
     <div class="col-md-6">
       <?php include_once('includes/php/scripts/display-also-viewed.php') ?>
     </div>

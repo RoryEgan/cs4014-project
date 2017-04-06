@@ -113,7 +113,7 @@ include_once(SITE_PATH . '/includes/php/utils/Flag.class.php');
       $taskTable = $this->qh -> search($searchQuery, $start, $tasksPerPage);
       $allTasksArray = array();
 
-      for($i = 0; $i < sizeof($taskTable); $i++){
+      for($i = 0; $i < sizeof($taskTable) && $taskTable != false; $i++){
         $allTasksArray[$i] = $this -> initializeTask($taskTable, $i);
       }
 

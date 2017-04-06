@@ -29,6 +29,7 @@ CREATE TABLE IF NOT EXISTS `CS4014_project_database`.`User` (
   `reputation` INT NOT NULL,
   `IsMod` TINYINT(1) NOT NULL,
   `PasswordSalt` VARCHAR(64) NOT NULL,
+  `ProfilePicURL` VARCHAR(255) NOT NULL,
   PRIMARY KEY (`UserID`),
   UNIQUE INDEX `EmailAddress_UNIQUE` (`EmailAddress` ASC),
   INDEX `fk_Users_Subjects_idx` (`Subject_SubjectID` ASC),

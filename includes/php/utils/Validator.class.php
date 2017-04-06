@@ -15,7 +15,7 @@ class Validator{
     if(sizeof($names) == 2){
       $fname = $names[0];
       $lname = $names[1];
-      
+
       return ($this->isValidName($fname) && $this -> isValidName($lname) && $this->isValidEmail($email) && $this->isValidSubject($subject) && $this->isValidStudentID($studentID));
     }
     else{
@@ -23,12 +23,12 @@ class Validator{
     }
   }
 
-  function isValidTask($taskTitle, $taskDescription, $numPages, $numWords, $docFormat, $docType, $subject, $tags, $document,
+  function isValidTask($taskTitle, $taskDescription, $numPages, $numWords, $docFormat, $docType, $subject, $tags, $document, $sampleDoc,
   $claimDeadline, $completeDeadline){
 
     if($this->isValidTaskTitle($taskTitle) && $this->isValidTaskDescription($taskDescription) && $this->isPosNum($numPages)
-    && $this->isPosNum($numWords) && $this->isValidFormat($docFormat) && $this -> isValidDocument($docFormat, $document) && $this->isValidDocType($docType) &&
-    $this->isValidSubject($subject) && $this->validTags($tags) && $this->validDeadlines($claimDeadline, $completeDeadline)){
+    && $this->isPosNum($numWords) && $this->isValidFormat($docFormat) && $this -> isValidDocument($docFormat, $document) && $this->isValidDocument($docFormat, $sampleDoc) &&
+    $this->isValidDocType($docType) && $this->isValidSubject($subject) && $this->validTags($tags) && $this->validDeadlines($claimDeadline, $completeDeadline)){
       return true;
     }
     else{

@@ -12,6 +12,7 @@ class Task{
   private $docFormat;
   private $docType;
   private $document;
+  private $sampleDoc;
   private $tag1;
   private $tag2;
   private $tag3;
@@ -20,7 +21,7 @@ class Task{
   private $completeDeadline;
   private $claimantID;
   private $rated;
-  function __construct($taskTitle, $taskType, $taskDescription, $numPages, $numWords, $docFormat, $docType, $subject, $document,
+  function __construct($taskTitle, $taskType, $taskDescription, $numPages, $numWords, $docFormat, $docType, $subject, $document, $sampleDoc,
                               $tag1, $tag2, $tag3, $tag4, $claimDeadline, $completeDeadline){
 
     $this->taskID = -1;
@@ -35,6 +36,7 @@ class Task{
     $this->docType = $docType;
     $this->subject = $subject;
     $this->document = $document;
+    $this->sampleDoc = $sampleDoc;
     $this->tag1 = $tag1;
     $this->tag2 = $tag2;
     $this->tag3 = $tag3;
@@ -69,6 +71,8 @@ class Task{
   function getSubject() { return $this->subject; }
   function setDocument($document) { $this->document = $document; }
   function getDocument() { return $this->document; }
+  function setSampleDoc($sampleDoc) { $this->sampleDoc = $sampleDoc; }
+  function getSampleDoc() { return $this->sampleDoc; }
   function setTag1($tag1) { $this->tag1 = $tag1; }
   function getTag1() { return $this->tag1; }
   function setTag2($tag2) { $this->tag2 = $tag2; }

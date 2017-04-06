@@ -78,9 +78,12 @@
       </select>
     </div>
 
-
-
     <div class="my-2">
+      <label>Enter sample: </label>
+      <input name="docSample" type="file" class="my-2 btn-default btn-file" required/>
+    </div>
+    <div class="my-2">
+      <label>Enter full document: </label>
       <input name="taskDocument" type="file" class="my-2 btn-default btn-file" required/>
     </div>
     <div class=" my-2">

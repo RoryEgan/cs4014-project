@@ -198,16 +198,20 @@ class QueryHelper{
     $database = $this->database;
 
     $document = $task -> getDocument();
-    $location = $document['tmp_name'];
+    $sampleDoc = $task->getSampleDoc();
+
+    $fullDocLocation = $document['tmp_name'];
+    $sampleDocLocation = $sampleDoc['tmp_name'];
     $targetFile = basename($document['name']);
     $ext = $task -> getDocFormat();
 
     $fileNameNew = uniqid('', true) . $ext;
+    $sampleFileName = uniqid('', true) . $ext;
 
-    $fileDestination = 'files/documents/' . $fileNameNew;
-    $excerpt = file_get_contents($fileDestination, NULL, NULL, 10, 7);
+    $docDestination = 'files/documents/' . $fileNameNew;
+    $sampleDestination = 'files/documents/samples/' . $sampleFileName;
 
-    if(move_uploaded_file($location, $fileDestination)){
+    if(move_uploaded_file($fullDocLocation, $docDestination) && move_uploaded_file($sampleDocLocation, $sampleDestination)){
       $taskID = $task -> getTaskID();
       $format = $task -> getDocFormat();
       $docType = $task -> getDocType();
@@ -218,10 +222,11 @@ class QueryHelper{
       $insertSQL = "INSERT INTO `CS4014_project_database`.`Document`(
         `DocumentID`,
         `DocumentURL`,
+        `SampleURL`,
         `Task_TaskID`,
         `Format_FormatID`,
         `DocumentType_DocumentTypeID`)
-      VALUES (NULL,'$fileDestination',$taskID,$formatID,$documentTypeID);";
+      VALUES (NULL,'$docDestination','$sampleDestination',$taskID,$formatID,$documentTypeID);";
 
       $docInsert = $database -> query($insertSQL);
       if($docInsert){

@@ -20,6 +20,7 @@ if(isset($_GET['taskID'])){
   $numPages = $task -> getNumPages();
   $docFormat = $task -> getDocFormat();
   $document = $task -> getDocument();
+  $sampleDoc = $task->getSampleDoc();
   $completeDate = $task -> getCompleteDeadline();
   $claimDate = $task -> getClaimDeadline();
   $status = $task -> getStatus();

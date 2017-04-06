@@ -70,10 +70,25 @@
       <br><br>
     </div>
     <div class="col-md-5 offset-md-1">
-      <object data="<?php echo $document ?>" type="application/<?php echo str_replace(".","",$docFormat) ?>" width="100%" height="100%">
-        <embed type="application/<?php echo str_replace(".","",$docFormat) ?>" src="<?php echo $document ?>" width="100%" height="100%">
-        </embed>
-      </object>
+      <p>Document Sample: </p>
+      <?php
+      if($docFormat == '.pdf' && file_exists($sampleDoc)){?>
+        <object data="<?php echo $sampleDoc ?>" type="application/<?php echo str_replace(".","",$docFormat) ?>" width="100%" height="100%">
+          <embed type="application/<?php echo str_replace(".","",$sampleDoc) ?>" src="<?php echo $sampleDoc ?>" width="100%" height="100%">
+          </embed>
+        </object>
+        <?php
+      }else if(file_exists($sampleDoc)){
+        ?>
+        <br><p><b>Download the document sample: </b><a href=" <?php echo "$sampleDoc"; ?> " download>
+          <img src="http://localhost/CS4014_project/files/images/document_download.jpg" alt="face" height="42" width="42">
+        </a></p>
+        <?php
+        }
+        else{
+          echo "No document sample available";
+        }
+         ?>
     </div>
   </div>
   <div>

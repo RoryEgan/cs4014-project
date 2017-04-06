@@ -184,6 +184,7 @@ include_once(SITE_PATH . '/includes/php/utils/Flag.class.php');
       $docFormat = $tasks[$index]['FormatVal'];
       $docType = $tasks[$index]['DocumentTypeVal'];
       $documentURL = $tasks[$index]['DocumentURL'];
+      $sampleURL = $tasks[$index]['SampleURL'];
       $claimDeadline = $tasks[$index]['Claim'];
       $completeDeadline = $tasks[$index]['Completion'];
       $subject = $tasks[$index]['SubjectName'];
@@ -194,7 +195,7 @@ include_once(SITE_PATH . '/includes/php/utils/Flag.class.php');
 
 
 
-      $task = new Task($taskTitle, $taskType, $taskDescription, $numPages, $numWords, $docFormat, $docType, $subject, $documentURL,
+      $task = new Task($taskTitle, $taskType, $taskDescription, $numPages, $numWords, $docFormat, $docType, $subject, $documentURL,$sampleURL,
                                   $tags[0], $tags[1], $tags[2], $tags[3], $claimDeadline, $completeDeadline);
       $task -> setStatus($taskStatus);
       $task -> setOwnerID($ownerID);

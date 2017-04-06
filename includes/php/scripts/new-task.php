@@ -20,6 +20,7 @@ if(isset($_POST['taskSubmitButton']) ){
   $docType = $db->quote($_POST['documentType']);
   $taskSubject = $db->quote($_POST['taskSubject']);
   $document = $_FILES['taskDocument'];
+  $sampleDoc = $_FILES['docSample'];
   $tag1 = $db->quote($_POST['tag1']);
   $tag2 = $db->quote($_POST['tag2']);
   $tag3 = $db->quote($_POST['tag3']);
@@ -31,9 +32,9 @@ if(isset($_POST['taskSubmitButton']) ){
   $connection = $db->connect();
 
   if($val->isValidTask($taskTitle, $taskDescription, $numPages, $numWords, $docFormat, $docType, $taskSubject, $tags,
-                        $document, $claimDeadline, $completeDeadline)){
+                        $document, $sampleDoc, $claimDeadline, $completeDeadline)){
     if($connection){
-      $currentTask = new Task($taskTitle, $taskType, $taskDescription, $numPages, $numWords, $docFormat, $docType, $taskSubject, $document,
+      $currentTask = new Task($taskTitle, $taskType, $taskDescription, $numPages, $numWords, $docFormat, $docType, $taskSubject, $document, $sampleDoc,
                                   $tag1, $tag2, $tag3, $tag4, $claimDeadline, $completeDeadline);
 
       $result = $qh -> insertTask($currentTask);

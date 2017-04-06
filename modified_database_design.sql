@@ -150,6 +150,7 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `CS4014_project_database`.`Document` (
   `DocumentID` INT NOT NULL AUTO_INCREMENT,
   `DocumentURL` VARCHAR(255) NOT NULL,
+  `SampleURL` VARCHAR(255) NOT NULL,
   `Task_TaskID` INT NOT NULL,
   `Format_FormatID` INT NOT NULL,
   `DocumentType_DocumentTypeID` INT NOT NULL,
@@ -285,7 +286,7 @@ CREATE VIEW JoinedTask AS
 
 SELECT TaskID,User_UserID,Title,TaskTypeVal,Description,NumPages,
 NumWords,FormatVal,DocumentTypeVal,SubjectName,
-DocumentURL,Claim,Completion,StatusVal,ClaimantID,Rated
+DocumentURL,Claim,Completion,StatusVal,ClaimantID,Rated,SampleURL
 
 FROM Task
 LEFT JOIN Deadline

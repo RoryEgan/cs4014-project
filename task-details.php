@@ -25,7 +25,7 @@
       if($claimant == $userID && $status == 'Claimed'){
         ?>
 
-        <br><p><b>Document: </b><a href=" <?php echo "$document"; ?> " download>
+        <br><p><b>Download Full Document: </b><a href=" <?php echo "$document"; ?> " download>
           <img src="http://localhost/CS4014_project/files/images/document_download.jpg" alt="face" height="42" width="42">
         </a></p>
 

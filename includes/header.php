@@ -4,7 +4,7 @@
       include_once('includes/php/scripts/current-user-info.php');
       include_once('includes/php/scripts/dynamic-search.php')
       ?>
-<header class="banner hidden-sm-down">
+<header class="banner hidden-md-down">
   <div class="container">
     <div class="flex-row">
       <div class="col-xs-12 text-center">
@@ -37,7 +37,7 @@
           </div>
         </div>
       </div>
-      <div class="col-md-5 hidden-sm-down">
+      <div class="col-md-5">
         <form class="form-inline my-2 my-lg-0" action="search-results.php" method="get">
           <input id="dynamic-search" name="search-query" class="form-control mr-sm-2" autocomplete="off" type="text" placeholder="Search">
           <ul class="dropdown-menu search-dropdown">

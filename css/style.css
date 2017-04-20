@@ -93,13 +93,14 @@ header.banner {
   transition: .7s;
 }
 
-.dropdown-menu {
-  position: absolute;
-  top: 100%;
-  right: 0;
-  left: inherit;
+@media (min-width: 1026px) {
+  .dropdown-menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    left: inherit;
+  }
 }
-
 .search-dropdown {
   width: auto;
   top: 100%;
@@ -112,6 +113,12 @@ header.banner {
     position: absolute;
     top: 100%;
     left: 0;
+  }
+}
+@media (max-width: 1024px) {
+  .dropdown-menu {
+    position: absolute;
+    top: 100%;
   }
 }
 footer {

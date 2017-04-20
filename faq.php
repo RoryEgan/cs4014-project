@@ -4,7 +4,7 @@
   <div class="container">
     <h2>Faqs</h2>
 
-    <div id="accordion" class="accordion" role="tablist" aria-multiselectable="true">
+    <div id="accordion" class="accordion mb-10" role="tablist" aria-multiselectable="true">
 
       <div class="card my-2">
         <div class="card-header" role="tab" id="heading1">

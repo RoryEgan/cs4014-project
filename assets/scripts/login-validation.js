@@ -50,8 +50,14 @@ function validateEmail() {
 
   if(emailText.match(/^[\w\-\.\+]+\@[a-zA-Z0-9\.\-]+\.[a-zA-z0-9]{2,4}$/)) {
 
-    emailGroup.className = "has-success";
-    email.className = "form-control my-2 form-control-success";
+    if(emailText.indexOf("@studentmail.ul.ie", emailText.length - "@studentmail.ul.ie".length) !== -1){
+      emailGroup.className = "has-success";
+      email.className = "form-control my-2 form-control-success";
+    }
+    else {
+      emailGroup.className = "has-danger";
+      email.className = "form-control my-2 form-control-danger";
+    }
   }
   else {
     emailGroup.className = "has-danger";
